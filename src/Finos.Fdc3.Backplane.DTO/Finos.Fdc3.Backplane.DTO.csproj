@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>FINOS</Authors>
+		<Description>This is data transfer object shared between desktop agent client C# and backplane.Supports FDC3 v1.2</Description>
+		<Copyright></Copyright>
+		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
+		<RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+		<Version>1.2.1</Version>
+		<Product>Desktop Agent Backplane DTO FDC3 v1.2</Product>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<PackageTags>FDC3 DesktopAgent DTO</PackageTags>
+		<Company>FINOS</Company>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+	</ItemGroup>
+
+</Project>

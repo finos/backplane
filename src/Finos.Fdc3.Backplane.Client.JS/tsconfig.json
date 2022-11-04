@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"outDir": "./lib",
+		"lib": ["es2017", "dom"],
+		"module": "commonjs",
+		"declaration": true,
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"noImplicitAny": true,
+		"preserveConstEnums": true,
+		"removeComments": true,
+		"sourceMap": true,
+		"strict": true,
+		"target": "es2017",
+		"esModuleInterop": true
+	},
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "**/__tests__/*"]
+}
