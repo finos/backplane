@@ -8,7 +8,6 @@ using Finos.Fdc3.Backplane.DTO;
 using Finos.Fdc3.Backplane.DTO.Envelope.Receive;
 using Finos.Fdc3.Backplane.DTO.Envelope.Send;
 using Finos.Fdc3.Backplane.DTO.FDC3;
-using Finos.Fdc3.Backplane.Models;
 using Finos.Fdc3.Backplane.MultiHost;
 using Finos.Fdc3.Backplane.Utils;
 using Microsoft.AspNetCore.SignalR;
@@ -18,7 +17,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -37,6 +35,7 @@ namespace Finos.Fdc3.Backplane.Hubs
         private readonly ILogger<DesktopAgentsHub> _logger;
         private readonly IConfigRepository _configRepository;
         private readonly TimeSpan _httpTimeOutInMs;
+        private readonly string _broadcastEndpoint;
         private static readonly SemaphoreSlim _threadSafeCurrentContextAccessHandle = new SemaphoreSlim(1, 1);
         private static readonly ConcurrentDictionary<string, JObject> _currentContextStore = new ConcurrentDictionary<string, JObject>();
         public DesktopAgentsHub(ILogger<DesktopAgentsHub> logger,
@@ -50,7 +49,8 @@ namespace Finos.Fdc3.Backplane.Hubs
             _memberNodesRepo = memberNodesRepo;
             _logger = logger;
             _configRepository = configRepository;
-            _httpTimeOutInMs = configRepository.HttpRequestTimeoutInMilliSeconds;
+            _httpTimeOutInMs = configRepository.HttpRequestTimeoutInMilliseconds;
+            _broadcastEndpoint = configRepository.AddNodeEndpoint;
         }
 
 
@@ -76,7 +76,7 @@ namespace Finos.Fdc3.Backplane.Hubs
             // propagate message to other nodes of backplane cluster
             if (!isMessageTobePropagatedToOtherNodes)
             {
-                await PostMessageToMemberBackplanes(broadcastContextDTO, "backplane/api/v1.0/broadcast/context");
+                await PostMessageToMemberBackplanes(broadcastContextDTO, _broadcastEndpoint);
             }
 
             await _threadSafeCurrentContextAccessHandle.WaitAsync().ConfigureAwait(false);
@@ -130,7 +130,7 @@ namespace Finos.Fdc3.Backplane.Hubs
 
         private async Task SendMessageToClientsExceptOriginalSender(MessageEnvelope messageEnvelope, bool intraMessageOnly, string remoteMethodName)
         {
-            var messageJson = JsonConvert.SerializeObject(messageEnvelope);
+            string messageJson = JsonConvert.SerializeObject(messageEnvelope);
             if (intraMessageOnly == true)
             {
                 _logger.LogInformation($"Sending data to all connected clients. Message: {messageJson}.");
@@ -143,37 +143,23 @@ namespace Finos.Fdc3.Backplane.Hubs
             }
         }
 
-        private async Task<List<string>> GetActiveNodes(string urlSuffix)
-        {
-            List<string> memberBackplanesUri = new List<string>();
-            //always rely on local live cache
-            IEnumerable<Node> clusterMembers = _memberNodesRepo.MemberNodes.Where(u => u.IsActive);
-            memberBackplanesUri.AddRange(clusterMembers.Select(u => $"{u.Uri.AbsoluteUri}{urlSuffix}"));
-            if (!memberBackplanesUri.Any())
-            {
-                _logger.LogDebug("No member nodes found for this backplane instance.");
-
-            }
-            return await Task.FromResult(memberBackplanesUri);
-
-        }
-
         private async Task PostMessageToMemberBackplanes<T>(T messageContextDTO, string urlSuffix)
         {
-            List<string> memberBackplanesUri = await GetActiveNodes(urlSuffix);
             //send message to member backplanes
-            foreach (string uri in memberBackplanesUri)
+            foreach (Uri uri in _memberNodesRepo.MemberNodes)
             {
-                await PostRequestAsync(new Uri($"{uri}/{urlSuffix}"), messageContextDTO);
+                await PostRequestAsync(uri, _broadcastEndpoint, messageContextDTO);
             }
         }
 
-        private async Task PostRequestAsync<T>(Uri uri, T dto)
+        private async Task PostRequestAsync<T>(Uri baseUri, string relativePath, T dto)
         {
+            Uri uri = new Uri(baseUri, relativePath);
             try
             {
+
                 //Any failure in broadcast to any one node should not stop broadcast to other node.
-                HttpResponseMessage httpResponseMessage = await HttpUtils.PostAsync(_httpClientFactory, uri, dto,_httpTimeOutInMs);
+                HttpResponseMessage httpResponseMessage = await HttpUtils.PostAsync(_httpClientFactory, uri, dto, _httpTimeOutInMs);
                 httpResponseMessage.EnsureSuccessStatusCode();
                 _logger.LogInformation($"Successfully completed send context to backplane: {uri}");
             }

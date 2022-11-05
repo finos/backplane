@@ -2,6 +2,7 @@
 using System;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 
@@ -20,7 +21,8 @@ namespace Finos.Fdc3.Backplane.Utils
         /// <param name="uri"></param>
         /// <param name="body"></param>
         /// <returns></returns>
-        public static async Task<HttpResponseMessage> PostAsync<T>(IHttpClientFactory httpClientFactory, Uri uri, T body,TimeSpan timeOut)
+        public static async Task<HttpResponseMessage> PostAsync<T>(IHttpClientFactory httpClientFactory, Uri uri, T body, TimeSpan timeOut, CancellationToken ct = default
+            )
         {
             string json = JsonConvert.SerializeObject(body, new JsonSerializerSettings()
             {
@@ -28,8 +30,7 @@ namespace Finos.Fdc3.Backplane.Utils
             });
             StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
             HttpClient httpClient = httpClientFactory.CreateClient();
-            httpClient.Timeout = timeOut;
-            using (HttpResponseMessage httpResponseMessage = await httpClient.PostAsync(uri, data))
+            using (HttpResponseMessage httpResponseMessage = await httpClient.PostAsync(uri, data, ct))
             {
                 return httpResponseMessage;
             }

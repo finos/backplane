@@ -4,7 +4,6 @@
 	*/
 
 using Finos.Fdc3.Backplane.DTO.Envelope.Send;
-using Finos.Fdc3.Backplane.Models;
 using Finos.Fdc3.Backplane.MultiHost;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -63,27 +62,27 @@ namespace Finos.Fdc3.Backplane.Controllers
         /// As a part of health check, this end point allows member nodes to post their status which 
         /// is updated in member node repository.
         /// </summary>
-        /// <param name="memberNode"></param>
+        /// <param name="memberNodeUri"></param>
         /// <returns></returns>
         [ApiExplorerSettings(IgnoreApi = true)]
         [HttpPost]
         [Route("addmembernode")]
-        public async Task<IActionResult> AddMemberNode(Node memberNode)
+        public async Task<IActionResult> AddMemberNode(Uri memberNodeUri)
         {
-            if (memberNode == null)
+            if (memberNodeUri == null)
             {
                 return await Task.FromResult(StatusCode(400, "Input parameter is missing"));
             }
-            _logger.LogDebug($"Received request for member nodes update with url: {memberNode.Uri}");
+            _logger.LogDebug($"Received request from: {memberNodeUri} to add as member");
 
             try
             {
-                _memberNodesRepository.AddOrUpdateActiveNode(memberNode.Uri);
+                _memberNodesRepository.AddNode(memberNodeUri);
                 return await Task.FromResult(Ok());
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error processing request at host config controller in Addmembernode action: {ex}.");
+                _logger.LogError($"Error processing request in addMemberNode.{ex}.");
                 return await Task.FromResult(StatusCode(500, ex));
             }
 

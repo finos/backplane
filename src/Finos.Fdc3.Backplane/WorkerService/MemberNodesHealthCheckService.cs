@@ -1,12 +1,15 @@
-﻿using Finos.Fdc3.Backplane.Config;
+﻿/**
+	* SPDX-License-Identifier: Apache-2.0
+	* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
+	*/
+
+using Finos.Fdc3.Backplane.Config;
 using Finos.Fdc3.Backplane.Models;
 using Finos.Fdc3.Backplane.MultiHost;
 using Finos.Fdc3.Backplane.Utils;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,12 +27,15 @@ namespace Finos.Fdc3.Backplane.WorkerService
         private readonly IHostingUtils _hostingUtils;
         private readonly INodeRegistrationClient _nodeRegistrationClient;
         private readonly INodesRepository _memberNodesRepository;
+        private readonly INodesDiscoveryClient _nodesDiscoveryClient;
         private readonly IHttpClientFactory _httpClientFactory;
         private CancellationToken _cancellationToken;
-        
 
-        public MemberNodesHealthCheckService(IHostingUtils hostingUtils,
-            IConfigRepository config, INodeRegistrationClient nodeRegistrationClient, ILogger<MemberNodesHealthCheckService> logger, IHttpClientFactory httpClientFactory, INodesRepository memberNodesRepository)
+
+        public MemberNodesHealthCheckService(IHostingUtils hostingUtils, INodesDiscoveryClient nodesDiscoveryClient,
+            IConfigRepository config, INodeRegistrationClient nodeRegistrationClient,
+            ILogger<MemberNodesHealthCheckService> logger,
+            IHttpClientFactory httpClientFactory, INodesRepository memberNodesRepository)
         {
             _config = config;
             _logger = logger;
@@ -37,13 +43,14 @@ namespace Finos.Fdc3.Backplane.WorkerService
             _nodeRegistrationClient = nodeRegistrationClient;
             _httpClientFactory = httpClientFactory;
             _memberNodesRepository = memberNodesRepository;
+            _nodesDiscoveryClient = nodesDiscoveryClient;
         }
 
         protected override async Task ExecuteAsync(CancellationToken ct)
         {
             _cancellationToken = ct;
             // hook on backplane start
-            _hostingUtils.BackplaneStart += OnBackplaneRunning;
+            _hostingUtils.BackplaneStarted += OnBackplaneRunning;
             await Task.CompletedTask;
         }
 
@@ -54,44 +61,39 @@ namespace Finos.Fdc3.Backplane.WorkerService
 
         private async Task PerformHealthCheckInBackground()
         {
-            var healthCheckIntervalMs = _config.MemberNodesHealthCheckIntervalInMilliSeconds;
-            var httpRequestTimeOutInMs = _config.HttpRequestTimeoutInMilliSeconds;
+            TimeSpan healthCheckIntervalMs = _config.MemberNodesHealthCheckIntervalInMilliseconds;
+            TimeSpan httpRequestTimeOutInMs = _config.HttpRequestTimeoutInMilliseconds;
             _logger.LogInformation($"HealthCheck service started with health check interval of {healthCheckIntervalMs} ms.");
-            List<Uri> onlineNodes = new List<Uri>();
-            List<Uri> offlineNodes = new List<Uri>();
 
             while (!_cancellationToken.IsCancellationRequested)
             {
                 try
                 {
-                    //check status of active nodes
-                    if (_memberNodesRepository.MemberNodes.Any(u => u.IsActive))
+                    System.Collections.Generic.IEnumerable<Uri> discoveredNodes = await _nodesDiscoveryClient.DiscoverAsync(_cancellationToken);
+                    foreach (Uri nodeUri in discoveredNodes)
                     {
-                        onlineNodes.AddRange(_memberNodesRepository.MemberNodes.Where(u => u.IsActive).Select(x => x.Uri));
-                        foreach (Uri uri in onlineNodes)
+                        try
                         {
-                            HttpResponseMessage response = await HttpUtils.PostAsync(_httpClientFactory, new Uri($"{uri}/backplane/api/v1.0/addmembernode"), new Node() { Uri = _nodeRegistrationClient.CurrentNodeUri },httpRequestTimeOutInMs);
-                            if (!response.IsSuccessStatusCode)
-                            {
-                                // response code does not indicate success.Mark the node inactive
-                                _memberNodesRepository.AddOrUpdateDeactiveNode(_memberNodesRepository.MemberNodes.First(u => u.Uri == uri).Uri);
-                            }
-                        }
-                    }
-                    //health check for off-line nodes
-                    if (_memberNodesRepository.MemberNodes.Any(u => u.IsActive == false))
-                    {
-                        offlineNodes.AddRange(_memberNodesRepository.MemberNodes.Where(u => u.IsActive == false).Select(x => x.Uri));
-                        foreach (Uri uri in offlineNodes)
-                        {
-                            HttpResponseMessage response = await HttpUtils.PostAsync(_httpClientFactory, new Uri($"{uri}/backplane/api/v1.0/addmembernode"), new Node() { Uri = _nodeRegistrationClient.CurrentNodeUri },httpRequestTimeOutInMs);
+                            HttpResponseMessage response = await HttpUtils.PostAsync(_httpClientFactory, new Uri($"{nodeUri}/backplane/api/v1.0/addmembernode"), new Node() { Uri = _nodeRegistrationClient.CurrentNodeUri }, httpRequestTimeOutInMs);
                             if (response.IsSuccessStatusCode)
                             {
-                                // response code indicate success.Mark the node active
-                                _memberNodesRepository.AddOrUpdateActiveNode(_memberNodesRepository.MemberNodes.First(u => u.Uri == uri).Uri);
+                                _memberNodesRepository.AddNode(nodeUri);
+                                _logger.LogDebug($"Added/updated node: {nodeUri} as node is live.");
+                            }
+                            else
+                            {
+                                // response code does not indicate success, remove the node.
+                                _memberNodesRepository.RemoveNode(nodeUri);
+                                _logger.LogDebug($"Removed node: {nodeUri} from member nodes as node did not respond");
                             }
                         }
+                        catch (Exception ex)
+                        {
+                            _logger.LogError($"Failed to heart beat of node:{nodeUri}.{ex}");
+                        }
+
                     }
+
                 }
                 catch (Exception ex)
                 {
@@ -99,15 +101,13 @@ namespace Finos.Fdc3.Backplane.WorkerService
                 }
                 //wait for health check interval.
                 await Task.Delay(healthCheckIntervalMs, _cancellationToken);
-                onlineNodes.Clear();
-                offlineNodes.Clear();
             }
         }
 
         public override async Task StopAsync(CancellationToken stoppingToken)
         {
             _logger.LogInformation("member backplane health check service stopped.");
-            _hostingUtils.BackplaneStart -= OnBackplaneRunning;
+            _hostingUtils.BackplaneStarted -= OnBackplaneRunning;
             await base.StopAsync(stoppingToken);
         }
     }

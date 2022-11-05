@@ -3,10 +3,10 @@
 	* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
 	*/
 
-using Finos.Fdc3.Backplane.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 
@@ -18,101 +18,83 @@ namespace Finos.Fdc3.Backplane.MultiHost
     public class NodesRepository : INodesRepository, IDisposable
     {
         private readonly ILogger<NodesRepository> _logger;
-        private readonly ReaderWriterLockSlim _lock_obj;
-        private readonly List<Node> _value;
-        private bool _already_disposed;
+        private readonly ReaderWriterLockSlim _lock;
+        private Immutable­Array<Uri> _value;
+        private bool _isDisposed;
 
         public NodesRepository(ILogger<NodesRepository> logger)
         {
-            _lock_obj = new ReaderWriterLockSlim();
-            _value = new List<Node>();
+            _lock = new ReaderWriterLockSlim();
+            _value = ImmutableArray.Create<Uri>();
             _logger = logger;
         }
 
-        public IEnumerable<Node> MemberNodes
+        public IEnumerable<Uri> MemberNodes
         {
             get
             {
-                _lock_obj.EnterReadLock();
+                _lock.EnterReadLock();
                 try
                 {
                     return _value;
                 }
                 finally
                 {
-                    _lock_obj.ExitReadLock();
+                    _lock.ExitReadLock();
                 }
             }
         }
 
-        public Uri CurrentNodeUri { get; set; }
-
-        public void AddOrUpdateActiveNode(Uri value)
+        public void AddNode(Uri nodeUri)
         {
-            if (value == null)
+            AddRemoveNode(nodeUri, false);
+        }
+
+        public void RemoveNode(Uri nodeUri)
+        {
+            AddRemoveNode(nodeUri, true);
+        }
+
+        private void AddRemoveNode(Uri node, bool isRemove)
+        {
+            if (node == null)
             {
-                throw new ArgumentNullException(nameof(value));
+                throw new ArgumentNullException();
             }
-            _lock_obj.EnterWriteLock();
+            _lock.EnterWriteLock();
             try
             {
-                Node nodeToBeActivated = _value.FirstOrDefault(x => x.Uri.AbsoluteUri == value.AbsoluteUri);
-                if (nodeToBeActivated == null)
+
+                Uri existingNode = _value.FirstOrDefault(x => x.AbsoluteUri == node.AbsoluteUri);
+                // node to be removed exist.
+                if (isRemove && existingNode != null)
                 {
-                    _value.Add(new Node() { Uri = value, IsActive = true });
-                    _logger.LogInformation($"{value.AbsoluteUri} activated url added to local cache.");
+                    _value = _value.Remove(existingNode);
+                    return;
                 }
-                else
+                // node to be added and node does not exist.
+                else if (!isRemove && existingNode == null)
                 {
-                    if (!nodeToBeActivated.IsActive)
-                    {
-                        nodeToBeActivated.IsActive = true;
-                        _logger.LogInformation($"{value.AbsoluteUri} url activated in local cache.");
-                    }
+                    _value = _value.Add(node);
                 }
             }
             finally
             {
-                _lock_obj.ExitWriteLock();
+                _lock.ExitWriteLock();
             }
         }
 
-        public void AddOrUpdateDeactiveNode(Uri value)
-        {
-            if (value == null)
-            {
-                throw new ArgumentNullException(nameof(value));
-            }
-            _lock_obj.EnterWriteLock();
-            try
-            {
-                Node itemToBeRemoved = _value.FirstOrDefault(x => x.Uri.AbsoluteUri == value.AbsoluteUri);
-                if (itemToBeRemoved != null)
-                {
-                    itemToBeRemoved.IsActive = false;
-                    _logger.LogInformation($"{value.AbsoluteUri} url de-activated in local cache.");
-                }
-                else
-                {
-                    _value.Add(new Node() { Uri = value, IsActive = false });
-                    _logger.LogInformation($"{value.AbsoluteUri} de-activated url added to local cache.");
-                }
-            }
-            finally
-            {
-                _lock_obj.ExitWriteLock();
-            }
-        }
+
 
         protected virtual void Dispose(bool disposeManagedObjects)
         {
-            if (!_already_disposed)
+            if (!_isDisposed)
             {
                 if (disposeManagedObjects)
                 {
-                    _lock_obj.Dispose();
+                    _lock.Dispose();
                 }
-                _already_disposed = true;
+                _isDisposed = true;
             }
         }
 

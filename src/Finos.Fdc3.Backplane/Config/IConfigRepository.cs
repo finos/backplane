@@ -17,8 +17,24 @@ namespace Finos.Fdc3.Backplane.Config
         /// Channels list from config
         /// </summary>
         List<Channel> ChannelsList { get; }
-        TimeSpan HttpRequestTimeoutInMilliSeconds { get; }
-        TimeSpan BackplaneRegistrationRetryIntervalInSeconds { get; }
-        TimeSpan MemberNodesHealthCheckIntervalInMilliSeconds { get; }
+        /// <summary>
+        /// Http Request timeout
+        /// </summary>
+        TimeSpan HttpRequestTimeoutInMilliseconds { get; }
+
+        /// <summary>
+        /// Health check interval for member nodes
+        /// </summary>
+        TimeSpan MemberNodesHealthCheckIntervalInMilliseconds { get; }
+
+        /// <summary>
+        /// Add node end point in mutihost scenario
+        /// </summary>
+        string AddNodeEndpoint { get; }
+
+        /// <summary>
+        /// SignalR hub endpoint
+        /// </summary>
+        string HubEndpoint { get; }
     }
 }

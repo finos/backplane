@@ -25,6 +25,6 @@ namespace Finos.Fdc3.Backplane.MultiHost
         /// <param name="uri"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<bool> RegisterAsync(Uri uri, CancellationToken ct = default);
+        Task RegisterAsync(Uri uri, CancellationToken ct = default);
     }
 }

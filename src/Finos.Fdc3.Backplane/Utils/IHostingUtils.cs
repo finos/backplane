@@ -14,6 +14,6 @@ namespace Finos.Fdc3.Backplane.Utils
         /// <summary>
         /// Even fired after successfull startup of backplane 
         /// </summary>
-        event Action BackplaneStart;
+        event Action BackplaneStarted;
     }
 }

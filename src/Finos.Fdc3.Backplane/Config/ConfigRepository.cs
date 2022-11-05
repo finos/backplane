@@ -21,10 +21,10 @@ namespace Finos.Fdc3.Backplane.Config
         private readonly IConfiguration _config;
 
         public List<Channel> ChannelsList { get; private set; }
-        public TimeSpan HttpRequestTimeoutInMilliSeconds { get; private set; }
-        public TimeSpan BackplaneRegistrationRetryIntervalInSeconds { get; private set; }
-        public TimeSpan MemberNodesHealthCheckIntervalInMilliSeconds { get; private set; }
-
+        public TimeSpan HttpRequestTimeoutInMilliseconds { get; private set; }
+        public TimeSpan MemberNodesHealthCheckIntervalInMilliseconds { get; private set; }
+        public string HubEndpoint { get; private set; }
+        public string AddNodeEndpoint { get; private set; }
 
         public ConfigRepository(ILogger<ConfigRepository> logger, IConfiguration config)
         {
@@ -39,11 +39,11 @@ namespace Finos.Fdc3.Backplane.Config
             IEnumerable<Channel> systemChannelsDto = systemChannels.Select(x => new Channel(x.Id, x.Type, new DisplayMetadata(x.Name, x.Color, x.Glyph)));
             ChannelsList.AddRange(systemChannelsDto);
             _logger.LogInformation($"Populated system channels from config: {string.Join(",", ChannelsList.Select(x => x.Id))}");
-            HttpRequestTimeoutInMilliSeconds = TimeSpan.FromMilliseconds(int.Parse(_config["HttpRequestTimeoutInMilliSeconds"]));
-            BackplaneRegistrationRetryIntervalInSeconds = TimeSpan.FromMinutes(int.Parse(_config["BackplaneRegistrationRetryIntervalInMinutes"]));
-            MemberNodesHealthCheckIntervalInMilliSeconds = TimeSpan.FromMilliseconds(int.Parse(_config["MemberNodesHealthCheckIntervalInMilliSeconds"]));
+            HttpRequestTimeoutInMilliseconds = TimeSpan.FromMilliseconds(_config.GetValue<int>("HttpRequestTimeoutInMilliseconds", 5000));
+            MemberNodesHealthCheckIntervalInMilliseconds = TimeSpan.FromMilliseconds(_config.GetValue<int>("MemberNodesHealthCheckIntervalInMilliseconds", 5000));
+            HubEndpoint = _config.GetValue<string>("HubEndpoint");
+            AddNodeEndpoint = _config.GetValue<string>("AddNodeEndpoint");
         }
-
 
     }
 }

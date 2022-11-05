@@ -32,7 +32,7 @@ namespace Finos.Fdc3.Backplane.Utils
         /// <summary>
         /// Event to notify the backplane is up and running.
         /// </summary>
-        public event Action BackplaneStart;
+        public event Action BackplaneStarted;
 
         /// <summary>
         /// Trigger registration of backplane when, its up and running.
@@ -43,7 +43,7 @@ namespace Finos.Fdc3.Backplane.Utils
             return _lifetime.ApplicationStarted.Register(async () =>
              {
                  //Notify backplane is running..
-               
+
                  try
                  {
                      IServer server = _serviceProvider.GetRequiredService<IServer>();
@@ -57,8 +57,10 @@ namespace Finos.Fdc3.Backplane.Utils
                      {
                          Uri backplaneUri = new Uri(addressFeature.Addresses.First());
                          backplaneUri = ReplaceHost(backplaneUri.OriginalString, Environment.MachineName);
+                         //register this node to discovery 
                          await _nodeRegistrationClient.RegisterAsync(backplaneUri);
-                         BackplaneStart?.Invoke();
+                         //Notify successfull start and registration of backplane.
+                         BackplaneStarted?.Invoke();
                          _logger.LogInformation("Listening on hosted address: " + backplaneUri);
                      }
                      else

@@ -3,7 +3,6 @@
 	* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
 	*/
 
-using Finos.Fdc3.Backplane.Models;
 using System;
 using System.Collections.Generic;
 
@@ -15,22 +14,21 @@ namespace Finos.Fdc3.Backplane.MultiHost
     public interface INodesRepository
     {
         /// <summary>
-        /// List of other nodes running on other host under same user.
+        /// List of nodes uri running on other host under same user.
         /// </summary>
-        IEnumerable<Node> MemberNodes { get; }
+        IEnumerable<Uri> MemberNodes { get; }
 
         /// <summary>
-        /// Add/update active nodes
+        /// Add a node to repository.
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        void AddOrUpdateActiveNode(Uri value);
+        /// <param name="nodeUri"></param>
+        void AddNode(Uri nodeUri);
 
         /// <summary>
-        /// Add or update deactive node list
+        /// Remove node from repository
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        void AddOrUpdateDeactiveNode(Uri value);
+        /// <param name="nodeUri"></param>
+        void RemoveNode(Uri nodeUri);
+
     }
 }

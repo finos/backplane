@@ -23,7 +23,9 @@ namespace Finos.Fdc3.Backplane
 {
     public class Startup
     {
+
         private readonly ILogger<Startup> _logger;
+
 
         public Startup(IConfiguration configuration, ILogger<Startup> logger)
         {
@@ -33,10 +35,15 @@ namespace Finos.Fdc3.Backplane
 
         private IConfiguration Configuration { get; }
 
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient();
+            services.AddHttpClient("Backplane", (httpConfig) =>
+             {
+                 httpConfig.Timeout = TimeSpan.FromMilliseconds(Configuration.GetValue<int>("HttpRequestTimeoutInMilliseconds"));
+             }
+            );
             services.AddApiVersioning(x =>
             {
                 // If the client hasn't specified the API version in the request, use the default API version number 

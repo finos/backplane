@@ -3,6 +3,7 @@
 	* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
 	*/
 
+
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
@@ -18,6 +19,7 @@ namespace Finos.Fdc3.Backplane.MultiHost
     {
         private readonly ILogger<INodeRegistrationClient> _logger;
 
+
         public NodeRegistrationClient(ILogger<INodeRegistrationClient> logger)
         {
             _logger = logger;
@@ -28,21 +30,19 @@ namespace Finos.Fdc3.Backplane.MultiHost
         /// </summary>
         public Uri CurrentNodeUri { get; private set; }
 
-        public ILogger<INodeRegistrationClient> Logger => _logger;
-
         /// <summary>
         /// Register node for discovery. 
         /// </summary>
         /// <param name="uri"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        public async Task<bool> RegisterAsync(Uri uri, CancellationToken ct = default)
+        public async Task RegisterAsync(Uri uri, CancellationToken ct = default)
         {
             CurrentNodeUri = uri;
             // write logic here to register this backplane to persistent storage and that can further be queried. Like service discovery etc. 
             // Since multi host interop is limited to DA running in context of same user, User name could be key in registration.
             _logger.LogInformation($"Service Registration Complete: Address:{Environment.MachineName} for user: {Environment.UserName}");
-            return await Task.FromResult(true);
+            await Task.CompletedTask;
         }
     }
 }
