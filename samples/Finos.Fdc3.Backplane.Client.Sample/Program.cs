@@ -1,9 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using Finos.Fdc3.Backplane.Client;
 using Finos.Fdc3.Backplane.Client.API;
 using Finos.Fdc3.Backplane.Client.Extensions;
 using Finos.Fdc3.Backplane.DTO.FDC3;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 System.Console.ForegroundColor = ConsoleColor.Green;
@@ -22,8 +24,10 @@ services.ConfigureBackplaneClient();
 services.AddLogging(configure => { configure.AddConsole(); configure.SetMinimumLevel(LogLevel.None); });
 ServiceProvider container = services.BuildServiceProvider();
 
+var backplaneUrl = new Uri("http://localhost:49201/backplane/v1.0");
 IBackplaneClient? backplaneClient1 = container.GetService<IBackplaneClient>();
-System.Console.WriteLine($"**Initializing client Example_Publisher. Connecting with backplane**{Environment.NewLine}");
+
+System.Console.WriteLine($"**Initializing client Backplane_Client_1. Connecting with backplane**{Environment.NewLine}");
 if (backplaneClient1 == null)
 {
     Console.Error.WriteLine("Failed to resolve dependency.Exiting...");
@@ -31,56 +35,42 @@ if (backplaneClient1 == null)
 }
 
 IBackplaneClient? backplaneClient2 = container.GetService<IBackplaneClient>();
-System.Console.WriteLine($"**Initializing client Example_Subscriber. Connecting with backplane**{Environment.NewLine}");
+System.Console.WriteLine($"**Initializing client Backplane_Client_2. Connecting with backplane**{Environment.NewLine}");
 if (backplaneClient2 == null)
 {
     Console.Error.WriteLine("Failed to resolve dependency.Exiting...");
     return;
 }
 
-await backplaneClient1.InitializeAsync(new AppIdentifier() { AppId = "Backplane_Client_1" });
-await backplaneClient2.InitializeAsync(new AppIdentifier() { AppId = "Backplane_Client_2" });
+await backplaneClient1.InitializeAsync(new InitializeParams(backplaneUrl, new AppIdentifier() { AppId = "Backplane_Client_1" }), (msg) =>
+{
+    Console.WriteLine($"Backplane_Client_1: {JsonConvert.SerializeObject(msg)}");
+}, async (ex) => { await Task.CompletedTask; Console.WriteLine($"Client disconnected. {ex}"); });
+
+
+await backplaneClient2.InitializeAsync(new InitializeParams(backplaneUrl, new AppIdentifier() { AppId = "Backplane_Client_2" }), (msg) =>
+{
+    Console.WriteLine($"Backplane_Client_2: {JsonConvert.SerializeObject(msg)}");
+}, async (ex) => { await Task.CompletedTask; Console.WriteLine($"Client disconnected. {ex}"); });
 
 //get system channels
-IEnumerable<IChannel>? channels = await backplaneClient1.GetSystemChannelsAsync();
+IEnumerable<Channel>? channels = await backplaneClient1.GetSystemChannelsAsync();
 System.Console.WriteLine($"**Populated channels:{string.Join(", ", channels.Select(x => $"Id {x.Id} and Name: {x.DisplayMetadata.Name}"))}**{Environment.NewLine}");
 
 /*
-                * BROADCAST WORK FLOW
-                * Broadcast is done on a channel.
-                * To send receive context message through broadcast, publisher and subscriber must be on same channel.
-                * Join Channel
-                * AddContextListener
-                * Broadcast.
-                */
+ * * BROADCAST WORK FLOW
+*/
 System.Console.WriteLine($"**Running Scenario for Broadcast**{Environment.NewLine}");
 
-
-//subscription can be done earlier. Channel can be joined later.
-System.Console.WriteLine($"**Subscribing context: fdc3.instrument**{Environment.NewLine}");
-IListener? broadcastSubscription = await backplaneClient1.AddContextListenerAsync("fdc3.instrument", (ctx) =>
-{
-    System.Console.WriteLine($"Example_Subscriber1: Receieved context: {ctx}{Environment.NewLine}");
-});
-
-//Join Channel
-
-Console.WriteLine($"Joining channel group1");
-//subscriber on same channel.
-await backplaneClient1.JoinChannelAsync("group1");
-//publisher on same channel.
-await backplaneClient2.JoinChannelAsync("group1");
-
 System.Console.WriteLine($"**Broadcasting context: fdc3.instrument**{Environment.NewLine}");
-await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)));
+await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "");
 
-Console.WriteLine("Enter to unsubscribe");
-Console.ReadLine();
-//Unsubscribe
-System.Console.WriteLine($"Unsubscribing Example_Subscriber from context fdc3.instrument{Environment.NewLine}");
-await broadcastSubscription.UnsubscribeAsync();
+await backplaneClient1.DisposeAsync();
+System.Console.WriteLine($"**Backplane_Client_1 disposed**{Environment.NewLine}");
+System.Console.WriteLine($"**Broadcasting context: fdc3.instrument**{Environment.NewLine}. This will have no effect");
+await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "");
 
-System.Console.WriteLine($"**Broadcasting context: fdc3.instrument.No subscriber now, so nothing would be printed**{Environment.NewLine}");
-await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)));
+
+Console.WriteLine("**Done**");
 
 Console.ReadLine();

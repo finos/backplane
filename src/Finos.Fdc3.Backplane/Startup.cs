@@ -23,10 +23,7 @@ namespace Finos.Fdc3.Backplane
 {
     public class Startup
     {
-
         private readonly ILogger<Startup> _logger;
-
-
         public Startup(IConfiguration configuration, ILogger<Startup> logger)
         {
             Configuration = configuration;
@@ -52,7 +49,6 @@ namespace Finos.Fdc3.Backplane
             });
             services.AddLogging(configure => { configure.AddConsole(); configure.SetMinimumLevel(LogLevel.Information); });
             services.AddTransient<IDesktopAgentHub, DesktopAgentsHub>();
-            services.AddTransient<IMessageEnvelopeGenerator, MessageEnvelopeGenerator>();
             services.AddControllers();
             services.AddSignalR(hubOptions =>
             {

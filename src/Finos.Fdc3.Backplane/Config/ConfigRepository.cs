@@ -20,6 +20,9 @@ namespace Finos.Fdc3.Backplane.Config
         private readonly ILogger<ConfigRepository> _logger;
         private readonly IConfiguration _config;
 
+        /// <summary>
+        /// List of system channels
+        /// </summary>
         public List<Channel> ChannelsList { get; private set; }
         public TimeSpan HttpRequestTimeoutInMilliseconds { get; private set; }
         public TimeSpan MemberNodesHealthCheckIntervalInMilliseconds { get; private set; }
@@ -35,9 +38,9 @@ namespace Finos.Fdc3.Backplane.Config
         }
         private void PopulatePropertiesFromConfig()
         {
-            IEnumerable<ChannelConfig> systemChannels = _config.GetSection("ChannelsConfig:SystemChannels").Get<IEnumerable<ChannelConfig>>();
-            IEnumerable<Channel> systemChannelsDto = systemChannels.Select(x => new Channel(x.Id, x.Type, new DisplayMetadata(x.Name, x.Color, x.Glyph)));
-            ChannelsList.AddRange(systemChannelsDto);
+            IEnumerable<ChannelConfig> systemChannelsConfig = _config.GetSection("ChannelsConfig:SystemChannels").Get<IEnumerable<ChannelConfig>>();
+            IEnumerable<Channel> systemChannels = systemChannelsConfig.Select(x => new Channel(x.Id, x.Type, new DisplayMetadata(x.Name, x.Color, x.Glyph)));
+            ChannelsList.AddRange(systemChannels);
             _logger.LogInformation($"Populated system channels from config: {string.Join(",", ChannelsList.Select(x => x.Id))}");
             HttpRequestTimeoutInMilliseconds = TimeSpan.FromMilliseconds(_config.GetValue<int>("HttpRequestTimeoutInMilliseconds", 5000));
             MemberNodesHealthCheckIntervalInMilliseconds = TimeSpan.FromMilliseconds(_config.GetValue<int>("MemberNodesHealthCheckIntervalInMilliseconds", 5000));

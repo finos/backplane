@@ -85,9 +85,9 @@ namespace Finos.Fdc3.Backplane.Tests.Multihost
             Uri url_not_present = new Uri("http://notpresent");
             NodesRepository sut = _fixture.Create<NodesRepository>();
             sut.AddNode(url1);
-            var ref1= sut.MemberNodes;
-            var ref2 = sut.MemberNodes;
-            Assert.IsFalse(ReferenceEquals(ref2,ref1));
+            System.Collections.Generic.IEnumerable<Uri> ref1 = sut.MemberNodes;
+            System.Collections.Generic.IEnumerable<Uri> ref2 = sut.MemberNodes;
+            Assert.IsFalse(ReferenceEquals(ref2, ref1));
         }
     }
 }

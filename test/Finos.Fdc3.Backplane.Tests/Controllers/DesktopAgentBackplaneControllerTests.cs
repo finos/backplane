@@ -1,7 +1,7 @@
 using AutoFixture;
 using Finos.Fdc3.Backplane.Controllers;
 using Finos.Fdc3.Backplane.DTO.Envelope;
-using Finos.Fdc3.Backplane.DTO.Envelope.Send;
+using Finos.Fdc3.Backplane.DTO.Envelope.Receive;
 using Finos.Fdc3.Backplane.DTO.FDC3;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
@@ -39,7 +39,7 @@ namespace Finos.Fdc3.Backplane.Tests.Controllers
             //Arrange
             JObject context = JObject.Parse(@"{'type': 'fdc3.Instrument'}");
             string uniqueMessageId = Guid.NewGuid().ToString();
-            BroadcastContextEnvelope broadcastContext = new BroadcastContextEnvelope() { ChannelId = "abc", Metadata = new EnvelopeMetadata() { UniqueMessageId = uniqueMessageId, Source = new AppIdentifier() { AppId = "Test" } }, Context = context };
+            MessageEnvelope broadcastContext = new MessageEnvelope() { Payload = new EnvelopeData() { ChannelId = "abc", Context = context }, Meta = new EnvelopeMetadata() { UniqueMessageId = uniqueMessageId, Source = new AppIdentifier() { AppId = "Test" } } };
             DesktopAgentBackplaneController sut = _fixture.Build<DesktopAgentBackplaneController>().OmitAutoProperties().Create();
             //Act
             ObjectResult result = sut.BroadcastToLocalClients(broadcastContext).Result as ObjectResult;
@@ -48,21 +48,21 @@ namespace Finos.Fdc3.Backplane.Tests.Controllers
         }
 
         [Test]
-        public void Test_BroadcastToLocalClients_ShouldReturn_500_WhenExceptionOccurs()
+        public void ShouldReturnErrorCodeIfExceptionOccurs()
         {
             //Arrange
             JObject context = JObject.Parse(@"{'type': 'fdc3.Instrument'}");
             string uniqueMessageId = Guid.NewGuid().ToString();
-            BroadcastContextEnvelope broadcastContext = new BroadcastContextEnvelope() { ChannelId = "abc", Metadata = new EnvelopeMetadata() { UniqueMessageId = uniqueMessageId, Source = new AppIdentifier() { AppId = "Test" } }, Context = context };
-            IDesktopAgentHub userService = _fixture.Freeze<IDesktopAgentHub>();
-            userService.Broadcast(broadcastContext, true).Returns(x => { throw new Exception("Exception Occured"); });
+            MessageEnvelope broadcastContext = new MessageEnvelope() { Payload = new EnvelopeData() { ChannelId = "channel1", Context = context }, Meta = new EnvelopeMetadata() { UniqueMessageId = uniqueMessageId, Source = new AppIdentifier() { AppId = "Test" } } };
+            IDesktopAgentHub hub = _fixture.Freeze<IDesktopAgentHub>();
+            hub.Broadcast(broadcastContext, true).ReturnsForAnyArgs(x => { throw new Exception("Exception Occured"); });
             DesktopAgentBackplaneController sut = _fixture.Build<DesktopAgentBackplaneController>().OmitAutoProperties().Create();
             //Act
             ObjectResult result = sut.BroadcastToLocalClients(broadcastContext).Result as ObjectResult;
             //Assert
             Assert.AreEqual(result.StatusCode, 500);
             Assert.AreEqual((result.Value as Exception).Message, "Exception Occured");
-            Assert.Throws<Exception>(() => userService.Broadcast(broadcastContext, true));
+            Assert.Throws<Exception>(() => hub.Broadcast(broadcastContext, true));
 
         }
     }

@@ -9,8 +9,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using NLog;
-using NLog.Web;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
@@ -19,28 +18,25 @@ namespace Finos.Fdc3.Backplane
     public class Program
     {
         private static SingleInstance _singleInstance;
-        private static Logger _logger;
+        private static ILogger _logger;
+
         public static async Task Main(string[] args)
         {
-            //Init logger.
-            InitLogger();
+            var loggerFactory = new LoggerFactory();
             // single instance check.
-            _singleInstance = new SingleInstance();
+            _singleInstance = new SingleInstance(loggerFactory);
+            _logger = loggerFactory.CreateLogger<Program>();
 
             if (_singleInstance.IsAlreadyRunning)
             {
-                _logger.Fatal($"Another instance of backplane service already running. Exiting the current instance..");
+                _logger.LogCritical($"Another instance of backplane service already running. Exiting the current instance..");
                 _singleInstance.Dispose();
-                LogManager.Shutdown();
                 Environment.Exit(-10);
             }
 
             await Init(args);
         }
-        private static void InitLogger()
-        {
-            _logger = LogManager.GetCurrentClassLogger();
-        }
+       
 
         public static async Task Init(string[] args)
         {
@@ -58,26 +54,26 @@ namespace Finos.Fdc3.Backplane
                         using IWebHost host = CreateWebHostBuilder(args, port).Build();
                         IHostingUtils hostingUtil = (IHostingUtils)host.Services.GetService(typeof(IHostingUtils));
                         hostingUtil.RegisterBackplane();
-                        _logger.Info("Backplane service started...");
+                        _logger.LogInformation("Backplane service started...");
                         await host.RunAsync();
-                        _logger.Info("Backplane service stopped...");
+                        _logger.LogInformation("Backplane service stopped...");
+
                     }
                     catch (Exception exception)
                     {
-                        _logger.Error(exception, $"An exception occurred while starting the backplane services on port: {port}");
+                        _logger.LogError(exception, $"An exception occurred while starting the backplane services on port: {port}");
                     }
                 }
             }
             catch (Exception exception)
             {
-                _logger.Error(exception, "An exception occurred while starting the services.");
+                _logger.LogError(exception, "An exception occurred while starting the services.");
                 throw;
             }
             finally
             {
                 //dispose below once if all of defined ports are tried or program exiting.
                 _singleInstance.Dispose();
-                LogManager.Shutdown();
             }
         }
 
@@ -90,7 +86,6 @@ namespace Finos.Fdc3.Backplane
                         config.AddCommandLine(args);
                     })
                     .UseStartup<Startup>()
-                    .UseNLog()
                     .UseKestrel(options => options.ListenAnyIP(port));
         }
     }

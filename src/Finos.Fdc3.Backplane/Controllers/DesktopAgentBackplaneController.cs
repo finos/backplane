@@ -3,7 +3,7 @@
 	* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
 	*/
 
-using Finos.Fdc3.Backplane.DTO.Envelope.Send;
+using Finos.Fdc3.Backplane.DTO.Envelope.Receive;
 using Finos.Fdc3.Backplane.MultiHost;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -35,21 +35,21 @@ namespace Finos.Fdc3.Backplane.Controllers
         /// <summary>
         /// Member node call this end point to send broadcast context to this node.
         /// </summary>
-        /// <param name="broadcastContextDTO"> Input message</param>
+        /// <param name="message"> Input message</param>
         /// <returns>Response with appropriate status code.</returns>
         [ApiExplorerSettings(IgnoreApi = true)]
         [HttpPost]
         [Route("broadcast/context")]
-        public async Task<IActionResult> BroadcastToLocalClients(BroadcastContextEnvelope broadcastContextDTO)
+        public async Task<IActionResult> BroadcastToLocalClients(MessageEnvelope message)
         {
-            if (broadcastContextDTO == null)
+            if (message == null)
             {
                 return await Task.FromResult(StatusCode(400, "Input parameter is missing"));
             }
             try
             {
-                _logger.LogInformation($"Broadcast context request received : {JsonConvert.SerializeObject(broadcastContextDTO)}");
-                return await Task.FromResult(Ok(_hub.Broadcast(broadcastContextDTO, true)));
+                _logger.LogInformation($"Broadcast context request received : {JsonConvert.SerializeObject(message)}");
+                return await Task.FromResult(Ok(_hub.Broadcast(message, false)));
             }
             catch (Exception ex)
             {
@@ -59,8 +59,7 @@ namespace Finos.Fdc3.Backplane.Controllers
         }
 
         /// <summary>
-        /// As a part of health check, this end point allows member nodes to post their status which 
-        /// is updated in member node repository.
+        /// This end point allows member nodes to register them with this node 
         /// </summary>
         /// <param name="memberNodeUri"></param>
         /// <returns></returns>

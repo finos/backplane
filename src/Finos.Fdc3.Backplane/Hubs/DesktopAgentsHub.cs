@@ -6,7 +6,6 @@
 using Finos.Fdc3.Backplane.Config;
 using Finos.Fdc3.Backplane.DTO;
 using Finos.Fdc3.Backplane.DTO.Envelope.Receive;
-using Finos.Fdc3.Backplane.DTO.Envelope.Send;
 using Finos.Fdc3.Backplane.DTO.FDC3;
 using Finos.Fdc3.Backplane.MultiHost;
 using Finos.Fdc3.Backplane.Utils;
@@ -29,7 +28,6 @@ namespace Finos.Fdc3.Backplane.Hubs
     public class DesktopAgentsHub : Hub, IDesktopAgentHub
     {
         private readonly IHubContext<DesktopAgentsHub> _hubContext;
-        private readonly IMessageEnvelopeGenerator _messageEnvelopeGenerator;
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly INodesRepository _memberNodesRepo;
         private readonly ILogger<DesktopAgentsHub> _logger;
@@ -40,11 +38,10 @@ namespace Finos.Fdc3.Backplane.Hubs
         private static readonly ConcurrentDictionary<string, JObject> _currentContextStore = new ConcurrentDictionary<string, JObject>();
         public DesktopAgentsHub(ILogger<DesktopAgentsHub> logger,
             IHubContext<DesktopAgentsHub> hubContext,
-            IMessageEnvelopeGenerator messageEnvelopeGenerator, IHttpClientFactory httpClientFactory,
+             IHttpClientFactory httpClientFactory,
             INodesRepository memberNodesRepo, IConfigRepository configRepository)
         {
             _hubContext = hubContext;
-            _messageEnvelopeGenerator = messageEnvelopeGenerator;
             _httpClientFactory = httpClientFactory;
             _memberNodesRepo = memberNodesRepo;
             _logger = logger;
@@ -58,37 +55,36 @@ namespace Finos.Fdc3.Backplane.Hubs
         /// <summary>
         /// Broadcast context to connected clients and member backplane nodes of cluster.
         /// </summary>
-        /// <param name="broadcastContextDTO"></param>
-        /// <param name="isMessageTobePropagatedToOtherNodes">if broadcast only need to be done locally and not to other member nodes. By default false.</param>
+        /// <param name="messageEnvelope"></param>
+        /// <param name="isMessageOriginatedFromCurrentNode">if broadcast only need to be done locally and not to other member nodes. By default false.</param>
         /// <returns></returns>
-        public async Task Broadcast(BroadcastContextEnvelope broadcastContextDTO, bool isMessageTobePropagatedToOtherNodes = false)
+        public async Task Broadcast(MessageEnvelope messageEnvelope, bool isMessageOriginatedFromCurrentNode = true)
         {
-            if (broadcastContextDTO == null)
+            if (messageEnvelope == null)
             {
                 _logger.LogError($"ExceptionCode:{(int)ResponseCodes.BroadcastPayloadInvalid} invalid parameter");
                 throw new HubException($"ExceptionCode:{(int)ResponseCodes.BroadcastPayloadInvalid} invalid parameter.") { HResult = (int)ResponseCodes.BroadcastPayloadInvalid };
             }
 
-            _logger.LogInformation($"Call received from signalR client: {Context?.ConnectionId}, message: {JsonConvert.SerializeObject(broadcastContextDTO)}");
-            MessageEnvelope messageEnvelope = _messageEnvelopeGenerator.GenerateMessageEnvelope(broadcastContextDTO);
+            _logger.LogInformation($"Call received from signalR client: {Context?.ConnectionId}, message: {JsonConvert.SerializeObject(messageEnvelope)}");
             //broadcast to local clients
-            await SendMessageToClientsExceptOriginalSender(messageEnvelope, isMessageTobePropagatedToOtherNodes, "ReceiveBroadcastMessage");
+            await SendMessageToClients(messageEnvelope, isMessageOriginatedFromCurrentNode, "OnMessage");
             // propagate message to other nodes of backplane cluster
-            if (!isMessageTobePropagatedToOtherNodes)
+            if (isMessageOriginatedFromCurrentNode)
             {
-                await PostMessageToMemberBackplanes(broadcastContextDTO, _broadcastEndpoint);
+                await PostMessageToMemberBackplanes(messageEnvelope, _broadcastEndpoint);
             }
 
             await _threadSafeCurrentContextAccessHandle.WaitAsync().ConfigureAwait(false);
             try
             {
-                _currentContextStore.AddOrUpdate(broadcastContextDTO.ChannelId, broadcastContextDTO.Context, (channelId, ctx) => broadcastContextDTO.Context);
+                _currentContextStore.AddOrUpdate(messageEnvelope.Payload.ChannelId, messageEnvelope.Payload.Context, (channelId, ctx) => messageEnvelope.Payload.Context);
             }
             finally
             {
                 _threadSafeCurrentContextAccessHandle.Release();
             }
-            _logger.LogDebug($"Updated current context for channelId : {broadcastContextDTO.ChannelId}: {JsonConvert.SerializeObject(broadcastContextDTO.Context)}");
+            _logger.LogDebug($"Updated current context for channelId : {messageEnvelope.Payload.ChannelId}: {JsonConvert.SerializeObject(messageEnvelope.Payload.Context)}");
         }
 
         /// <summary>
@@ -128,18 +124,19 @@ namespace Finos.Fdc3.Backplane.Hubs
             return await Task.FromResult(_configRepository.ChannelsList);
         }
 
-        private async Task SendMessageToClientsExceptOriginalSender(MessageEnvelope messageEnvelope, bool intraMessageOnly, string remoteMethodName)
+        private async Task SendMessageToClients(MessageEnvelope messageEnvelope, bool isMessageOriginatedFromCurrentNode, string remoteMethodName)
         {
             string messageJson = JsonConvert.SerializeObject(messageEnvelope);
-            if (intraMessageOnly == true)
-            {
-                _logger.LogInformation($"Sending data to all connected clients. Message: {messageJson}.");
-                await _hubContext.Clients.All.SendAsync(remoteMethodName, messageEnvelope);
-            }
-            else
+            if (isMessageOriginatedFromCurrentNode)
             {
                 _logger.LogInformation($"Sending data to all connected clients except original sender: {Context.ConnectionId}. Message: {messageJson}.");
                 await _hubContext.Clients.AllExcept(Context.ConnectionId).SendAsync(remoteMethodName, messageEnvelope);
+            }
+            else
+            {
+                _logger.LogInformation($"Sending data to all connected clients. Message: {messageJson}.");
+                await _hubContext.Clients.All.SendAsync(remoteMethodName, messageEnvelope);
+
             }
         }
 

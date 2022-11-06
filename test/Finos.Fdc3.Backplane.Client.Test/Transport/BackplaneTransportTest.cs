@@ -1,11 +1,9 @@
 ﻿using AutoFixture;
-using Finos.Fdc3.Backplane.Client.Resilliency;
 using Finos.Fdc3.Backplane.Client.Transport;
 using Finos.Fdc3.Backplane.DTO.FDC3;
 using Newtonsoft.Json.Linq;
 using NSubstitute;
 using NUnit.Framework;
-using Polly;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -16,36 +14,35 @@ namespace Finos.Fdc3.Backplane.Client.Test.Transport
     public class BackplaneTransportTest
     {
         private Fixture _fixture;
-        private IConnection _connection;
-        private IConnectionFactory _connectionFactory;
+        private ISignalRConnection _connection;
+        private ISignalRConnectionBuilder _signalRConnectionBuilder;
 
         [SetUp]
         public void Setup()
         {
             _fixture = AutoFixture.Create();
-            _connection = _fixture.Freeze<IConnection>();
+            _connection = _fixture.Freeze<ISignalRConnection>();
             _connection.State.Returns(ConnectionState.Connected);
-            _connectionFactory = _fixture.Freeze<IConnectionFactory>();
-            _connectionFactory.Create(default).ReturnsForAnyArgs(_connection);
-            IRetryPolicyProvider retryPolicyProvider = _fixture.Freeze<IRetryPolicyProvider>();
-            retryPolicyProvider.GetAsyncRetryPolicy<Exception>(Arg.Any<int>(), Arg.Any<Func<int, TimeSpan>>()).Returns(Policy.NoOpAsync());
+            _signalRConnectionBuilder = _fixture.Freeze<ISignalRConnectionBuilder>();
+            _signalRConnectionBuilder.Build(default).ReturnsForAnyArgs(_connection);
         }
 
         [Test]
         public async Task ShouldCreateAndStartConnectionOnInitialize()
         {
-            BackplaneTransport sut = _fixture.Create<BackplaneTransport>();
-            await sut.InitializeConnectionAsync(1, (t) => TimeSpan.FromSeconds(1), CancellationToken.None);
-            await _connectionFactory.ReceivedWithAnyArgs().Create(default);
+            SignalRBackplaneTransport sut = _fixture.Create<SignalRBackplaneTransport>();
+            await sut.ConnectAsync(default, default, default);
+            _signalRConnectionBuilder.ReceivedWithAnyArgs().Build(default);
+            await _connection.ReceivedWithAnyArgs().StartAsync();
         }
 
         [Test]
 
-        public void BroadcastAsyncShouldThrowExceptionIfConnectionIsBroken()
+        public async Task BroadcastAsyncShouldThrowExceptionIfConnectionIsBroken()
         {
-            BackplaneTransport sut = _fixture.Create<BackplaneTransport>();
+            SignalRBackplaneTransport sut = _fixture.Create<SignalRBackplaneTransport>();
             _connection.State.Returns(ConnectionState.Disconnected);
-            sut.InitializeConnectionAsync(1, (t) => TimeSpan.FromSeconds(1), CancellationToken.None).Wait();
+            await sut.ConnectAsync(default, default, default);
             Assert.ThrowsAsync<InvalidOperationException>(async () => await sut.BroadcastAsync(default, default));
 
         }
@@ -53,19 +50,19 @@ namespace Finos.Fdc3.Backplane.Client.Test.Transport
         [Test]
         public async Task ShouldCallGetSystemChannelOnHub()
         {
-            BackplaneTransport sut = _fixture.Create<BackplaneTransport>();
-            await sut.InitializeConnectionAsync(1, (t) => TimeSpan.FromSeconds(1), CancellationToken.None);
-            await sut.GetSystemChannelsAsync(default);
-            await _connection.Received().InvokeAsync<IEnumerable<Channel>>("GetSystemChannels", Arg.Any<CancellationToken>());
+            SignalRBackplaneTransport sut = _fixture.Create<SignalRBackplaneTransport>();
+            await sut.ConnectAsync(default, default, default);
+            await sut.GetSystemChannelsAsync();
+            await _connection.ReceivedWithAnyArgs().InvokeAsync<IEnumerable<Channel>>("GetSystemChannels", Arg.Any<CancellationToken>());
 
         }
 
         [Test]
-        public void GetCurrentContextAsynShouldThrowExceptionIfConnectionIsBroken()
+        public async Task GetCurrentContextAsynShouldThrowExceptionIfConnectionIsBroken()
         {
             _connection.State.Returns(ConnectionState.Disconnected);
-            BackplaneTransport sut = _fixture.Create<BackplaneTransport>();
-            sut.InitializeConnectionAsync(1, (t) => TimeSpan.FromSeconds(1), CancellationToken.None).Wait();
+            SignalRBackplaneTransport sut = _fixture.Create<SignalRBackplaneTransport>();
+            await sut.ConnectAsync(default, default, default);
             Assert.ThrowsAsync<InvalidOperationException>(async () => await sut.GetCurrentContextAsync(default, default));
 
         }
@@ -73,20 +70,12 @@ namespace Finos.Fdc3.Backplane.Client.Test.Transport
         [Test]
         public async Task ShouldCallGetCurrentContextAsyncOnHub()
         {
-            BackplaneTransport sut = _fixture.Create<BackplaneTransport>();
-            await sut.InitializeConnectionAsync(1, (t) => TimeSpan.FromSeconds(1), CancellationToken.None);
+            SignalRBackplaneTransport sut = _fixture.Create<SignalRBackplaneTransport>();
+            await sut.ConnectAsync(default, default, default);
             await sut.GetCurrentContextAsync(default, default);
             await _connection.ReceivedWithAnyArgs().InvokeAsync<JObject>("GetCurrentContextForChannel", default, Arg.Any<CancellationToken>());
 
         }
 
-        [Test]
-        public async Task ShouldReinitiateConnectionOnClose()
-        {
-            BackplaneTransport sut = _fixture.Create<BackplaneTransport>();
-            await sut.InitializeConnectionAsync(1, (t) => TimeSpan.FromSeconds(1), CancellationToken.None);
-            _connection.Closed += Raise.Event<Func<Exception, Task>>(new Exception("Connection Closed"));
-            await _connectionFactory.ReceivedWithAnyArgs(2).Create(default);
-        }
     }
 }

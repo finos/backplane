@@ -1,13 +1,10 @@
-﻿/**
+﻿/*
 	* SPDX-License-Identifier: Apache-2.0
 	* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
 	*/
 
 
-using Finos.Fdc3.Backplane.Client.Extensions;
 using Microsoft.AspNetCore.SignalR.Client;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -16,10 +13,10 @@ using System.Threading.Tasks;
 [assembly: InternalsVisibleTo("Finos.Fdc3.Backplane.Client.Test")]
 namespace Finos.Fdc3.Backplane.Client.Transport
 {
-    internal class SignalRConnection : IConnection
+    internal class SignalRConnection : ISignalRConnection
     {
-        private HubConnection _connection;
-        private readonly ILogger<IConnection> _logger;
+        private readonly HubConnection _connection;
+
 
         public event Func<Exception, Task> Closed
         {
@@ -45,23 +42,12 @@ namespace Finos.Fdc3.Backplane.Client.Transport
             }
         }
 
+        public SignalRConnection(HubConnection hubConnection)
+        {
+            _connection = hubConnection;
+        }
+
         public ConnectionState State => Transform(_connection.State);
-
-        public SignalRConnection(ILogger<IConnection> logger)
-        {
-            _logger = logger;
-        }
-
-        public void Build(string url, CancellationToken ct)
-        {
-            _connection = new HubConnectionBuilder()
-                  .WithUrl(url)
-                  .AddNewtonsoftJsonProtocol()
-                  .ConfigureLogging(logging =>
-                  {
-                      logging.AddProvider(_logger.AsLoggerProvider());
-                  }).Build();
-        }
 
         public async Task StartAsync(CancellationToken ct = default)
         {
@@ -114,6 +100,7 @@ namespace Finos.Fdc3.Backplane.Client.Transport
                     return ConnectionState.Disconnected;
             }
         }
+
     }
 }
 

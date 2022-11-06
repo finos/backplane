@@ -4,12 +4,12 @@
 	*/
 
 using Finos.Fdc3.Backplane.Config;
-using Finos.Fdc3.Backplane.Models;
 using Finos.Fdc3.Backplane.MultiHost;
 using Finos.Fdc3.Backplane.Utils;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -63,18 +63,19 @@ namespace Finos.Fdc3.Backplane.WorkerService
         {
             TimeSpan healthCheckIntervalMs = _config.MemberNodesHealthCheckIntervalInMilliseconds;
             TimeSpan httpRequestTimeOutInMs = _config.HttpRequestTimeoutInMilliseconds;
+            string addNodePath = _config.AddNodeEndpoint;
             _logger.LogInformation($"HealthCheck service started with health check interval of {healthCheckIntervalMs} ms.");
 
             while (!_cancellationToken.IsCancellationRequested)
             {
                 try
                 {
-                    System.Collections.Generic.IEnumerable<Uri> discoveredNodes = await _nodesDiscoveryClient.DiscoverAsync(_cancellationToken);
+                    IEnumerable<Uri> discoveredNodes = await _nodesDiscoveryClient.DiscoverAsync(_cancellationToken);
                     foreach (Uri nodeUri in discoveredNodes)
                     {
                         try
                         {
-                            HttpResponseMessage response = await HttpUtils.PostAsync(_httpClientFactory, new Uri($"{nodeUri}/backplane/api/v1.0/addmembernode"), new Node() { Uri = _nodeRegistrationClient.CurrentNodeUri }, httpRequestTimeOutInMs);
+                            HttpResponseMessage response = await HttpUtils.PostAsync(_httpClientFactory, new Uri(nodeUri, addNodePath), _nodeRegistrationClient.CurrentNodeUri, httpRequestTimeOutInMs);
                             if (response.IsSuccessStatusCode)
                             {
                                 _memberNodesRepository.AddNode(nodeUri);

@@ -3,7 +3,7 @@
 	* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
 	*/
 
-using NLog;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading;
 
@@ -11,15 +11,16 @@ namespace Finos.Fdc3.Backplane
 {
     public class SingleInstance : IDisposable
     {
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
+        private readonly ILogger<SingleInstance> _logger;
         private readonly Mutex _mutex;
         private bool _hasHandle;
 
         public bool IsAlreadyRunning => !_hasHandle;
 
-        public SingleInstance()
+        public SingleInstance(LoggerFactory loggerFactory)
         {
+            _logger = loggerFactory.CreateLogger<SingleInstance>();
             _mutex = new Mutex(false, $"{GetMutexId()}", out _hasHandle);
             TryAcquire(TimeSpan.FromSeconds(5));
         }
@@ -32,7 +33,7 @@ namespace Finos.Fdc3.Backplane
             }
             catch (AbandonedMutexException abandonedMutexException)
             {
-                Logger.Warn($"Previous instance did not cleanly exit: \n{abandonedMutexException}");
+                _logger.LogError($"Previous instance did not cleanly exit: \n{abandonedMutexException}");
                 _hasHandle = true;
             }
         }
@@ -46,7 +47,7 @@ namespace Finos.Fdc3.Backplane
         {
             if (_mutex != null)
             {
-                Logger.Info("Disposing mutex");
+                _logger.LogInformation("Disposing mutex");
 
                 if (_hasHandle)
                 {
@@ -57,7 +58,7 @@ namespace Finos.Fdc3.Backplane
                 _mutex.Close();
             }
 
-            Logger.Info("Finished disposing single instance");
+            _logger.LogInformation("Finished disposing single instance");
         }
     }
 }
