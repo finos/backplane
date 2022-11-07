@@ -14,9 +14,14 @@ namespace Finos.Fdc3.Backplane.Config
     public interface IConfigRepository
     {
         /// <summary>
+        /// Member nodes from config
+        /// </summary>
+        IEnumerable<Uri> MemberNodes { get; }
+
+        /// <summary>
         /// Channels list from config
         /// </summary>
-        List<Channel> ChannelsList { get; }
+        IEnumerable<Channel> Channels { get; }
         /// <summary>
         /// Http Request timeout
         /// </summary>
@@ -28,12 +33,17 @@ namespace Finos.Fdc3.Backplane.Config
         TimeSpan MemberNodesHealthCheckIntervalInMilliseconds { get; }
 
         /// <summary>
-        /// Add node end point in mutihost scenario
+        /// Add node endpoint in mutihost scenario
         /// </summary>
         string AddNodeEndpoint { get; }
 
         /// <summary>
-        /// SignalR hub endpoint
+        /// Broadcast endpoint 
+        /// </summary>
+        string BroadcastEndpoint { get; }
+
+        /// <summary>
+        /// Backplane endpoint
         /// </summary>
         string HubEndpoint { get; }
     }

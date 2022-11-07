@@ -16,6 +16,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,7 +34,7 @@ namespace Finos.Fdc3.Backplane.Hubs
         private readonly ILogger<DesktopAgentsHub> _logger;
         private readonly IConfigRepository _configRepository;
         private readonly TimeSpan _httpTimeOutInMs;
-        private readonly string _broadcastEndpoint;
+        private readonly string _broadcastPath;
         private static readonly SemaphoreSlim _threadSafeCurrentContextAccessHandle = new SemaphoreSlim(1, 1);
         private static readonly ConcurrentDictionary<string, JObject> _currentContextStore = new ConcurrentDictionary<string, JObject>();
         public DesktopAgentsHub(ILogger<DesktopAgentsHub> logger,
@@ -47,7 +48,7 @@ namespace Finos.Fdc3.Backplane.Hubs
             _logger = logger;
             _configRepository = configRepository;
             _httpTimeOutInMs = configRepository.HttpRequestTimeoutInMilliseconds;
-            _broadcastEndpoint = configRepository.AddNodeEndpoint;
+            _broadcastPath = Path.Combine(configRepository.HubEndpoint, configRepository.BroadcastEndpoint);
         }
 
         /// <summary>
@@ -92,7 +93,7 @@ namespace Finos.Fdc3.Backplane.Hubs
             // propagate message to other nodes of backplane cluster
             if (isMessageOriginatedFromCurrentNode)
             {
-                await PostMessageToMemberBackplanes(messageEnvelope, _broadcastEndpoint);
+                await PostMessageToMemberBackplanes(messageEnvelope);
             }
 
             await _threadSafeCurrentContextAccessHandle.WaitAsync().ConfigureAwait(false);
@@ -141,7 +142,7 @@ namespace Finos.Fdc3.Backplane.Hubs
         /// <returns></returns>
         public async Task<IEnumerable<Channel>> GetSystemChannels()
         {
-            return await Task.FromResult(_configRepository.ChannelsList);
+            return await Task.FromResult(_configRepository.Channels);
         }
 
         private async Task SendMessageToClients(MessageEnvelope messageEnvelope, bool isMessageOriginatedFromCurrentNode, string remoteMethodName)
@@ -160,12 +161,13 @@ namespace Finos.Fdc3.Backplane.Hubs
             }
         }
 
-        private async Task PostMessageToMemberBackplanes<T>(T messageContextDTO, string urlSuffix)
+        private async Task PostMessageToMemberBackplanes<T>(T messageContextDTO)
         {
             //send message to member backplanes
-            foreach (Uri uri in _memberNodesRepo.MemberNodes)
+            foreach (Uri nodeUri in _memberNodesRepo.MemberNodes)
             {
-                await PostRequestAsync(uri, _broadcastEndpoint, messageContextDTO);
+                //http://nodeurl/backplane/v1.0/broadcast/context
+                await PostRequestAsync(nodeUri, _broadcastPath, messageContextDTO);
             }
         }
 

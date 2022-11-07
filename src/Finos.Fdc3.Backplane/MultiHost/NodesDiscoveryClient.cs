@@ -3,10 +3,10 @@
 	* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
 	*/
 
+using Finos.Fdc3.Backplane.Config;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,10 +19,14 @@ namespace Finos.Fdc3.Backplane.MultiHost
     public class NodesDiscoveryClient : INodesDiscoveryClient
     {
         private readonly ILogger<NodesDiscoveryClient> _logger;
+        private readonly IConfigRepository _configRepository;
+        private readonly IEnumerable<Uri> _memberNodes;
 
-        public NodesDiscoveryClient(ILogger<NodesDiscoveryClient> logger)
+        public NodesDiscoveryClient(ILogger<NodesDiscoveryClient> logger, IConfigRepository configRepository)
         {
             _logger = logger;
+            _configRepository = configRepository;
+            _memberNodes = _configRepository.MemberNodes;
         }
 
         /// <summary>
@@ -32,10 +36,10 @@ namespace Finos.Fdc3.Backplane.MultiHost
         /// <returns></returns>
         public async Task<IEnumerable<Uri>> DiscoverAsync(CancellationToken ct = default)
         {
-            //Implement here discovery mechanism.
-            IEnumerable<Uri> nodes = await Task.FromResult(Enumerable.Empty<Uri>());
+            //You can implement own discovery mechanism. Current implementation uses config based settings
+            IEnumerable<Uri> nodes = _memberNodes;
             _logger.LogInformation($"Discovered nodes:{nodes}");
-            return nodes;
+            return await Task.FromResult(nodes);
         }
 
     }

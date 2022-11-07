@@ -6,8 +6,8 @@
 
 using Finos.Fdc3.Backplane.DTO.FDC3;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
 namespace Finos.Fdc3.Backplane.DTO.Envelope

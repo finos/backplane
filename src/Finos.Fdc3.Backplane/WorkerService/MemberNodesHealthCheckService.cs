@@ -10,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -63,7 +64,9 @@ namespace Finos.Fdc3.Backplane.WorkerService
         {
             TimeSpan healthCheckIntervalMs = _config.MemberNodesHealthCheckIntervalInMilliseconds;
             TimeSpan httpRequestTimeOutInMs = _config.HttpRequestTimeoutInMilliseconds;
-            string addNodePath = _config.AddNodeEndpoint;
+            string addNodePath = Path.Combine(_config.HubEndpoint, _config.AddNodeEndpoint);
+
+
             _logger.LogInformation($"HealthCheck service started with health check interval of {healthCheckIntervalMs} ms.");
 
             while (!_cancellationToken.IsCancellationRequested)
@@ -75,7 +78,8 @@ namespace Finos.Fdc3.Backplane.WorkerService
                     {
                         try
                         {
-                            HttpResponseMessage response = await HttpUtils.PostAsync(_httpClientFactory, new Uri(nodeUri, addNodePath), _nodeRegistrationClient.CurrentNodeUri, httpRequestTimeOutInMs);
+                            Uri addMemberNodeUri = new Uri(nodeUri, addNodePath);
+                            HttpResponseMessage response = await HttpUtils.PostAsync(_httpClientFactory, addMemberNodeUri, _nodeRegistrationClient.CurrentNodeUri, httpRequestTimeOutInMs);
                             if (response.IsSuccessStatusCode)
                             {
                                 _memberNodesRepository.AddNode(nodeUri);
@@ -90,7 +94,7 @@ namespace Finos.Fdc3.Backplane.WorkerService
                         }
                         catch (Exception ex)
                         {
-                            _logger.LogError($"Failed to heart beat of node:{nodeUri}.{ex}");
+                            _logger.LogError($"Failed to check heart beat of node:{nodeUri}.{ex}");
                         }
 
                     }
