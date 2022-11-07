@@ -5,15 +5,11 @@
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
     <StartupObject />
-    <AssemblyName>Fdc3.DesktopAgent.Backplane</AssemblyName>
-    <Version>1.0.0</Version>
+    <AssemblyName>Finos.Fdc3.Backplane</AssemblyName>
+    <Version>1.0.0-alpha</Version>
     <Company>FINOS</Company>
-    <Product></Product>
+    <Product>FDC3 Backplane</Product>
     <Authors>FINOS</Authors>
-    <!--<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    --><!--<AssemblyVersion>1.2.3.4</AssemblyVersion>--><!--
-    <OutputType>WinExe</OutputType>-->
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -21,14 +17,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Hosting.WindowsServices" Version="6.0.8" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" Version="6.0.9" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
-    <PackageReference Include="System.Diagnostics.Process" Version="4.3.0" />
-    <PackageReference Include="System.ServiceModel.Http" Version="4.10.0" />
-    <PackageReference Include="System.Threading.AccessControl" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.WindowsServices" Version="6.0.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.0.*" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" Version="6.0.*" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.*" />
+    <PackageReference Include="System.Diagnostics.Process" Version="4.3.*" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.10.*" />
+    <PackageReference Include="System.Threading.AccessControl" Version="6.0.*" />
   </ItemGroup>
 
   <ItemGroup>

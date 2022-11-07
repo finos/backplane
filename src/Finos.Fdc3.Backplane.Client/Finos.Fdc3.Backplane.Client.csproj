@@ -5,29 +5,36 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<Authors>FINOS</Authors>
 		<Product>FDC3 'Backplane' client</Product>
-		<Description>.NET client for 'Backplane' to connect and communicate with other desktop agent</Description>
-		<Copyright>@FINOS</Copyright>
-		<RepositoryUrl></RepositoryUrl>
+		<Description>.NET client for connecting and communicating with FDC3 'backplane'</Description>
+		<RepositoryUrl>https://github.com/bankofapis/backplane</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags></PackageTags>
+		<PackageTags>FDC3 Backplane Client</PackageTags>
 		<PackageOutputPath>..\..\output\netclient</PackageOutputPath>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Version>1.0.0-alpha</Version>
+		<PackageReadmeFile>Readme.md</PackageReadmeFile>
 
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.7" />
-		<PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" Version="6.0.9" />
-		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
-		<PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.*" />
+		<PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" Version="6.0.*" />
+		<PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="6.0.*" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.*" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.*" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.*" />
+		<PackageReference Include="System.Net.Http.Json" Version="6.0.*" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Finos.Fdc3.Backplane.DTO\Finos.Fdc3.Backplane.DTO.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Readme.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
 	</ItemGroup>
 
 </Project>
