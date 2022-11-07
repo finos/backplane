@@ -12,53 +12,34 @@ import {
 	JsonHubProtocol,
 	LogLevel,
 } from '@microsoft/signalr';
-import { Context } from 'mocha';
+import { Context } from '@finos/fdc3';
 import { InitializeParams } from '../API/initializeParams';
 import { AppIdentifier, MessageEnvelope } from '../DTO/MessageEnvelope';
 
 export class BackplaneClientTransport {
-	private hubConnection: HubConnection | undefined;
+	private hubConnection: HubConnection;
 	private logger: ILogger;
 	private appIdentifier: AppIdentifier = { appId: '' };
 
-	constructor(params: InitializeParams) {
-		this.appIdentifier = params.appIdentifier;
-		this.logger = params.logger ?? console;
+	constructor(initializeParams: InitializeParams) {
+		this.appIdentifier = initializeParams.appIdentifier;
+		this.logger = initializeParams.logger ?? console;
+		this.hubConnection = this.buildSignalRConnection(initializeParams.url);
 	}
 
-	/**
-	 *
-	 *
-	 * @param {string} url
-	 * @param {{ (msg: MessageEnvelope): void }} onMessage
-	 * @param {{ (error?: Error): void }} onDisconnect
-	 * @return {*}
-	 * @memberof BackplaneClientTransport
-	 */
-	public async connect(
-		url: string,
-		onMessage: { (msg: MessageEnvelope): void },
-		onDisconnect: { (error?: Error): void }
-	) {
-		this.hubConnection = await this.buildSignalRConnection(url);
+	public async connect(onMessage: { (msg: MessageEnvelope): void }, onDisconnect: { (error?: Error): void }) {
 		this.hubConnection?.on('OnMessage', onMessage);
 		this.hubConnection?.onclose(onDisconnect);
 		await this.hubConnection?.start();
 		return this.appIdentifier;
 	}
 
-	/**
-	 *
-	 *
-	 * @param {MessageEnvelope} msg
-	 * @memberof BackplaneClientTransport
-	 */
 	public async broadcast(msg: MessageEnvelope) {
 		await this.hubConnection?.invoke('Broadcast', msg);
 	}
 
 	public async getSystemChannels() {
-		return await this.hubConnection?.invoke<Channel>('GetSystemChannels');
+		return await this.hubConnection.invoke<Channel[]>('GetSystemChannels');
 	}
 
 	public async getCurrentContext(channelId: string, contextType?: string) {
@@ -69,8 +50,8 @@ export class BackplaneClientTransport {
 		await this.hubConnection?.stop();
 	}
 
-	private async buildSignalRConnection(url: string) {
-		this.logger.log(LogLevel.Information, `signalR: Building connection with url: ${url}`);
+	private buildSignalRConnection(url: string) {
+		this.logger?.log(LogLevel.Information, `signalR: Building connection with url: ${url}`);
 		var hubConnection = new HubConnectionBuilder()
 			.withUrl(`${url}`, { skipNegotiation: true, transport: HttpTransportType.WebSockets })
 			.configureLogging(this.logger)

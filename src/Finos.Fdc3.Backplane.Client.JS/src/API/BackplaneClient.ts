@@ -3,23 +3,33 @@
  * Copyright 2021 FINOS FDC3 contributors - see NOTICE file
  */
 
-import { Context } from '@finos/fdc3';
+import { Channel, Context } from '@finos/fdc3';
 import { AppIdentifier, Fdc3Action, MessageEnvelope } from '../DTO/MessageEnvelope';
 import { BackplaneClientTransport } from '../transport/BackplaneTransport';
 import { InitializeParams } from './initializeParams';
 import { randomBytes } from 'crypto';
 
 export class BackplaneClient {
-	private backplaneClientService: BackplaneClientTransport | undefined;
+	private backplaneClientService: BackplaneClientTransport;
 	private appIdentifier: AppIdentifier = { appId: '' };
+	private systemChannels: Channel[];
 
-	public async initialize(
-		initializeParams: InitializeParams,
-		onMessage: { (msg: MessageEnvelope): void },
-		onDisconnect: { (error?: Error): void }
-	) {
+	constructor(initializeParams: InitializeParams) {
 		this.backplaneClientService = new BackplaneClientTransport(initializeParams);
-		this.appIdentifier = await this.backplaneClientService.connect(initializeParams.url, onMessage, onDisconnect);
+		this.systemChannels = [];
+	}
+
+	/**
+	 * Connect with backplane
+	 *
+	 * @param {{ (msg: MessageEnvelope): void }} onMessage
+	 * @param {{ (error?: Error): void }} onDisconnect
+	 * @return {*}
+	 * @memberof BackplaneClient
+	 */
+	public async connect(onMessage: { (msg: MessageEnvelope): void }, onDisconnect: { (error?: Error): void }) {
+		this.appIdentifier = await this.backplaneClientService.connect(onMessage, onDisconnect);
+		this.systemChannels = await this.getSystemChannels();
 		return this.appIdentifier;
 	}
 
@@ -35,22 +45,37 @@ export class BackplaneClient {
 			payload: { channelId: channelId, context: context },
 			meta: { source: this.appIdentifier, uniqueMessageId: randomBytes(20).toString('hex') },
 		};
-		await this.backplaneClientService?.broadcast(message);
+		await this.backplaneClientService.broadcast(message);
 	}
 
 	/**
+	 * Get system channels exposed by backplane
+	 * @memberof BackplaneClient
+	 */
+	public getSystemChannels() {
+		return this.systemChannels;
+	}
+
+	/**
+	 * Get current context for channel id.
+	 * Provides latest context brodcasted on channel.
+	 * Currently ignores context type.
+	 *
+	 * @param {string} channelId
+	 * @param {string} [contextType]
+	 * @return {*}
+	 * @memberof BackplaneClient
+	 */
+	public async getCurrentContext(channelId: string, contextType?: string) {
+		return await this.backplaneClientService.getCurrentContext(channelId, contextType);
+	}
+
+	/**
+	 * Disconnect client from backplane
 	 *
 	 * @memberof BackplaneClient
 	 */
-	public async getSystemChannels() {
-		return await this.backplaneClientService?.getSystemChannels();
-	}
-
-	public async getCurrentContext(channelId: string, contextType?: string) {
-		return await this.backplaneClientService?.getCurrentContext(channelId, contextType);
-	}
-
 	public async Disconnect() {
-		await this.backplaneClientService?.Disconnect();
+		await this.backplaneClientService.Disconnect();
 	}
 }

@@ -13,16 +13,20 @@ const instrument = {
 
 async function main(params) {
   console.log("***Setting up clients***");
-  var backplaneClient1 = new backplaneClient.BackplaneClient();
-  var backplaneClient2 = new backplaneClient.BackplaneClient();
-
-  await backplaneClient1.initialize(
-    {
-      appIdentifier: {
-        appId: "Example_JS",
-      },
-      url: "http://localhost:49201/backplane/v1.0",
+  var backplaneClient1 = new backplaneClient.BackplaneClient({
+    appIdentifier: {
+      appId: "Example_JS",
     },
+    url: "http://localhost:49201/backplane/v1.0",
+  });
+  var backplaneClient2 = new backplaneClient.BackplaneClient({
+    appIdentifier: {
+      appId: "Example_JS",
+    },
+    url: "http://localhost:49201/backplane/v1.0",
+  });
+
+  await backplaneClient1.connect(
     (msg) => {
       if (msg.type == Fdc3Action.Broadcast) {
         console.info(
@@ -35,13 +39,7 @@ async function main(params) {
       console.error(`Disconnected.${err}`);
     }
   );
-  await backplaneClient2.initialize(
-    {
-      appIdentifier: {
-        appId: "Example_JS",
-      },
-      url: "http://localhost:49201/backplane/v1.0",
-    },
+  await backplaneClient2.connect(
     (msg) => {
       `Backplane Client2: Recived broadcast over channel: ${msg.payload.channelId}`;
       console.info(JSON.stringify(msg));
