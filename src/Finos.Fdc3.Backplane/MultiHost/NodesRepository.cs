@@ -64,24 +64,21 @@ namespace Finos.Fdc3.Backplane.MultiHost
             _lock.EnterWriteLock();
             try
             {
-
-                Uri existingNode = _value.FirstOrDefault(x => x.AbsoluteUri == node.AbsoluteUri);
-                // node to be removed exist.
-                if (isRemove && existingNode != null)
+                if(isRemove)
                 {
-                    _value = _value.Remove(existingNode);
-                    return;
+                   _value= _value.Remove(node);
                 }
-                // node to be added and node does not exist.
-                else if (!isRemove && existingNode == null)
+                else 
                 {
-                    _value = _value.Add(node);
+                    if(!_value.Contains(node))
+                      _value=  _value.Add(node);
                 }
             }
             finally
             {
                 _lock.ExitWriteLock();
             }
+            _logger.LogDebug($"Member nodes repo:{node} {(isRemove? "removed" : "added")}");
         }
 
 
