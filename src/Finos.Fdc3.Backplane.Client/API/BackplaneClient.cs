@@ -5,7 +5,6 @@
 
 using Finos.Fdc3.Backplane.Client.Transport;
 using Finos.Fdc3.Backplane.DTO.Envelope;
-using Finos.Fdc3.Backplane.DTO.Envelope.Receive;
 using Finos.Fdc3.Backplane.DTO.FDC3;
 using Microsoft.Extensions.Logging;
 using System;
@@ -78,7 +77,7 @@ namespace Finos.Fdc3.Backplane.Client.API
             {
                 ActionType = Fdc3Action.Broadcast,
                 Payload = new EnvelopeData() { Context = context, ChannelId = channelId },
-                Meta = new EnvelopeMetadata()
+                Meta = new EnvelopeMeta()
                 {
                     Source = _appIdentifier,
                     UniqueMessageId = Guid.NewGuid().ToString(),

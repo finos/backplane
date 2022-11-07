@@ -24,7 +24,7 @@ services.ConfigureBackplaneClient();
 services.AddLogging(configure => { configure.AddConsole(); configure.SetMinimumLevel(LogLevel.None); });
 ServiceProvider container = services.BuildServiceProvider();
 
-var backplaneUrl = new Uri("http://localhost:49201/backplane/v1.0");
+Uri? backplaneUrl = new Uri("http://localhost:49201/backplane/v1.0");
 IBackplaneClient? backplaneClient1 = container.GetService<IBackplaneClient>();
 
 System.Console.WriteLine($"**Initializing client Backplane_Client_1. Connecting with backplane**{Environment.NewLine}");

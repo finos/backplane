@@ -20,8 +20,9 @@ Written in .NET 6.0 C# which supports multiple operating systems. See: https://g
 
 1. Open 'Finos.Fdc3.Backplane.sln' at root in visual studio.
 2. Build Solution.
-3. Publish the Finos.Fdc3.Backplane project as self contained.
-4. Launch backplane by running the exe in publish folder.
+3. Righ click on 'Finos.Fdc3.Backplane' project and click Publish
+4. Above step would publish backplane as self contained in folder output/backplane
+5. Navigate to above folder and run 'Finos.Fdc3.Backplane.exe
 
 ## License
 

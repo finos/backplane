@@ -3,7 +3,7 @@
 	* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
 	*/
 
-using Finos.Fdc3.Backplane.DTO.Envelope.Receive;
+using Finos.Fdc3.Backplane.DTO.Envelope;
 using Finos.Fdc3.Backplane.MultiHost;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -49,7 +49,7 @@ namespace Finos.Fdc3.Backplane.Controllers
             try
             {
                 _logger.LogInformation($"Broadcast context request received : {JsonConvert.SerializeObject(message)}");
-                return await Task.FromResult(Ok(_hub.Broadcast(message, false)));
+                return await Task.FromResult(Ok(_hub.BroadcastToLocalClients(message)));
             }
             catch (Exception ex)
             {

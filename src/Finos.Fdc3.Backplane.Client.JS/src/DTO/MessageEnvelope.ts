@@ -12,7 +12,7 @@ export interface MessageEnvelope {
 }
 
 export enum Fdc3Action {
-	Broadcast,
+	Broadcast = 'broadcast',
 }
 
 export interface EnvelopeData {

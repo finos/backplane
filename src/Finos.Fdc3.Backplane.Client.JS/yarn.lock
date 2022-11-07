@@ -304,7 +304,7 @@
   dependencies:
     "@jridgewell/trace-mapping" "0.3.9"
 
-"@finos/fdc3@1.2.0":
+"@finos/fdc3@^1.2.0":
   version "1.2.0"
   resolved "http://frontier-uat.arc-tst.fm.rbsgrp.net/fnpm/@finos%2ffdc3/-/fdc3-1.2.0.tgz#3d064d6272bd94c69478ecb96e428bc3304d30cb"
   integrity sha512-im/vqpS96qsCKMPkwR/Fg2t2FQtwh+/LOvTekIY0eYyuz/CZQoqhwcxwk/Re0pqJiA3inisV7DSfQ1JYLi+bxw==
@@ -572,7 +572,7 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@microsoft/signalr@^6.0.9":
+"@microsoft/signalr@^6.0.10":
   version "6.0.10"
   resolved "http://frontier-uat.arc-tst.fm.rbsgrp.net/fnpm/@microsoft%2fsignalr/-/signalr-6.0.10.tgz#d2b5ce72e035dfa4c285b5e658388804e85abb86"
   integrity sha512-ND9LiIYac+ZDgCgW2QzpNfe9BTiOtjc2AX/2GtFIhRGhEzx5CixcNANg2VGj27IAxycAPPnEoy7+QA31Eil7QQ==
@@ -2409,11 +2409,6 @@ pkg-dir@^4.1.0, pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-polly-js@^1.8.2:
-  version "1.8.3"
-  resolved "http://frontier-uat.arc-tst.fm.rbsgrp.net/fnpm/polly-js/-/polly-js-1.8.3.tgz#c1bfe878f676a78146e394a95b41b4ba5143300c"
-  integrity sha512-pFgSsipKs5bxtXMM+Vfw2p8kOEZhJ+Z9xDZLbiMjjw57WZdlg+6eTZdSIHDycNii+4+7xmzCfryQVIqwgeYX4g==
-
 pretty-format@^29.2.1:
   version "29.2.1"
   resolved "http://frontier-uat.arc-tst.fm.rbsgrp.net/fnpm/pretty-format/-/pretty-format-29.2.1.tgz#86e7748fe8bbc96a6a4e04fa99172630907a9611"
@@ -2725,11 +2720,6 @@ tr46@~0.0.3:
   version "0.0.3"
   resolved "http://frontier-uat.arc-tst.fm.rbsgrp.net/fnpm/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
   integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
-
-ts-log@^2.2.4:
-  version "2.2.5"
-  resolved "http://frontier-uat.arc-tst.fm.rbsgrp.net/fnpm/ts-log/-/ts-log-2.2.5.tgz#aef3252f1143d11047e2cb6f7cfaac7408d96623"
-  integrity sha512-PGcnJoTBnVGy6yYNFxWVNkdcAuAMstvutN9MgDJIV6L0oG8fB+ZNNy1T+wJzah8RPGor1mZuPQkVfXNDpy9eHA==
 
 ts-node@^10.9.1:
   version "10.9.1"

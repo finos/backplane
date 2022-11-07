@@ -276,6 +276,7 @@ BuildArtifacts/
 /TestResult.xml
 
 node_modules
+lib
 /lib
 .yalc
 yalc.lock

@@ -3,7 +3,7 @@
 	* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
 	*/
 
-using Finos.Fdc3.Backplane.DTO.Envelope.Receive;
+using Finos.Fdc3.Backplane.DTO.Envelope;
 using System.Threading.Tasks;
 
 namespace Finos.Fdc3.Backplane
@@ -14,11 +14,18 @@ namespace Finos.Fdc3.Backplane
     public interface IDesktopAgentHub
     {
         /// <summary>
-        /// Broadcast
+        /// Invoked by local connected clients.Hence original message source is this node.
+        /// This would also result in propagation of message to other member nodes
         /// </summary>
-        /// <param name="broadcastContextDTO"></param>
-        /// <param name="isMessageOriginatedFromCurrentNode"></param>
+        /// <param name="messageEnvelope"></param>
         /// <returns></returns>
-        Task Broadcast(MessageEnvelope broadcastContextDTO, bool isMessageOriginatedFromCurrentNode = false);
+        Task Broadcast(MessageEnvelope broadcastContextDTO);
+
+        /// <summary>
+        /// Invoked by member node. Hence original message source is not this node
+        /// </summary>
+        /// <param name="messageEnvelope"></param>
+        /// <returns></returns>
+        Task BroadcastToLocalClients(MessageEnvelope messageEnvelope);
     }
 }

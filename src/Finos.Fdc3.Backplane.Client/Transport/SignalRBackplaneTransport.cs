@@ -4,7 +4,7 @@
 	*/
 
 
-using Finos.Fdc3.Backplane.DTO.Envelope.Receive;
+using Finos.Fdc3.Backplane.DTO.Envelope;
 using Finos.Fdc3.Backplane.DTO.FDC3;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
@@ -59,7 +59,7 @@ namespace Finos.Fdc3.Backplane.Client.Transport
             {
                 throw new InvalidOperationException(MSG_CONNECTION_CLOSED);
             }
-            await _signalRConnection.InvokeAsync("Broadcast", message, false, ct);
+            await _signalRConnection.InvokeAsync("Broadcast", message, ct);
             _logger.LogInformation($"Broadcast successfull for message: {JsonSerializer.Serialize(message)}");
         }
 

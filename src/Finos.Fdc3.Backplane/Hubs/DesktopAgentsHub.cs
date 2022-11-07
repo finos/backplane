@@ -5,7 +5,7 @@
 
 using Finos.Fdc3.Backplane.Config;
 using Finos.Fdc3.Backplane.DTO;
-using Finos.Fdc3.Backplane.DTO.Envelope.Receive;
+using Finos.Fdc3.Backplane.DTO.Envelope;
 using Finos.Fdc3.Backplane.DTO.FDC3;
 using Finos.Fdc3.Backplane.MultiHost;
 using Finos.Fdc3.Backplane.Utils;
@@ -50,15 +50,35 @@ namespace Finos.Fdc3.Backplane.Hubs
             _broadcastEndpoint = configRepository.AddNodeEndpoint;
         }
 
+        /// <summary>
+        /// Invoked by member node. Hence original message source is not this node
+        /// </summary>
+        /// <param name="messageEnvelope"></param>
+        /// <returns></returns>
+        public async Task BroadcastToLocalClients(MessageEnvelope messageEnvelope)
+        {
+            await HandleBroadcast(messageEnvelope, false);
+        }
+
+        /// <summary>
+        /// Invoked by local connected clients.Hence original message source is this node.
+        /// This would also result in propagation of message to other member nodes
+        /// </summary>
+        /// <param name="messageEnvelope"></param>
+        /// <returns></returns>
+        public async Task Broadcast(MessageEnvelope messageEnvelope)
+        {
+            await HandleBroadcast(messageEnvelope, true);
+        }
 
 
         /// <summary>
         /// Broadcast context to connected clients and member backplane nodes of cluster.
         /// </summary>
         /// <param name="messageEnvelope"></param>
-        /// <param name="isMessageOriginatedFromCurrentNode">if broadcast only need to be done locally and not to other member nodes. By default false.</param>
+        /// <param name="isMessageOriginatedFromCurrentNode">if client called broadcast over this node or it was called on member node and propagated here</param>
         /// <returns></returns>
-        public async Task Broadcast(MessageEnvelope messageEnvelope, bool isMessageOriginatedFromCurrentNode = true)
+        private async Task HandleBroadcast(MessageEnvelope messageEnvelope, bool isMessageOriginatedFromCurrentNode = true)
         {
             if (messageEnvelope == null)
             {

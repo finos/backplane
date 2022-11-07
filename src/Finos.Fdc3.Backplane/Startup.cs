@@ -16,6 +16,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Net;
 
@@ -53,7 +55,7 @@ namespace Finos.Fdc3.Backplane
             services.AddSignalR(hubOptions =>
             {
                 hubOptions.EnableDetailedErrors = true;
-            }).AddNewtonsoftJsonProtocol();
+            }).AddNewtonsoftJsonProtocol((config) => config.PayloadSerializerSettings = new Newtonsoft.Json.JsonSerializerSettings() { TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto });
             services.AddControllers().AddNewtonsoftJson();
             services.AddCors(options =>
             {

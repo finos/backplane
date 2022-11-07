@@ -1,3 +1,6 @@
+const {
+  Fdc3Action,
+} = require("../../src/Finos.Fdc3.Backplane.Client.JS/lib/DTO/MessageEnvelope");
 var backplaneClient = require("../../src/Finos.Fdc3.Backplane.Client.JS/lib/index");
 const instrument = {
   type: "fdc3.instrument",
@@ -10,25 +13,50 @@ const instrument = {
 
 async function main(params) {
   console.log("***Setting up clients***");
-  var subscriber = new backplaneClient.BackplaneClient({
-    appId: "Example_JS",
-  });
+  var backplaneClient1 = new backplaneClient.BackplaneClient();
+  var backplaneClient2 = new backplaneClient.BackplaneClient();
 
-  var publisher = new backplaneClient.BackplaneClient({
-    appId: "Example_JS",
-  });
-
-  await subscriber.initializeAsync();
-  await publisher.initializeAsync();
-
-  var brdUnsubs1 = subscriber.addContextListener((ctx) =>
-    console.log(
-      `%cSubscriber1: Receieved context ${JSON.stringify(ctx)}`,
-      "color:green"
-    )
+  await backplaneClient1.initialize(
+    {
+      appIdentifier: {
+        appId: "Example_JS",
+      },
+      url: "http://localhost:49201/backplane/v1.0",
+    },
+    (msg) => {
+      if (msg.type == Fdc3Action.Broadcast) {
+        console.info(
+          `Backplane Client1: Recived broadcast over channel: ${msg.payload.channelId}`
+        );
+      }
+      console.info(JSON.stringify(msg));
+    },
+    (err) => {
+      console.error(`Disconnected.${err}`);
+    }
   );
-  await subscriber.joinChannel("group1");
-  publisher.broadcast(instrument);
+  await backplaneClient2.initialize(
+    {
+      appIdentifier: {
+        appId: "Example_JS",
+      },
+      url: "http://localhost:49201/backplane/v1.0",
+    },
+    (msg) => {
+      `Backplane Client2: Recived broadcast over channel: ${msg.payload.channelId}`;
+      console.info(JSON.stringify(msg));
+    },
+    (err) => {
+      console.error(`Disconnected.${err}`);
+    }
+  );
+
+  var systemChannels = await backplaneClient1.getSystemChannels();
+  console.info(`System channels: ${JSON.stringify(systemChannels)}`);
+
+  await backplaneClient2.broadcast(instrument, "group1");
+  var context = await backplaneClient2.getCurrentContext("group1");
+  console.info(`Current context: ${JSON.stringify(context)}`);
 }
 
 main();

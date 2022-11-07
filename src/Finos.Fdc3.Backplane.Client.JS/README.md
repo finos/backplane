@@ -6,51 +6,77 @@ Javascript client which allows web based desktop agents to connect and communica
 
 - Broadcast context
 
-### Example
+## Usage example
 
 ```ts
-import { DesktopAgentClient } from '@finos/fdc3-desktop-agent-backplane-client';
+import { BackplaneClient } from '@finos/fdc3-backplane-client';
 
-var backplaneClient = new backplaneClient.BackplaneClient({
-	appId: 'Example_JS',
-});
+console.log('***Setting up clients***');
+var backplaneClient1 = new backplaneClient.BackplaneClient();
+var backplaneClient2 = new backplaneClient.BackplaneClient();
 
-await backplaneClient.initializeAsync();
-// declare FDC3-compliant data
-const instrument = {
-	type: 'fdc3.instrument',
-	id: {
-		ticker: 'AAPL',
-		ISIN: 'US0378331005',
-		FIGI: 'BBG000B9XRY4',
+await backplaneClient1.initialize(
+	{
+		appIdentifier: {
+			appId: 'Example_JS',
+		},
+		url: 'http://localhost:49201/backplane/v1.0',
 	},
-};
+	//hook for receive message
+	msg => {
+		//check message type
+		if (msg.type == Fdc3Action.Broadcast) {
+			console.info(`Backplane Client1: Recived broadcast over channel: ${msg.payload.channelId}`);
+		}
+		console.info(JSON.stringify(msg));
+	},
+	//hook for disconnect
+	err => {
+		console.error(`Disconnected.${err}`);
+	}
+);
+await backplaneClient2.initialize(
+	{
+		appIdentifier: {
+			appId: 'Example_JS',
+		},
+		url: 'http://localhost:49201/backplane/v1.0',
+	},
+	msg => {
+		`Backplane Client2: Recived broadcast over channel: ${msg.payload.channelId}`;
+		console.info(JSON.stringify(msg));
+	},
+	err => {
+		console.error(`Disconnected.${err}`);
+	}
+);
+//get channels exposed by backplane.
+var systemChannels = await backplaneClient1.getSystemChannels();
+console.info(`System channels: ${JSON.stringify(systemChannels)}`);
 
-// join the channel and broadcast data to subscribers
-await backplaneClient.joinChannel('channel1');
-backplaneClient.broadcast(instrument);
+//broadcast context
+await backplaneClient2.broadcast(instrument, 'group1');
 
-// set up a listener for incoming data
-const listener = backplaneClient.addContextListener('fdc3.instrument', instrument => {
-	// handle context received
-});
+//get current context on channel
+var context = await backplaneClient2.getCurrentContext('group1');
+console.info(`Current context: ${JSON.stringify(context)}`);
 ```
 
-### Installation
+## Installation
 
 1. Open folder '\src\Finos.Fdc3.Backplane.Client.JS' in vs code.
-2. Run command 'yarn prepare' in new terminal.
-3. npm package should be created in 'output' folder at root.
+2. Run command 'yarn run buildPack' in new terminal.
+3. npm package should be created in 'output\jsclient' folder at root.
 
-   To access the APIs in your application, simply install fdc3-desktop-agent-backplane-client npm package:
+   To access the APIs in your application, simply install '@finos/fdc3-backplane-client' npm package:
 
 ```sh
 
 # npm
-npm install @finos/fdc3-desktop-agent-backplane-client
+npm install file:/path/to/local/folder/@finos/fdc3-backplane-client
 
 #yarn
-yarn add @finos/fdc3-desktop-agent-backplane-client
+yarn add file:/path/to/local/folder/@finos/fdc3-backplane-client
 
 ```
 

@@ -3,46 +3,80 @@
  * Copyright 2021 FINOS FDC3 contributors - see NOTICE file
  */
 
-import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import polly from 'polly-js';
-import { Logger } from 'ts-log';
-import { BackplaneDiscoveryServiceClient } from '../discovery/BackplaneDiscoveryServiceClient';
-import { createAndStartHubConnectionAsync } from '../utility/BackplaneTransportUtil';
+import { Channel } from '@finos/fdc3';
+import {
+	HttpTransportType,
+	HubConnection,
+	HubConnectionBuilder,
+	ILogger,
+	JsonHubProtocol,
+	LogLevel,
+} from '@microsoft/signalr';
+import { Context } from 'mocha';
+import { InitializeParams } from '../API/initializeParams';
+import { AppIdentifier, MessageEnvelope } from '../DTO/MessageEnvelope';
 
-export class BackplaneTransport {
-	private backplaneServiceDiscovery: BackplaneDiscoveryServiceClient;
+export class BackplaneClientTransport {
 	private hubConnection: HubConnection | undefined;
-	private onConnectHandlers: { (): void }[] = [];
-	private logger: Logger;
+	private logger: ILogger;
+	private appIdentifier: AppIdentifier = { appId: '' };
 
-	constructor(backplaneServiceDiscovery: BackplaneDiscoveryServiceClient, logger: Logger) {
-		this.logger = logger;
-		this.backplaneServiceDiscovery = backplaneServiceDiscovery;
+	constructor(params: InitializeParams) {
+		this.appIdentifier = params.appIdentifier;
+		this.logger = params.logger ?? console;
 	}
 
-	async initializeAsync(retryCount: number, retryIntervalInMs: number): Promise<void> {
-		this.logger.info(
-			`Initializing backplane connection with retry count: ${retryCount} and retryIntervalInMs: ${retryIntervalInMs}`
-		);
-		await polly()
-			.waitAndRetry(Array(retryCount).fill(retryIntervalInMs))
-			.executeForPromise(
-				async () =>
-					(this.hubConnection = await createAndStartHubConnectionAsync(
-						this.logger,
-						this.backplaneServiceDiscovery,
-						this.hubConnection,
-						this.onConnectHandlers
-					))
-			);
+	/**
+	 *
+	 *
+	 * @param {string} url
+	 * @param {{ (msg: MessageEnvelope): void }} onMessage
+	 * @param {{ (error?: Error): void }} onDisconnect
+	 * @return {*}
+	 * @memberof BackplaneClientTransport
+	 */
+	public async connect(
+		url: string,
+		onMessage: { (msg: MessageEnvelope): void },
+		onDisconnect: { (error?: Error): void }
+	) {
+		this.hubConnection = await this.buildSignalRConnection(url);
+		this.hubConnection?.on('OnMessage', onMessage);
+		this.hubConnection?.onclose(onDisconnect);
+		await this.hubConnection?.start();
+		return this.appIdentifier;
 	}
 
-	registerOnConnect(onConnect: () => void): void {
-		this.onConnectHandlers.push(onConnect);
-		this.logger.info(`SignalR: Registered for callback on reconnect ..`);
+	/**
+	 *
+	 *
+	 * @param {MessageEnvelope} msg
+	 * @memberof BackplaneClientTransport
+	 */
+	public async broadcast(msg: MessageEnvelope) {
+		await this.hubConnection?.invoke('Broadcast', msg);
 	}
 
-	getHubConnection(): HubConnection | undefined {
-		return this.hubConnection;
+	public async getSystemChannels() {
+		return await this.hubConnection?.invoke<Channel>('GetSystemChannels');
+	}
+
+	public async getCurrentContext(channelId: string, contextType?: string) {
+		return await this.hubConnection?.invoke<Context>('GetCurrentContextForChannel', channelId);
+	}
+
+	public async Disconnect() {
+		await this.hubConnection?.stop();
+	}
+
+	private async buildSignalRConnection(url: string) {
+		this.logger.log(LogLevel.Information, `signalR: Building connection with url: ${url}`);
+		var hubConnection = new HubConnectionBuilder()
+			.withUrl(`${url}`, { skipNegotiation: true, transport: HttpTransportType.WebSockets })
+			.configureLogging(this.logger)
+			.withAutomaticReconnect()
+			.withHubProtocol(new JsonHubProtocol())
+			.build();
+		return hubConnection;
 	}
 }

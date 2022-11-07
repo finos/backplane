@@ -4,13 +4,13 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<Authors>FINOS</Authors>
-		<Product>FDC3 desktop agent 'Backplane' client</Product>
+		<Product>FDC3 'Backplane' client</Product>
 		<Description>.NET client for 'Backplane' to connect and communicate with other desktop agent</Description>
-		<Copyright></Copyright>
+		<Copyright>@FINOS</Copyright>
 		<RepositoryUrl></RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags></PackageTags>
-		<PackageOutputPath>..\..\output</PackageOutputPath>
+		<PackageOutputPath>..\..\output\netclient</PackageOutputPath>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<Version>1.0.0-alpha</Version>
 

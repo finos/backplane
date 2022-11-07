@@ -4,10 +4,13 @@
 */
 
 
+using Finos.Fdc3.Backplane.DTO.FDC3;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Serialization;
 
-namespace Finos.Fdc3.Backplane.DTO.Envelope.Receive
+namespace Finos.Fdc3.Backplane.DTO.Envelope
 {
     /// <summary>
     /// The message which is sent by backplane to clients.
@@ -19,20 +22,21 @@ namespace Finos.Fdc3.Backplane.DTO.Envelope.Receive
         /// <summary>
         /// Fdc3 operation enum: RaiseIntent, Broadcast, Open
         /// </summary>
-        [JsonProperty("type")]
+        [JsonConverter(typeof(StringEnumConverter), typeof(CamelCaseNamingStrategy))]
+        [JsonProperty("type", Required = Required.Always)]
         public Fdc3Action ActionType { get; set; }
 
         /// <summary>
         /// Wraps Fdc3 data.
         /// </summary>
-        [JsonProperty("payload")]
+        [JsonProperty("payload", Required = Required.Always)]
         public EnvelopeData Payload { get; set; }
 
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("meta", Required = Required.Always)]
-        public EnvelopeMetadata Meta { get; set; }
+        public EnvelopeMeta Meta { get; set; }
 
     }
 
@@ -52,6 +56,26 @@ namespace Finos.Fdc3.Backplane.DTO.Envelope.Receive
         /// </summary>
         [JsonProperty("context", Required = Required.Always)]
         public JObject Context { get; set; }
+    }
+
+    /// <summary>
+    /// Meta data 
+    /// </summary>
+    public class EnvelopeMeta
+    {
+        /// <summary>
+        /// Sender details
+        /// </summary>
+        [JsonProperty("source", Required = Required.Always)]
+        public AppIdentifier Source { get; set; }
+
+        /// <summary>
+        /// This is unique id of message which would be set by sender and transfered as is to destination.
+        /// Useful in tracing messages.
+        /// </summary>
+        /// 
+        [JsonProperty("uniqueMessageId", Required = Required.Always)]
+        public string UniqueMessageId { get; set; }
     }
 
     /// <summary>

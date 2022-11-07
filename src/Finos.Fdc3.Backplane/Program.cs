@@ -22,7 +22,7 @@ namespace Finos.Fdc3.Backplane
 
         public static async Task Main(string[] args)
         {
-            var loggerFactory = new LoggerFactory();
+            LoggerFactory loggerFactory = new LoggerFactory();
             // single instance check.
             _singleInstance = new SingleInstance(loggerFactory);
             _logger = loggerFactory.CreateLogger<Program>();
@@ -36,7 +36,7 @@ namespace Finos.Fdc3.Backplane
 
             await Init(args);
         }
-       
+
 
         public static async Task Init(string[] args)
         {
