@@ -10,12 +10,10 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
-[assembly: InternalsVisibleTo("Finos.Fdc3.Backplane.Client.Test")]
 namespace Finos.Fdc3.Backplane.Client.Transport
 {
     internal class SignalRBackplaneTransport : IBackplaneTransport

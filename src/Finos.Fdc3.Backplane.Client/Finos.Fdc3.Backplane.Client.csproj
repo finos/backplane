@@ -27,14 +27,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Finos.Fdc3.Backplane.DTO\Finos.Fdc3.Backplane.DTO.csproj" />
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>$(AssemblyName).Test</_Parameter1>
+		</AssemblyAttribute>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>"DynamicProxyGenAssembly2"</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Finos.Fdc3.Backplane.DTO\Finos.Fdc3.Backplane.DTO.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Readme.md">
-	    <Pack>True</Pack>
-	    <PackagePath>\</PackagePath>
-	  </None>
+		<None Update="Readme.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 
 </Project>

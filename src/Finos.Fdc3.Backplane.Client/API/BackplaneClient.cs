@@ -10,13 +10,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-[assembly: InternalsVisibleTo("Finos.Fdc3.Backplane.Client.Test")]
-//Used in proxy generation for testing
-[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 namespace Finos.Fdc3.Backplane.Client.API
 {
     /// <summary>

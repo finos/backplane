@@ -6,11 +6,9 @@
 
 using Microsoft.AspNetCore.SignalR.Client;
 using System;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-[assembly: InternalsVisibleTo("Finos.Fdc3.Backplane.Client.Test")]
 namespace Finos.Fdc3.Backplane.Client.Transport
 {
     internal class SignalRConnection : ISignalRConnection
