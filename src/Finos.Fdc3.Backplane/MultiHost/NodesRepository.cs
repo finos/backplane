@@ -7,7 +7,6 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Linq;
 using System.Threading;
 
 namespace Finos.Fdc3.Backplane.MultiHost
@@ -64,21 +63,23 @@ namespace Finos.Fdc3.Backplane.MultiHost
             _lock.EnterWriteLock();
             try
             {
-                if(isRemove)
+                if (isRemove)
                 {
-                   _value= _value.Remove(node);
+                    _value = _value.Remove(node);
                 }
-                else 
+                else
                 {
-                    if(!_value.Contains(node))
-                      _value=  _value.Add(node);
+                    if (!_value.Contains(node))
+                    {
+                        _value = _value.Add(node);
+                    }
                 }
             }
             finally
             {
                 _lock.ExitWriteLock();
             }
-            _logger.LogDebug($"Member nodes repo:{node} {(isRemove? "removed" : "added")}");
+            _logger.LogDebug($"Member nodes repo:{node} {(isRemove ? "removed" : "added")}");
         }
 
 

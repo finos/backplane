@@ -17,15 +17,15 @@ namespace Finos.Fdc3.Backplane.Client.API
     /// </summary>
     public interface IBackplaneClient : IAsyncDisposable
     {
+       
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="initializeParams"></param>
         /// <param name="onMessage"></param>
         /// <param name="onDisconnect"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<AppIdentifier> InitializeAsync(InitializeParams initializeParams, Action<MessageEnvelope> onMessage, Func<Exception, Task> onDisconnect, CancellationToken ct = default);
+        Task<AppIdentifier> ConnectAsync(Action<MessageEnvelope> onMessage, Func<Exception, Task> onDisconnect, CancellationToken ct = default);
 
         /// <summary>
         /// Publishes context to other apps on the desktop. 

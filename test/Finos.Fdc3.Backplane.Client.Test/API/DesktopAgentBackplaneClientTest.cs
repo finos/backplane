@@ -7,6 +7,7 @@ using AutoFixture;
 using Finos.Fdc3.Backplane.Client.API;
 using Finos.Fdc3.Backplane.Client.Transport;
 using Finos.Fdc3.Backplane.DTO.FDC3;
+using Newtonsoft.Json.Linq;
 using NSubstitute;
 using NUnit.Framework;
 using System;
@@ -17,50 +18,52 @@ namespace Finos.Fdc3.Backplane.Client.Test.API
 {
     public class DesktopAgentBackplaneClientTest
     {
+        private readonly string? instrument = @"{
+                type: 'fdc3.instrument',
+                id: {
+                    ticker: 'AAPL',
+                    ISIN: 'US0378331005',
+                    FIGI: 'BBG000B9XRY4',
+                },
+              }";
 
         private Fixture _fixture;
-        private IBackplaneTransport _backplaneTransport;
+        private Lazy<IBackplaneTransport> _backplaneTransport;
 
 
         [SetUp]
         public void Setup()
         {
             _fixture = AutoFixture.Create();
-            _backplaneTransport = _fixture.Freeze<IBackplaneTransport>();
-            _backplaneTransport.GetSystemChannelsAsync().Returns(new Channel[] { new Channel("channel1", "system") });
+            _backplaneTransport = _fixture.Freeze<Lazy<IBackplaneTransport>>();
+            _backplaneTransport.Value.GetSystemChannelsAsync().Returns(new Channel[] { new Channel("channel1", "system") });
+            _backplaneTransport.Value.ConnectAsync(default, default, default).ReturnsForAnyArgs(new AppIdentifier() { AppId="Test"});
         }
 
 
         [Test]
         public void ShouldNotConnectToBackplaneOnObjectCreation()
         {
-
             _fixture.Create<BackplaneClient>();
-            _backplaneTransport.DidNotReceiveWithAnyArgs().ConnectAsync(default, default, default, default);
-
+            _backplaneTransport.Value.DidNotReceiveWithAnyArgs().ConnectAsync(default,default);
         }
-
-        [Test]
-        public async Task ShouldSetInitializeFlagOnceOnly()
-        {
-            BackplaneClient sut = _fixture.Create<BackplaneClient>();
-            AppIdentifier appIdentifier = new AppIdentifier() { AppId = "Test" };
-            await sut.InitializeAsync(new InitializeParams(new Uri("http://address"), new AppIdentifier() { AppId = "DA1" }), (x) => { }, async (ex) => { await Task.CompletedTask; });
-            await sut.InitializeAsync(new InitializeParams(new Uri("http://address"), new AppIdentifier() { AppId = "DA1" }), (x) => { }, async (ex) => { await Task.CompletedTask; });
-            await _backplaneTransport.ReceivedWithAnyArgs(1).ConnectAsync(default, default, default, default);
-        }
-
-
-
-
 
         [Test]
         public async Task GetSystemChannelsShouldReturnPopulatedChannel()
         {
             BackplaneClient sut = _fixture.Create<BackplaneClient>();
-            await sut.InitializeAsync(new InitializeParams(new Uri("http://address"), new AppIdentifier() { AppId = "DA1" }), (x) => { }, async (ex) => { await Task.CompletedTask; });
-            Assert.AreEqual(sut.GetSystemChannelsAsync().Result.Count(), 1);
+            await sut.ConnectAsync(default, default, default);
+            System.Collections.Generic.IEnumerable<Channel> channels = await sut.GetSystemChannelsAsync();
+            Assert.AreEqual(channels.Count(), 1);
         }
 
+        [Test]
+        public async Task BroadcastContextShouldInvokeBroadcastOverTransport()
+        {
+            BackplaneClient sut = _fixture.Create<BackplaneClient>();
+            await sut.ConnectAsync(default, default, default);
+            await sut.BroadcastAsync(new Context(JObject.Parse(instrument)), "channel1");
+            await _backplaneTransport.Value.ReceivedWithAnyArgs().BroadcastAsync(default);
+        }
     }
 }

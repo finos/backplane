@@ -20,14 +20,18 @@ string? instrument = @"{
 
 //set up DI
 ServiceCollection services = new ServiceCollection();
-services.ConfigureBackplaneClient();
+
+Uri backplaneUrl = new Uri("http://localhost:49201/backplane/v1.0");
+//configure client with backplane url
+//takes delegate for obtaining url. comes handly when to integrate with discovery and dynamic port.
+services.ConfigureBackplaneClient(new InitializeParams(new AppIdentifier() { AppId = "Backplane_Client_1" }), () => backplaneUrl);
 services.AddLogging(configure => { configure.AddConsole(); configure.SetMinimumLevel(LogLevel.None); });
 ServiceProvider container = services.BuildServiceProvider();
 
-Uri? backplaneUrl = new Uri("http://localhost:49201/backplane/v1.0");
+//resolve from IOC
 IBackplaneClient? backplaneClient1 = container.GetService<IBackplaneClient>();
-
 System.Console.WriteLine($"**Initializing client Backplane_Client_1. Connecting with backplane**{Environment.NewLine}");
+
 if (backplaneClient1 == null)
 {
     Console.Error.WriteLine("Failed to resolve dependency.Exiting...");
@@ -42,16 +46,15 @@ if (backplaneClient2 == null)
     return;
 }
 
-await backplaneClient1.InitializeAsync(new InitializeParams(backplaneUrl, new AppIdentifier() { AppId = "Backplane_Client_1" }), (msg) =>
+await backplaneClient1.ConnectAsync((msg) =>
 {
-    Console.WriteLine($"Backplane_Client_1: {JsonConvert.SerializeObject(msg)}");
-}, async (ex) => { await Task.CompletedTask; Console.WriteLine($"Client disconnected. {ex}"); });
+    Console.WriteLine($"Backplane_Client_1: {JsonConvert.SerializeObject(msg)}{Environment.NewLine}");
+}, async (ex) => { await Task.CompletedTask; Console.WriteLine($"Backplane_Client_1 disconnected. {ex}"); });
 
-
-await backplaneClient2.InitializeAsync(new InitializeParams(backplaneUrl, new AppIdentifier() { AppId = "Backplane_Client_2" }), (msg) =>
+await backplaneClient2.ConnectAsync((msg) =>
 {
-    Console.WriteLine($"Backplane_Client_2: {JsonConvert.SerializeObject(msg)}");
-}, async (ex) => { await Task.CompletedTask; Console.WriteLine($"Client disconnected. {ex}"); });
+    Console.WriteLine($"Backplane_Client_2: {JsonConvert.SerializeObject(msg)}{Environment.NewLine}");
+}, async (ex) => { await Task.CompletedTask; Console.WriteLine($"Backplane_Client_2 disconnected. {ex}"); });
 
 //get system channels
 IEnumerable<Channel>? channels = await backplaneClient1.GetSystemChannelsAsync();
@@ -63,14 +66,16 @@ System.Console.WriteLine($"**Populated channels:{string.Join(", ", channels.Sele
 System.Console.WriteLine($"**Running Scenario for Broadcast**{Environment.NewLine}");
 
 System.Console.WriteLine($"**Broadcasting context: fdc3.instrument**{Environment.NewLine}");
-await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "");
+await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "channel1");
+
+var currentContext = await backplaneClient1.GetCurrentContextAsync("channel1");
+System.Console.WriteLine($"Backplane_client_1: Current context over channel1:{JsonConvert.SerializeObject(currentContext)} {Environment.NewLine}");
 
 await backplaneClient1.DisposeAsync();
 System.Console.WriteLine($"**Backplane_Client_1 disposed**{Environment.NewLine}");
 System.Console.WriteLine($"**Broadcasting context: fdc3.instrument**{Environment.NewLine}. This will have no effect");
-await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "");
+await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "channel1");
 
 
 Console.WriteLine("**Done**");
-
 Console.ReadLine();

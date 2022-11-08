@@ -5,8 +5,10 @@
 
 using Finos.Fdc3.Backplane.Client.API;
 using Finos.Fdc3.Backplane.Client.Transport;
-using Microsoft.AspNetCore.SignalR.Client;
+using Finos.Fdc3.Backplane.DTO.Envelope;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Threading.Tasks;
 
 namespace Finos.Fdc3.Backplane.Client.Extensions
 {
@@ -16,14 +18,22 @@ namespace Finos.Fdc3.Backplane.Client.Extensions
     public static class ServiceCollectionExtension
     {
         /// <summary>
-        /// Registers required dependencies for desktop agent client
+        /// 
         /// </summary>
         /// <param name="serviceCollection"></param>
-        public static void ConfigureBackplaneClient(this IServiceCollection serviceCollection)
+        /// <param name="initializeParams"></param>
+        /// <param name="urlProvider"></param>
+        public static void ConfigureBackplaneClient(this IServiceCollection serviceCollection, InitializeParams initializeParams, Func<Uri> urlProvider)
         {
-
-            serviceCollection.AddTransient<IBackplaneTransport, SignalRBackplaneTransport>();
             serviceCollection.AddTransient<IBackplaneClient, BackplaneClient>();
+            serviceCollection.AddTransient<IBackplaneTransport, SignalRBackplaneTransport>()
+            .AddTransient(x => new Lazy<IBackplaneTransport>(
+            () =>
+            {
+                ServiceProvider provider = serviceCollection.BuildServiceProvider();
+                return new SignalRBackplaneTransport(provider, initializeParams, urlProvider);
+            }));
+
 
         }
     }

@@ -23,17 +23,35 @@ namespace Finos.Fdc3.Backplane.Client.Transport
     {
         private readonly ILogger<IBackplaneTransport> _logger;
         private const string MSG_CONNECTION_CLOSED = "Underlying connection is closed!";
-        private HubConnection _hubConnection;
+        private readonly HubConnection _hubConnection;
+        private readonly AppIdentifier _appIdentifier;
 
-        public SignalRBackplaneTransport(ILogger<IBackplaneTransport> logger)
+        public SignalRBackplaneTransport(IServiceProvider serviceProvider, InitializeParams initializeParams, Func<Uri> urlProvider)
         {
-            _logger = logger;
+            var backplaneUrl = urlProvider();
+            _logger = serviceProvider.GetRequiredService<ILogger<IBackplaneTransport>>();
+            _appIdentifier = initializeParams.AppIdentifier;
+            _hubConnection = new HubConnectionBuilder().WithUrl(backplaneUrl)
+                 .AddNewtonsoftJsonProtocol()
+                  .ConfigureLogging(logging =>
+                  {
+                      logging.AddProvider(_logger.AsLoggerProvider());
+                  }).Build();
+            _logger.LogInformation($"Creating connection object with url:{backplaneUrl}");
+        }
+
+        public async Task<AppIdentifier> ConnectAsync(Action<MessageEnvelope> onMessage, Func<Exception, Task> onDisconnect, CancellationToken ct = default)
+        {
+            _hubConnection.On("OnMessage", onMessage);
+            _hubConnection.Closed += onDisconnect;
+            await _hubConnection.StartAsync();
+            return _appIdentifier;
         }
 
 
         public async Task<Context> GetCurrentContextAsync(string channelId, CancellationToken ct = default)
         {
-            if (_hubConnection.State !=HubConnectionState.Connected)
+            if (_hubConnection.State != HubConnectionState.Connected)
             {
                 throw new InvalidOperationException(MSG_CONNECTION_CLOSED);
             }
@@ -62,20 +80,7 @@ namespace Finos.Fdc3.Backplane.Client.Transport
         }
 
 
-        public async Task ConnectAsync(Uri uri,
-            Action<MessageEnvelope> onMessage, Func<Exception, Task> onDisconnect, CancellationToken ct = default)
-        {
-            _hubConnection= new HubConnectionBuilder().WithUrl(uri)
-                .AddNewtonsoftJsonProtocol()
-                 .ConfigureLogging(logging =>
-                 {
-                     logging.AddProvider(_logger.AsLoggerProvider());
-                 }).Build();
-            _hubConnection.On("OnMessage", onMessage);
-            _hubConnection.Closed += onDisconnect;
-            _logger.LogInformation($"Connecting with backplane...");
-            await _hubConnection.StartAsync();
-        }
+       
 
         public async ValueTask DisposeAsync()
         {

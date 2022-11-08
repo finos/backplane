@@ -3,7 +3,6 @@
 	* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
 	*/
 
-
 using Finos.Fdc3.Backplane.DTO.Envelope;
 using Finos.Fdc3.Backplane.DTO.FDC3;
 using System;
@@ -19,14 +18,13 @@ namespace Finos.Fdc3.Backplane.Client.Transport
     public interface IBackplaneTransport : IAsyncDisposable
     {
         /// <summary>
-        /// Establish connection with backplane
+        /// 
         /// </summary>
-        /// <param name="uri"></param>
         /// <param name="onMessage"></param>
         /// <param name="onDisconnect"></param>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task ConnectAsync(Uri uri, Action<MessageEnvelope> onMessage, Func<Exception, Task> onDisconnect, CancellationToken ct = default);
+        Task<AppIdentifier> ConnectAsync(Action<MessageEnvelope> onMessage, Func<Exception, Task> onDisconnect, CancellationToken ct = default);
 
         /// <summary>
         /// Get current context for channel
@@ -42,6 +40,7 @@ namespace Finos.Fdc3.Backplane.Client.Transport
         /// <param name="ct"></param>
         /// <returns></returns>
         Task<IEnumerable<Channel>> GetSystemChannelsAsync(CancellationToken ct = default);
+
         /// <summary>
         /// Broadcast Context
         /// </summary>
