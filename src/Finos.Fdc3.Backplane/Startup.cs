@@ -49,7 +49,6 @@ namespace Finos.Fdc3.Backplane
             });
             services.AddLogging(configure => { configure.AddConsole(); configure.SetMinimumLevel(LogLevel.Information); });
             services.AddTransient<IDesktopAgentHub, DesktopAgentsHub>();
-            services.AddControllers();
             services.AddSignalR(hubOptions =>
             {
                 hubOptions.EnableDetailedErrors = true;
