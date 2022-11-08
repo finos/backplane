@@ -30,7 +30,7 @@ namespace Finos.Fdc3.Backplane.Client.Test.Extensions
             Assembly assembly = Assembly.Load("Finos.Fdc3.Backplane.Client");
             IEnumerable<Type> interfaces = assembly.GetTypes().Where(x => x.IsInterface);
             ServiceProvider container = serviceCollection.BuildServiceProvider();
-            Assert.IsTrue(interfaces.Except(new[] { typeof(ISignalRConnection) }).All(p => container.GetService(p) != null));
+            Assert.IsTrue(interfaces.All(p => container.GetService(p) != null));
 
 
 

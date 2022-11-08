@@ -5,6 +5,7 @@
 
 using Finos.Fdc3.Backplane.Client.API;
 using Finos.Fdc3.Backplane.Client.Transport;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Finos.Fdc3.Backplane.Client.Extensions
@@ -22,7 +23,6 @@ namespace Finos.Fdc3.Backplane.Client.Extensions
         {
 
             serviceCollection.AddTransient<IBackplaneTransport, SignalRBackplaneTransport>();
-            serviceCollection.AddTransient<ISignalRConnectionBuilder, SignalRConnectionBuilder>();
             serviceCollection.AddTransient<IBackplaneClient, BackplaneClient>();
 
         }

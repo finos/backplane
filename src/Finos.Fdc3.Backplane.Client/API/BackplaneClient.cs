@@ -55,7 +55,7 @@ namespace Finos.Fdc3.Backplane.Client.API
                 _systemChannels.AddRange(systemChannels);
                 _logger.LogInformation($"Populated system channels:{string.Join(", ", _systemChannels.Select(x => x?.ToString()))}");
                 _isInitialized = true;
-                _logger.LogInformation($"Initialized da client successfully!");
+                _logger.LogInformation($"Initialized the backplane client successfully!");
                 _appIdentifier = initializeParams.AppIdentifier;
                 return _appIdentifier;
             }
