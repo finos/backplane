@@ -29,7 +29,7 @@ namespace Finos.Fdc3.Backplane.Utils
                 TypeNameHandling = TypeNameHandling.Auto
             });
             StringContent data = new StringContent(json, Encoding.UTF8, "application/json");
-            HttpClient httpClient = httpClientFactory.CreateClient();
+            HttpClient httpClient = httpClientFactory.CreateClient("Backplane");
             using (HttpResponseMessage httpResponseMessage = await httpClient.PostAsync(uri, data, ct))
             {
                 return httpResponseMessage;
