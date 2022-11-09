@@ -286,3 +286,4 @@ yarn.lock
 coverage
 .nyc_output
 /src/Finos.Fdc3.Backplane.Client.JS/yarn.lock
+/src/Finos.Fdc3.Backplane/Properties/launchSettings.json
