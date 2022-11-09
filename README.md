@@ -18,16 +18,20 @@ The power and benefits of FDC3 based interoperability can be harnessed to full p
 
 \*Discovery interface implementation is not in in scope of this project. It has to be implemented by consumer based on own approach of registration and discovery of member backplanes)
 
-## Installation
-
-Coming soon!
-
 ## Usage example
+
+See readme files.
+
+- [backplane](./docs/backplane.md).
+- [backplane-client-js](./docs/backplane-client-js.md).
+- [backplane-client-net](./docs/backplane-client-net.md)
+
+Check the samples available under samples folder: [samples](./samples/)
 
 ### Backplane
 
 A desktop service which act as a message bus between multiple desktop agents for sending/receiving FDC3 compliant data.
-See more here: [backplane-client-js](docs\backplane-service.md).
+See more here: [backplane](./docs/backplane.md).
 
 Client libraries provide API to connect and communicate with backplane.
 
@@ -35,13 +39,13 @@ Client libraries provide API to connect and communicate with backplane.
 
 Javascript client which allows web based desktop agents to connect and communicate with backplane through API.
 
-See more here: [backplane-client-js](docs\backplane-client-js.md).
+See more here: [backplane-client-js](./docs/backplane-client-js.md).
 
 ### Backplane client .NET
 
 For desktop agent build in .NET, this client library exposed API to connect and communicate with backplane.
 
-see more here: [backplane-client-net](docs\backplane-client-net.md)
+see more here: [backplane-client-net](./docs/backplane-client-net.md)
 
 ## Development setup
 
@@ -51,24 +55,20 @@ IDE
 2.  VS code.
 
 Build
-Backplane and .NET Client
 
-1. Open 'Finos.Fdc3.Backplane.sln' at root in visual studio.
-2. Build Solution.
-3. Nuget package is created in 'output' folder at root.
-4. Publish the Finos.Fdc3.Backplane project as self contained.
-5. Launch backplane by running the exe in publish folder.
+- Backplane
+  See details here: [backplane](./docs/backplane.md).
 
-JS Client
+- .Net Client
+  see details here: [backplane-client-net](./docs/backplane-client-net.md)
 
-1. Open folder '\src\Finos.Fdc3.Backplane.Client.JS' in vs code.
-2. Run command 'yarn prepare' in new terminal.
-3. npm package should be created in 'output' folder at root.
+- JS Client
+  see details here: [backplane-client-js](./docs/backplane-client-js.md)
 
 ## Roadmap
 
 1. Provide/enhance developer documentation.
-2. Evolve the implementation to meet the emerging FDC3 specifications for Desktop Agent Bridging [!Draft](https://github.com/finos/FDC3/blob/544-Desktop-Agent-Bridging-Proposal/docs/api-bridging/spec.md).
+2. Evolve the implementation to meet the emerging FDC3 specifications for Desktop Agent Bridging [Draft](https://github.com/finos/FDC3/blob/544-Desktop-Agent-Bridging-Proposal/docs/api-bridging/spec.md).
 3. Deprecate interim DA to Bridge integrations as vendor support for standard enables direct bridge connections
 4. Provide examples for multi host discovery implementations in line with concrete use cases.
 5. Update system topology to include use of standalone Desktop Agent in line with emerging standard.
@@ -93,7 +93,7 @@ _Need an ICLA? Unsure if you are covered under an existing CCLA? Email [help@fin
 
 ## License
 
-Copyright {yyyy} {name of copyright owner}
+Copyright 2022 FINOS
 
 Distributed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 

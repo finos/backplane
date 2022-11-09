@@ -1,3 +1,8 @@
+/**
+ * SPDX-License-Identifier: Apache-2.0
+ * Copyright 2021 FINOS FDC3 contributors - see NOTICE file
+ */
+
 const {
   Fdc3Action,
 } = require("../../src/Finos.Fdc3.Backplane.Client.JS/lib/DTO/MessageEnvelope");
@@ -15,13 +20,13 @@ async function main(params) {
   console.log("***Setting up clients***");
   var backplaneClient1 = new backplaneClient.BackplaneClient({
     appIdentifier: {
-      appId: "Example_JS",
+      appId: "backplaneJSClient1",
     },
     url: "http://localhost:49201/backplane/v1.0",
   });
   var backplaneClient2 = new backplaneClient.BackplaneClient({
     appIdentifier: {
-      appId: "Example_JS",
+      appId: "backplaneJSClient2",
     },
     url: "http://localhost:49201/backplane/v1.0",
   });
@@ -36,7 +41,7 @@ async function main(params) {
       console.info(JSON.stringify(msg));
     },
     (err) => {
-      console.error(`Disconnected.${err}`);
+      console.error(`Backplane Client1:Disconnected.${err}`);
     }
   );
   await backplaneClient2.connect(
@@ -45,7 +50,7 @@ async function main(params) {
       console.info(JSON.stringify(msg));
     },
     (err) => {
-      console.error(`Disconnected.${err}`);
+      console.error(`Backplane Client2:Disconnected.${err}`);
     }
   );
 
@@ -55,6 +60,15 @@ async function main(params) {
   await backplaneClient2.broadcast(instrument, "group1");
   var context = await backplaneClient2.getCurrentContext("group1");
   console.info(`Current context: ${JSON.stringify(context)}`);
+
+  console.info(`Disconnecting client1`);
+  await backplaneClient1.Disconnect();
+
+  console.info(
+    `Broadcasting context by client2, but this has no effect as client1 has disconnected`
+  );
+  await backplaneClient2.broadcast(instrument, "group1");
+  console.info("**DONE**");
 }
 
 main();

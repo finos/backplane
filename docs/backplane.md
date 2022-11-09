@@ -9,8 +9,8 @@ It serves two purposes:
 There are client libraries to this runtime which expose API enabling interoperability across consuming applications.
 Currently available client libs:
 
-- C#: Fdc3.Backplane.Client
-- JS: @finos/fdc3-backplane-client
+- C#: Fdc3.Backplane.Client [details](../../docs/backplane-client-net.md)
+- JS: @finos/fdc3-backplane-client [details](../../docs/backplane-client-js.md)
 
 ## Supported Platforms
 
@@ -23,6 +23,10 @@ Written in .NET 6.0 C# which supports multiple operating systems. See: https://g
 3. Righ click on 'Finos.Fdc3.Backplane' project and click Publish
 4. Above step would publish backplane as self contained in folder output/backplane
 5. Navigate to above folder and run 'Finos.Fdc3.Backplane.exe
+
+## Configurations
+
+Check the configuration file: [appsettings.json](../src/Finos.Fdc3.Backplane/appsettings.json)
 
 ## License
 

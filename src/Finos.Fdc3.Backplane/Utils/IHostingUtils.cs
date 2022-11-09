@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+	* SPDX-License-Identifier: Apache-2.0
+	* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
+	*/
+    
+using System;
 using System.Threading;
 
 namespace Finos.Fdc3.Backplane.Utils

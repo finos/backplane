@@ -1,4 +1,9 @@
-﻿using Finos.Fdc3.Backplane.DTO.Envelope;
+﻿/*
+	* SPDX-License-Identifier: Apache-2.0
+	* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
+	*/
+    
+using Finos.Fdc3.Backplane.DTO.Envelope;
 using Finos.Fdc3.Backplane.DTO.FDC3;
 using System;
 

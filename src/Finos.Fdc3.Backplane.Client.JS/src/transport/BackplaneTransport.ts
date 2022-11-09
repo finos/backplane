@@ -35,6 +35,7 @@ export class BackplaneClientTransport {
 	}
 
 	public async broadcast(msg: MessageEnvelope) {
+		this.logger.log(LogLevel.Information, `Broadcasting context: msg ${JSON.stringify(msg)}`);
 		await this.hubConnection?.invoke('Broadcast', msg);
 	}
 

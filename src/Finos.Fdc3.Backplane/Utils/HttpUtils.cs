@@ -1,4 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿/*
+	* SPDX-License-Identifier: Apache-2.0
+	* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
+	*/
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Text;

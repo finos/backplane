@@ -1,4 +1,9 @@
-﻿using AutoFixture;
+﻿/**
+ * SPDX-License-Identifier: Apache-2.0
+ * Copyright 2021 FINOS FDC3 contributors - see NOTICE file
+ */
+
+using AutoFixture;
 using Finos.Fdc3.Backplane.Client.Transport;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;

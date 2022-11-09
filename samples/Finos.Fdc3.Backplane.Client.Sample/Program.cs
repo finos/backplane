@@ -1,4 +1,9 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿/*
+	* SPDX-License-Identifier: Apache-2.0
+	* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
+	*/
+
+// See https://aka.ms/new-console-template for more information
 using Finos.Fdc3.Backplane.Client;
 using Finos.Fdc3.Backplane.Client.API;
 using Finos.Fdc3.Backplane.Client.Extensions;
