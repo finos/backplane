@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoFixture" Version="4.17.*" />
+    <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.17.*" />
+    <PackageReference Include="AutoFixture.NUnit3" Version="4.17.*" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.*" />
+    <PackageReference Include="NUnit" Version="3.13.*" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.2.*" />
+    <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Finos.Fdc3.Backplane\Finos.Fdc3.Backplane.csproj" />
+  </ItemGroup>
+
+</Project>

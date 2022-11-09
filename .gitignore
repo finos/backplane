@@ -11,7 +11,7 @@
 *.userprefs
 
 # Build results
-lib/
+output/
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
@@ -274,3 +274,16 @@ tools/*
 BuildArtifacts/
 !tools/packages.config
 /TestResult.xml
+
+node_modules
+lib
+/lib
+.yalc
+yalc.lock
+*.log
+yarn.lock
+.vscode
+coverage
+.nyc_output
+/src/Finos.Fdc3.Backplane.Client.JS/yarn.lock
+/src/Finos.Fdc3.Backplane/Properties/launchSettings.json

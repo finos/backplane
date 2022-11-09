@@ -1,0 +1,93 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finos.Fdc3.Backplane.DTO", "src\Finos.Fdc3.Backplane.DTO\Finos.Fdc3.Backplane.DTO.csproj", "{F26DB325-1A48-41DB-9C1A-9DC230033F4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7EE9843B-7094-46C2-8FA5-346CED88B753}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finos.Fdc3.Backplane", "src\Finos.Fdc3.Backplane\Finos.Fdc3.Backplane.csproj", "{77834028-F4D7-4BE1-9FFB-22FCCF1CF0FE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finos.Fdc3.Backplane.Client", "src\Finos.Fdc3.Backplane.Client\Finos.Fdc3.Backplane.Client.csproj", "{F2A2671C-8517-4994-96E6-EBC8E37F714B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{5BC79FF4-50A9-4BCF-8998-B20991D9FCA8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finos.Fdc3.Backplane.Client.Test", "test\Finos.Fdc3.Backplane.Client.Test\Finos.Fdc3.Backplane.Client.Test.csproj", "{AE14CC6D-1661-44CA-A77D-F28BAFC1D68C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finos.Fdc3.Backplane.Tests", "test\Finos.Fdc3.Backplane.Tests\Finos.Fdc3.Backplane.Tests.csproj", "{2FF33158-CB0D-4EA4-A0C5-091DFAB23629}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{97EFB9C7-7507-4B61-8831-168843648C3E}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		LICENSE.spdx = LICENSE.spdx
+		NOTICE = NOTICE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{F76EAB2F-B889-418C-89AC-6C172DBAB493}"
+	ProjectSection(SolutionItems) = preProject
+		docs\backplane-client-js.md = docs\backplane-client-js.md
+		docs\backplane-client-net.md = docs\backplane-client-net.md
+		docs\desktop-agent-backplane.md = docs\desktop-agent-backplane.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resources", "resources", "{28ED7B66-AD62-4E29-AAB4-13DB07766726}"
+	ProjectSection(SolutionItems) = preProject
+		docs\resources\high-level.png = docs\resources\high-level.png
+		docs\resources\topology.png = docs\resources\topology.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{40C5D217-E193-4F0E-B734-C3208A3697AF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finos.Fdc3.Backplane.Client.Sample", "samples\Finos.Fdc3.Backplane.Client.Sample\Finos.Fdc3.Backplane.Client.Sample.csproj", "{9F08A077-DC0D-4B1B-AFD2-F8992A1AD58E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F26DB325-1A48-41DB-9C1A-9DC230033F4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F26DB325-1A48-41DB-9C1A-9DC230033F4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F26DB325-1A48-41DB-9C1A-9DC230033F4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F26DB325-1A48-41DB-9C1A-9DC230033F4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77834028-F4D7-4BE1-9FFB-22FCCF1CF0FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77834028-F4D7-4BE1-9FFB-22FCCF1CF0FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77834028-F4D7-4BE1-9FFB-22FCCF1CF0FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77834028-F4D7-4BE1-9FFB-22FCCF1CF0FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2A2671C-8517-4994-96E6-EBC8E37F714B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2A2671C-8517-4994-96E6-EBC8E37F714B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2A2671C-8517-4994-96E6-EBC8E37F714B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2A2671C-8517-4994-96E6-EBC8E37F714B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE14CC6D-1661-44CA-A77D-F28BAFC1D68C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE14CC6D-1661-44CA-A77D-F28BAFC1D68C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE14CC6D-1661-44CA-A77D-F28BAFC1D68C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE14CC6D-1661-44CA-A77D-F28BAFC1D68C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FF33158-CB0D-4EA4-A0C5-091DFAB23629}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FF33158-CB0D-4EA4-A0C5-091DFAB23629}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FF33158-CB0D-4EA4-A0C5-091DFAB23629}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FF33158-CB0D-4EA4-A0C5-091DFAB23629}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F08A077-DC0D-4B1B-AFD2-F8992A1AD58E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F08A077-DC0D-4B1B-AFD2-F8992A1AD58E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F08A077-DC0D-4B1B-AFD2-F8992A1AD58E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F08A077-DC0D-4B1B-AFD2-F8992A1AD58E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F26DB325-1A48-41DB-9C1A-9DC230033F4E} = {7EE9843B-7094-46C2-8FA5-346CED88B753}
+		{77834028-F4D7-4BE1-9FFB-22FCCF1CF0FE} = {7EE9843B-7094-46C2-8FA5-346CED88B753}
+		{F2A2671C-8517-4994-96E6-EBC8E37F714B} = {7EE9843B-7094-46C2-8FA5-346CED88B753}
+		{AE14CC6D-1661-44CA-A77D-F28BAFC1D68C} = {5BC79FF4-50A9-4BCF-8998-B20991D9FCA8}
+		{2FF33158-CB0D-4EA4-A0C5-091DFAB23629} = {5BC79FF4-50A9-4BCF-8998-B20991D9FCA8}
+		{F76EAB2F-B889-418C-89AC-6C172DBAB493} = {97EFB9C7-7507-4B61-8831-168843648C3E}
+		{28ED7B66-AD62-4E29-AAB4-13DB07766726} = {97EFB9C7-7507-4B61-8831-168843648C3E}
+		{9F08A077-DC0D-4B1B-AFD2-F8992A1AD58E} = {40C5D217-E193-4F0E-B734-C3208A3697AF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {409221C3-F967-467C-9006-BD4EFB5582EB}
+	EndGlobalSection
+EndGlobal

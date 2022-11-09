@@ -1,0 +1,36 @@
+{
+  "name": "@finos/fdc3-backplane-client",
+  "version": "1.0.0-alpha",
+  "description": "JS client for connecting and communicating with 'backplane'",
+  "main": "./lib/index.js",
+  "scripts": {
+    "build": "tsc",
+    "buildPack": "yarn && tsc && npm pack --pack-destination ../../output/jsclient"
+  },
+  "author": "FINOS",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "tslib": "^2.4.0",
+    "typescript": "^4.8.3"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "dependencies": {
+    "@finos/fdc3": "^1.2.0",
+    "@microsoft/signalr": "^6.0.10",
+    "@types/node": "^14.11.5"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "arrowParens": "avoid",
+    "trailingComma": "es5",
+    "endOfLine": "auto",
+    "printWidth": 120
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bankofapis/backplane"
+  }
+}

@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<Authors>FINOS</Authors>
+		<Description>This is data transfer object shared between backplane clients and backplane</Description>
+		<AssemblyName>$(MSBuildProjectName)</AssemblyName>
+		<RootNamespace>$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+		<Product>FDC3 Backplane DTO</Product>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<PackageTags>FDC3 Backplane DTO</PackageTags>
+		<Company>FINOS</Company>
+		<RepositoryUrl>https://github.com/bankofapis/backplane</RepositoryUrl>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.*" />
+	</ItemGroup>
+
+</Project>
