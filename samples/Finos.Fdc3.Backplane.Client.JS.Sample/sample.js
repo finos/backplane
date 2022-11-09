@@ -58,8 +58,6 @@ async function main(params) {
   console.info(`System channels: ${JSON.stringify(systemChannels)}`);
 
   await backplaneClient2.broadcast(instrument, "group1");
-  var context = await backplaneClient2.getCurrentContext("group1");
-  console.info(`Current context: ${JSON.stringify(context)}`);
 
   console.info(`Disconnecting client1`);
   await backplaneClient1.Disconnect();

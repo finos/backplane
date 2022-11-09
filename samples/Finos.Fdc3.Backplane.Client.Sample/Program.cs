@@ -73,9 +73,6 @@ System.Console.WriteLine($"**Running Scenario for Broadcast**{Environment.NewLin
 System.Console.WriteLine($"**Broadcasting context: fdc3.instrument**{Environment.NewLine}");
 await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "channel1");
 
-var currentContext = await backplaneClient1.GetCurrentContextAsync("channel1");
-System.Console.WriteLine($"Backplane_client_1: Current context over channel1:{JsonConvert.SerializeObject(currentContext)} {Environment.NewLine}");
-
 await backplaneClient1.DisposeAsync();
 System.Console.WriteLine($"**Backplane_Client_1 disposed**{Environment.NewLine}");
 System.Console.WriteLine($"**Broadcasting context: fdc3.instrument**{Environment.NewLine}. This will have no effect");

@@ -5,10 +5,8 @@
 
 using Finos.Fdc3.Backplane.Client.API;
 using Finos.Fdc3.Backplane.Client.Transport;
-using Finos.Fdc3.Backplane.DTO.Envelope;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Threading.Tasks;
 
 namespace Finos.Fdc3.Backplane.Client.Extensions
 {

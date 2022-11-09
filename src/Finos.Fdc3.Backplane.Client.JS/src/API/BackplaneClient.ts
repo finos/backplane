@@ -10,72 +10,58 @@ import { InitializeParams } from './initializeParams';
 import { randomBytes } from 'crypto';
 
 export class BackplaneClient {
-	private backplaneClientService: BackplaneClientTransport;
-	private appIdentifier: AppIdentifier = { appId: '' };
-	private systemChannels: Channel[];
+  private backplaneClientService: BackplaneClientTransport;
+  private appIdentifier: AppIdentifier = { appId: '' };
+  private systemChannels: Channel[];
 
-	constructor(initializeParams: InitializeParams) {
-		this.backplaneClientService = new BackplaneClientTransport(initializeParams);
-		this.systemChannels = [];
-	}
+  constructor(initializeParams: InitializeParams) {
+    this.backplaneClientService = new BackplaneClientTransport(initializeParams);
+    this.systemChannels = [];
+  }
 
-	/**
-	 * Connect with backplane
-	 *
-	 * @param {{ (msg: MessageEnvelope): void }} onMessage
-	 * @param {{ (error?: Error): void }} onDisconnect
-	 * @return {*}
-	 * @memberof BackplaneClient
-	 */
-	public async connect(onMessage: { (msg: MessageEnvelope): void }, onDisconnect: { (error?: Error): void }) {
-		this.appIdentifier = await this.backplaneClientService.connect(onMessage, onDisconnect);
-		this.systemChannels = await this.getSystemChannels();
-		return this.appIdentifier;
-	}
+  /**
+   * Connect with backplane
+   *
+   * @param {{ (msg: MessageEnvelope): void }} onMessage
+   * @param {{ (error?: Error): void }} onDisconnect
+   * @return {*}
+   * @memberof BackplaneClient
+   */
+  public async connect(onMessage: { (msg: MessageEnvelope): void }, onDisconnect: { (error?: Error): void }) {
+    this.appIdentifier = await this.backplaneClientService.connect(onMessage, onDisconnect);
+    this.systemChannels = await this.getSystemChannels();
+    return this.appIdentifier;
+  }
 
-	/**
-	 * Broadcast context
-	 * @param {Context} context
-	 * @param {string} channelId
-	 * @memberof DesktopAgentBackplaneClient
-	 */
-	public async broadcast(context: Context, channelId: string) {
-		var message: MessageEnvelope = {
-			type: Fdc3Action.Broadcast,
-			payload: { channelId: channelId, context: context },
-			meta: { source: this.appIdentifier, uniqueMessageId: randomBytes(20).toString('hex') },
-		};
-		await this.backplaneClientService.broadcast(message);
-	}
+  /**
+   * Broadcast context
+   * @param {Context} context
+   * @param {string} channelId
+   * @memberof DesktopAgentBackplaneClient
+   */
+  public async broadcast(context: Context, channelId: string) {
+    var message: MessageEnvelope = {
+      type: Fdc3Action.Broadcast,
+      payload: { channelId: channelId, context: context },
+      meta: { source: this.appIdentifier, uniqueMessageId: randomBytes(20).toString('hex') },
+    };
+    await this.backplaneClientService.broadcast(message);
+  }
 
-	/**
-	 * Get system channels exposed by backplane
-	 * @memberof BackplaneClient
-	 */
-	public getSystemChannels() {
-		return this.systemChannels;
-	}
+  /**
+   * Get system channels exposed by backplane
+   * @memberof BackplaneClient
+   */
+  public getSystemChannels() {
+    return this.systemChannels;
+  }
 
-	/**
-	 * Get current context for channel id.
-	 * Provides latest context brodcasted on channel.
-	 * Currently ignores context type.
-	 *
-	 * @param {string} channelId
-	 * @param {string} [contextType]
-	 * @return {*}
-	 * @memberof BackplaneClient
-	 */
-	public async getCurrentContext(channelId: string, contextType?: string) {
-		return await this.backplaneClientService.getCurrentContext(channelId, contextType);
-	}
-
-	/**
-	 * Disconnect client from backplane
-	 *
-	 * @memberof BackplaneClient
-	 */
-	public async Disconnect() {
-		await this.backplaneClientService.Disconnect();
-	}
+  /**
+   * Disconnect client from backplane
+   *
+   * @memberof BackplaneClient
+   */
+  public async Disconnect() {
+    await this.backplaneClientService.Disconnect();
+  }
 }

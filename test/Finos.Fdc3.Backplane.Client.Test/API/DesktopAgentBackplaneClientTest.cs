@@ -37,7 +37,7 @@ namespace Finos.Fdc3.Backplane.Client.Test.API
             _fixture = AutoFixture.Create();
             _backplaneTransport = _fixture.Freeze<Lazy<IBackplaneTransport>>();
             _backplaneTransport.Value.GetSystemChannelsAsync().Returns(new Channel[] { new Channel("channel1", "system") });
-            _backplaneTransport.Value.ConnectAsync(default, default, default).ReturnsForAnyArgs(new AppIdentifier() { AppId="Test"});
+            _backplaneTransport.Value.ConnectAsync(default, default, default).ReturnsForAnyArgs(new AppIdentifier() { AppId = "Test" });
         }
 
 
@@ -45,7 +45,7 @@ namespace Finos.Fdc3.Backplane.Client.Test.API
         public void ShouldNotConnectToBackplaneOnObjectCreation()
         {
             _fixture.Create<BackplaneClient>();
-            _backplaneTransport.Value.DidNotReceiveWithAnyArgs().ConnectAsync(default,default);
+            _backplaneTransport.Value.DidNotReceiveWithAnyArgs().ConnectAsync(default, default);
         }
 
         [Test]

@@ -12,13 +12,10 @@ using Finos.Fdc3.Backplane.Utils;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Finos.Fdc3.Backplane.Hubs
@@ -35,8 +32,7 @@ namespace Finos.Fdc3.Backplane.Hubs
         private readonly IConfigRepository _configRepository;
         private readonly TimeSpan _httpTimeOutInMs;
         private readonly string _broadcastPath;
-        private static readonly SemaphoreSlim _threadSafeCurrentContextAccessHandle = new SemaphoreSlim(1, 1);
-        private static readonly ConcurrentDictionary<string, JObject> _currentContextStore = new ConcurrentDictionary<string, JObject>();
+
         public DesktopAgentsHub(ILogger<DesktopAgentsHub> logger,
             IHubContext<DesktopAgentsHub> hubContext,
              IHttpClientFactory httpClientFactory,
@@ -95,46 +91,8 @@ namespace Finos.Fdc3.Backplane.Hubs
             {
                 await PostMessageToMemberBackplanes(messageEnvelope);
             }
-
-            await _threadSafeCurrentContextAccessHandle.WaitAsync().ConfigureAwait(false);
-            try
-            {
-                _currentContextStore.AddOrUpdate(messageEnvelope.Payload.ChannelId, messageEnvelope.Payload.Context, (channelId, ctx) => messageEnvelope.Payload.Context);
-            }
-            finally
-            {
-                _threadSafeCurrentContextAccessHandle.Release();
-            }
-            _logger.LogDebug($"Updated current context for channelId : {messageEnvelope.Payload.ChannelId}: {JsonConvert.SerializeObject(messageEnvelope.Payload.Context)}");
         }
 
-        /// <summary>
-        /// Get Context for Channel.
-        /// </summary>
-        /// <param name="channelId">Channel Id</param>
-        /// <returns>Jobject Channel details</returns>
-        public async Task<JObject> GetCurrentContextForChannel(string channelId)
-        {
-            await _threadSafeCurrentContextAccessHandle.WaitAsync().ConfigureAwait(false);
-            try
-            {
-                JObject currentContextForChannel = null;
-                _logger.LogDebug($"Received call to get current context for channel: {channelId}");
-
-                if (_currentContextStore.TryGetValue(channelId, out JObject currentContext))
-                {
-                    currentContextForChannel = currentContext;
-                }
-                string ctxAsString = currentContextForChannel == null ? "NULL" : JsonConvert.SerializeObject(currentContextForChannel);
-                _logger.LogDebug($"Returning current context for channel: {channelId}, context: ${ctxAsString}");
-                return currentContextForChannel;
-            }
-            finally
-            {
-                _threadSafeCurrentContextAccessHandle.Release();
-            }
-
-        }
 
         /// <summary>
         /// Provides system channels

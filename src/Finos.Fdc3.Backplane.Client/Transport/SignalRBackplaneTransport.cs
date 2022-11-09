@@ -10,7 +10,6 @@ using Finos.Fdc3.Backplane.DTO.FDC3;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
@@ -28,7 +27,7 @@ namespace Finos.Fdc3.Backplane.Client.Transport
 
         public SignalRBackplaneTransport(IServiceProvider serviceProvider, InitializeParams initializeParams, Func<Uri> urlProvider)
         {
-            var backplaneUrl = urlProvider();
+            Uri backplaneUrl = urlProvider();
             _logger = serviceProvider.GetRequiredService<ILogger<IBackplaneTransport>>();
             _appIdentifier = initializeParams.AppIdentifier;
             _hubConnection = new HubConnectionBuilder().WithUrl(backplaneUrl)
@@ -49,16 +48,6 @@ namespace Finos.Fdc3.Backplane.Client.Transport
         }
 
 
-        public async Task<Context> GetCurrentContextAsync(string channelId, CancellationToken ct = default)
-        {
-            if (_hubConnection.State != HubConnectionState.Connected)
-            {
-                throw new InvalidOperationException(MSG_CONNECTION_CLOSED);
-            }
-            JObject ctxJObject = await _hubConnection.InvokeAsync<JObject>("GetCurrentContextForChannel", channelId, ct);
-            _logger.LogInformation($"Received current context for channel: {channelId} from server");
-            return ctxJObject == null ? null : new Context(ctxJObject);
-        }
 
         public async Task<IEnumerable<Channel>> GetSystemChannelsAsync(CancellationToken ct = default)
         {
@@ -80,7 +69,7 @@ namespace Finos.Fdc3.Backplane.Client.Transport
         }
 
 
-       
+
 
         public async ValueTask DisposeAsync()
         {

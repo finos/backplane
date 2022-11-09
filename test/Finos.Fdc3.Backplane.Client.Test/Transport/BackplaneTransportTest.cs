@@ -33,13 +33,6 @@ namespace Finos.Fdc3.Backplane.Client.Test.Transport
         }
 
         [Test]
-        public void GetCurrentContextShouldThrowExceptionIfNotConnected()
-        {
-            SignalRBackplaneTransport sut = _fixture.Create<SignalRBackplaneTransport>();
-            Assert.ThrowsAsync<InvalidOperationException>(async () => await sut.GetCurrentContextAsync(default, default));
-        }
-
-        [Test]
         public void GetSystemChannelsShouldThrowExceptionIfNotConnected()
         {
             SignalRBackplaneTransport sut = _fixture.Create<SignalRBackplaneTransport>();

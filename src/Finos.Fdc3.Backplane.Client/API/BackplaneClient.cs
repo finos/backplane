@@ -45,11 +45,6 @@ namespace Finos.Fdc3.Backplane.Client.API
         }
 
 
-        public async Task<Context> GetCurrentContextAsync(string channelId, CancellationToken ct = default)
-        {
-            return await _backplaneTransport.Value.GetCurrentContextAsync(channelId, ct).ConfigureAwait(false);
-        }
-
         public async Task<IEnumerable<Channel>> GetSystemChannelsAsync(CancellationToken ct = default)
         {
             return await Task.FromResult(_systemChannels);

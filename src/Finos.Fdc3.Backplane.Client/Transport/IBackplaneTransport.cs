@@ -27,14 +27,6 @@ namespace Finos.Fdc3.Backplane.Client.Transport
         Task<AppIdentifier> ConnectAsync(Action<MessageEnvelope> onMessage, Func<Exception, Task> onDisconnect, CancellationToken ct = default);
 
         /// <summary>
-        /// Get current context for channel
-        /// </summary>
-        /// <param name="channelId"></param>
-        /// <param name="ct"></param>
-        /// <returns></returns>
-        Task<Context> GetCurrentContextAsync(string channelId, CancellationToken ct = default);
-
-        /// <summary>
         /// Get system channels from backplane
         /// </summary>
         /// <param name="ct"></param>
