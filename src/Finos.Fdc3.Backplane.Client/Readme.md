@@ -1,6 +1,6 @@
 # Backplane Client .NET
 
-Exposes API to send/receive FDC3 compliant messages over backplane for context sharing across apps and desktop agents.
+.NET client exposing API to connect and communicate with backplane.
 
 ## Supported Platforms
 

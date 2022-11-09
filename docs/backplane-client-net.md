@@ -7,7 +7,7 @@ Exposes API to send/receive FDC3 compliant messages over backplane for context s
 The library is written in .NET standard 2.0.
 .NET Standard 2.0 is supported by all modern platforms and is the recommended way to support multiple platforms with one target.
 
-## Supported Features
+## Supported Operations
 
 - Broadcast context
 

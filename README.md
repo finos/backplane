@@ -8,7 +8,7 @@ Where FDC3 Desktop Agent API addresses interoperability between apps running wit
 
 ## Why Backplane?
 
-Imagine a business Workflow that involves applications which are not running under same desktop agent, how can we make applications interoperate across different desktop agents? This is where DA Backplane comes into picture.
+Imagine a business workflow that involves applications which are not running under same desktop agent, how can we make applications interoperate across different desktop agents? This is where DA Backplane comes into picture.
 
 The power and benefits of FDC3 based interoperability can be harnessed to full potential only if it is not just limited to boundaries of desktop agent but across desktop.
 
@@ -37,7 +37,7 @@ Client libraries provide API to connect and communicate with backplane.
 
 ### Backplane client Web
 
-Javascript client which allows web based desktop agents to connect and communicate with backplane through API.
+Javascript client which allows web based desktop agents to connect and communicate with backplane.
 
 See more here: [backplane-client-js](./docs/backplane-client-js.md).
 
@@ -57,12 +57,15 @@ IDE
 Build
 
 - Backplane
+
   See details here: [backplane](./docs/backplane.md).
 
 - .Net Client
+
   see details here: [backplane-client-net](./docs/backplane-client-net.md)
 
 - JS Client
+
   see details here: [backplane-client-js](./docs/backplane-client-js.md)
 
 ## Roadmap
@@ -93,7 +96,7 @@ _Need an ICLA? Unsure if you are covered under an existing CCLA? Email [help@fin
 
 ## License
 
-Copyright 2022 FINOS
+Copyright (C) 2022 Backplane open source project
 
 Distributed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 

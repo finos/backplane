@@ -1,12 +1,10 @@
-![Logo](fdc3.png)
-
-# Finsemble Backplane Bridge Service
+# Finsemble Backplane Bridge Service (Code Snippet)
 
 Sample code snippet showcase setup of finsemble connection to backplane for sending receiving message
 
 ## Installation
 
-1. Copy the folder 'src\' to 'src\services' in your finsemble project.
+1. Copy the folders under 'src\' to 'src\services\finsembleBackplaneBridge' in your finsemble project.
 2. Go to config.json file in your finsemble project, and include the path to 'src\finsembleBackplaneBridge\config.json' in the "importConfig" key. For example:
 
 ```JSON
@@ -24,7 +22,7 @@ Sample code snippet showcase setup of finsemble connection to backplane for send
 
 ## License
 
-Copyright 2022 FINOS
+Copyright (C) 2022 Backplane open source project
 
 Distributed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
