@@ -3,6 +3,7 @@
 [![Dependency Review](https://github.com/bankofapis/backplane/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/bankofapis/backplane/actions/workflows/dependency-review.yml)
 [![.NET](https://github.com/bankofapis/backplane/actions/workflows/dotnet.yml/badge.svg)](https://github.com/bankofapis/backplane/actions/workflows/dotnet.yml)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/6700/badge)](https://bestpractices.coreinfrastructure.org/projects/6700)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 # Backplane
 
