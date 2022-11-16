@@ -1,4 +1,4 @@
-name: Node.js CVE Scanning
+name: Node.js License Scanning
 
 on:
   push:
