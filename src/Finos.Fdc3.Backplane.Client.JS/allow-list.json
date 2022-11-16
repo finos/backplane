@@ -1,4 +1,5 @@
 {
     "ignore": [
+        { "id": "sonatype-2022-3677", "reason": "Low score (3.7) and no way to update it as its transitive of @microsoft/signalr" },
     ]
 }
