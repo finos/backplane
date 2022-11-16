@@ -25,7 +25,9 @@ jobs:
     - name: package install
       run: |
         yarn install
+      working-directory: ./src/Finos.Fdc3.Backplane.Client.JS
     - name: build
       run: |
         yarn build
+      working-directory: ./src/Finos.Fdc3.Backplane.Client.JS
   
