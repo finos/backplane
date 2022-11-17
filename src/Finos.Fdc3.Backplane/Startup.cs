@@ -41,12 +41,6 @@ namespace Finos.Fdc3.Backplane
                  httpConfig.Timeout = TimeSpan.FromMilliseconds(Configuration.GetValue<int>("HttpRequestTimeoutInMilliseconds"));
              }
             );
-            services.AddApiVersioning(x =>
-            {
-                // If the client hasn't specified the API version in the request, use the default API version number 
-                x.AssumeDefaultVersionWhenUnspecified = true;
-                x.ReportApiVersions = true;
-            });
             services.AddLogging(configure => { configure.AddConsole(); configure.SetMinimumLevel(LogLevel.Information); });
             services.AddTransient<IDesktopAgentHub, DesktopAgentsHub>();
             services.AddSignalR(hubOptions =>
