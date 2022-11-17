@@ -1,9 +1,10 @@
 [![FINOS - Incubating](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-incubating.svg)](https://community.finos.org/docs/governance/Software-Projects/stages/incubating)
 [![CodeQL](https://github.com/bankofapis/backplane/actions/workflows/codeql.yml/badge.svg)](https://github.com/bankofapis/backplane/actions/workflows/codeql.yml)
-[![Dependency Review](https://github.com/bankofapis/backplane/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/bankofapis/backplane/actions/workflows/dependency-review.yml)
+[![Node.js CVE Scanning](https://github.com/bankofapis/backplane/actions/workflows/node-cve-scanning.yml/badge.svg)](https://github.com/bankofapis/backplane/actions/workflows/node-cve-scanning.yml) 
 [![.NET](https://github.com/bankofapis/backplane/actions/workflows/dotnet.yml/badge.svg)](https://github.com/bankofapis/backplane/actions/workflows/dotnet.yml)
 [![npm build](https://github.com/bankofapis/backplane/actions/workflows/npm-build.yml/badge.svg)](https://github.com/bankofapis/backplane/actions/workflows/npm-build.yml)
 [![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/6700/badge)](https://bestpractices.coreinfrastructure.org/projects/6700)
+[![Node.js License Scanning](https://github.com/bankofapis/backplane/actions/workflows/node-license-scanning.yml/badge.svg)](https://github.com/bankofapis/backplane/actions/workflows/node-license-scanning.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 # Backplane
