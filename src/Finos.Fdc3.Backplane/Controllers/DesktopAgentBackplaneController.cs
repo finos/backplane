@@ -17,8 +17,7 @@ namespace Finos.Fdc3.Backplane.Controllers
     /// REST API for multihost communication. 
     /// </summary>
     [ApiController]
-    [ApiVersion("1.0")]
-    [Route("backplane/api/v{version:apiVersion}")]
+    [Route("backplane/api/v1")]
     public class DesktopAgentBackplaneController : ControllerBase
     {
         private readonly ILogger<DesktopAgentBackplaneController> _logger;
@@ -40,7 +39,7 @@ namespace Finos.Fdc3.Backplane.Controllers
         [ApiExplorerSettings(IgnoreApi = true)]
         [HttpPost]
         [Route("broadcast/context")]
-        public async Task<IActionResult> BroadcastToLocalClients(MessageEnvelope message)
+        public async Task<IActionResult> BroadcastToLocalClients([FromBody]MessageEnvelope message)
         {
             if (message == null)
             {
@@ -66,7 +65,7 @@ namespace Finos.Fdc3.Backplane.Controllers
         [ApiExplorerSettings(IgnoreApi = true)]
         [HttpPost]
         [Route("addmembernode")]
-        public async Task<IActionResult> AddMemberNode(Uri memberNodeUri)
+        public async Task<IActionResult> AddMemberNode([FromBody]Uri memberNodeUri)
         {
             if (memberNodeUri == null)
             {
