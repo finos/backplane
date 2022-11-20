@@ -1,7 +1,7 @@
-﻿/**
- * SPDX-License-Identifier: Apache-2.0
- * Copyright 2021 FINOS FDC3 contributors - see NOTICE file
- */
+﻿/*
+	* SPDX-License-Identifier: Apache-2.0
+	* Copyright 2022 FINOS FDC3 contributors - see NOTICE file
+	*/
 using AutoFixture;
 using Finos.Fdc3.Backplane.Client.Extensions;
 using Microsoft.Extensions.Logging;

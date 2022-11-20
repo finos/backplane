@@ -1,9 +1,11 @@
-﻿using System.Threading;
+﻿/*
+	* SPDX-License-Identifier: Apache-2.0
+	* Copyright 2022 FINOS FDC3 contributors - see NOTICE file
+	*/
+
+using System.Threading;
 using System.Threading.Tasks;
-/**
-* SPDX-License-Identifier: Apache-2.0
-* Copyright 2021 FINOS FDC3 contributors - see NOTICE file
-*/
+
 namespace Finos.Fdc3.Backplane.DTO.FDC3
 {
     /// <summary>
