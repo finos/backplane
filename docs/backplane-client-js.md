@@ -15,7 +15,7 @@ var backplaneClient = new backplaneClient.BackplaneClient({
   appIdentifier: {
     appId: "backplaneJSClient",
   },
-  url: "http://localhost:49201/backplane/v1.0",
+  url: "http://localhost:4475",
 });
 
 await backplaneClient.connect(

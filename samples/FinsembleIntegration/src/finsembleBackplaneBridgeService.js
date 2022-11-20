@@ -28,7 +28,7 @@ const Logger = FSBL.Clients.Logger;
 
  const setUpBridge= async()=> {
     Logger.log("Fdc3 ready!. Setting up bridge...");
-    var backplaneUrl= "http://localhost:49201/backplane/v1.0";
+    var backplaneUrl= "http://localhost:4475";
     try {
       this.bridgeServiceName = WindowClient.getWindowIdentifier().windowName;
       Logger.log(`Creating backplane client..`);

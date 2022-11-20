@@ -30,7 +30,7 @@ namespace Finos.Fdc3.Backplane.Tests.Controllers
         public void Test_BroadcastToLocalClients_ShouldReturn_400_WhenParameterIsMissing()
         {
             //Arrange
-            DesktopAgentBackplaneController sut = _fixture.Build<DesktopAgentBackplaneController>().OmitAutoProperties().Create();
+            BackplaneController sut = _fixture.Build<BackplaneController>().OmitAutoProperties().Create();
             //Act
             ObjectResult result = sut.BroadcastToLocalClients(null).Result as ObjectResult;
             //Assert
@@ -44,7 +44,7 @@ namespace Finos.Fdc3.Backplane.Tests.Controllers
             JObject context = JObject.Parse(@"{'type': 'fdc3.Instrument'}");
             string uniqueMessageId = Guid.NewGuid().ToString();
             MessageEnvelope broadcastContext = new MessageEnvelope() { Payload = new EnvelopeData() { ChannelId = "abc", Context = context }, Meta = new EnvelopeMeta() { UniqueMessageId = uniqueMessageId, Source = new AppIdentifier() { AppId = "Test" } } };
-            DesktopAgentBackplaneController sut = _fixture.Build<DesktopAgentBackplaneController>().OmitAutoProperties().Create();
+            BackplaneController sut = _fixture.Build<BackplaneController>().OmitAutoProperties().Create();
             //Act
             ObjectResult result = sut.BroadcastToLocalClients(broadcastContext).Result as ObjectResult;
             //Assert
@@ -60,7 +60,7 @@ namespace Finos.Fdc3.Backplane.Tests.Controllers
             MessageEnvelope broadcastContext = new MessageEnvelope() { Payload = new EnvelopeData() { ChannelId = "channel1", Context = context }, Meta = new EnvelopeMeta() { UniqueMessageId = uniqueMessageId, Source = new AppIdentifier() { AppId = "Test" } } };
             IDesktopAgentHub hub = _fixture.Freeze<IDesktopAgentHub>();
             hub.BroadcastToLocalClients(broadcastContext).ReturnsForAnyArgs(x => { throw new Exception("Exception Occured"); });
-            DesktopAgentBackplaneController sut = _fixture.Build<DesktopAgentBackplaneController>().OmitAutoProperties().Create();
+            BackplaneController sut = _fixture.Build<BackplaneController>().OmitAutoProperties().Create();
             //Act
             ObjectResult result = sut.BroadcastToLocalClients(broadcastContext).Result as ObjectResult;
             //Assert

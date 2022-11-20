@@ -26,7 +26,7 @@ string? instrument = @"{
 //set up DI
 ServiceCollection services = new ServiceCollection();
 
-Uri backplaneUrl = new Uri("http://localhost:49201/backplane/v1.0");
+Uri backplaneUrl = new Uri("http://localhost:4475");
 //configure client with backplane url
 //takes delegate for obtaining url. comes handly when to integrate with discovery and dynamic port.
 services.ConfigureBackplaneClient(new InitializeParams(new AppIdentifier() { AppId = "Backplane_Client_1" }), () => backplaneUrl);

@@ -44,7 +44,7 @@ namespace Finos.Fdc3.Backplane.Hubs
             _logger = logger;
             _configRepository = configRepository;
             _httpTimeOutInMs = configRepository.HttpRequestTimeoutInMilliseconds;
-            _broadcastPath = Path.Combine(configRepository.HubEndpoint, configRepository.BroadcastEndpoint);
+            _broadcastPath = configRepository.BroadcastEndpoint;
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Finos.Fdc3.Backplane.Hubs
             //send message to member backplanes
             foreach (Uri nodeUri in _memberNodesRepo.MemberNodes)
             {
-                //http://nodeurl/backplane/v1.0/broadcast/context
+                //http://nodeurl/api/backplane/broadcast/context
                 await PostRequestAsync(nodeUri, _broadcastPath, messageContextDTO);
             }
         }
