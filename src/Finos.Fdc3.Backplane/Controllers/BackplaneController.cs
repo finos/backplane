@@ -17,14 +17,14 @@ namespace Finos.Fdc3.Backplane.Controllers
     /// REST API for multihost communication. 
     /// </summary>
     [ApiController]
-    [Route("backplane/api/v1")]
-    public class DesktopAgentBackplaneController : ControllerBase
+    [Route("api/backplane")]
+    public class BackplaneController : ControllerBase
     {
-        private readonly ILogger<DesktopAgentBackplaneController> _logger;
+        private readonly ILogger<BackplaneController> _logger;
         private readonly IDesktopAgentHub _hub;
         private readonly INodesRepository _memberNodesRepository;
 
-        public DesktopAgentBackplaneController(ILogger<DesktopAgentBackplaneController> logger, INodesRepository memberNodesRepository, IDesktopAgentHub hub)
+        public BackplaneController(ILogger<BackplaneController> logger, INodesRepository memberNodesRepository, IDesktopAgentHub hub)
         {
             _logger = logger;
             _hub = hub;

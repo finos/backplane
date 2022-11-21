@@ -18,17 +18,18 @@ const instrument = {
 
 async function main(params) {
   console.log("***Setting up clients***");
+  var backplaneUrl= "http://localhost:4475";
   var backplaneClient1 = new backplaneClient.BackplaneClient({
     appIdentifier: {
       appId: "backplaneJSClient1",
     },
-    url: "http://localhost:49201/backplane/v1.0",
+    url: backplaneUrl,
   });
   var backplaneClient2 = new backplaneClient.BackplaneClient({
     appIdentifier: {
       appId: "backplaneJSClient2",
     },
-    url: "http://localhost:49201/backplane/v1.0",
+    url: backplaneUrl,
   });
 
   await backplaneClient1.connect(
@@ -46,7 +47,11 @@ async function main(params) {
   );
   await backplaneClient2.connect(
     (msg) => {
-      `Backplane Client2: Recived broadcast over channel: ${msg.payload.channelId}`;
+      if (msg.type == Fdc3Action.Broadcast) {
+        console.info(
+          `Backplane Client2: Recived broadcast over channel: ${msg.payload.channelId}`
+        );
+      }
       console.info(JSON.stringify(msg));
     },
     (err) => {

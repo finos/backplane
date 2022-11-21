@@ -10,7 +10,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
@@ -64,7 +63,7 @@ namespace Finos.Fdc3.Backplane.WorkerService
         {
             TimeSpan healthCheckIntervalMs = _config.MemberNodesHealthCheckIntervalInMilliseconds;
             TimeSpan httpRequestTimeOutInMs = _config.HttpRequestTimeoutInMilliseconds;
-            string addNodePath = Path.Combine(_config.HubEndpoint, _config.AddNodeEndpoint);
+            string addNodePath =  _config.AddNodeEndpoint;
 
 
             _logger.LogInformation($"HealthCheck service started with health check interval of {healthCheckIntervalMs} ms.");

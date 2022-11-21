@@ -35,7 +35,7 @@ namespace Finos.Fdc3.Backplane.Client.Transport
                   .ConfigureLogging(logging =>
                   {
                       logging.AddProvider(_logger.AsLoggerProvider());
-                  }).Build();
+                  }).WithAutomaticReconnect().Build();
             _logger.LogInformation($"Creating connection object with url:{backplaneUrl}");
         }
 

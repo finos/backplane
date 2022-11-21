@@ -34,7 +34,7 @@ string? instrument = @"{
                 },
               }";
 
-Uri backplaneUrl = new Uri("http://localhost:49201/backplane/v1.0");
+Uri backplaneUrl = new Uri("http://localhost:4475");
 services.ConfigureBackplaneClient(new InitializeParams(new AppIdentifier() { AppId = "Backplane_Client" }), () => backplaneUrl);
 ServiceProvider container = services.BuildServiceProvider();
 
