@@ -95,10 +95,10 @@ namespace Finos.Fdc3.Backplane.Hubs
 
 
         /// <summary>
-        /// Provides system channels
+        /// Provides user channels
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<Channel>> GetSystemChannels()
+        public async Task<IEnumerable<Channel>> GetUserChannels()
         {
             return await Task.FromResult(_configRepository.Channels);
         }

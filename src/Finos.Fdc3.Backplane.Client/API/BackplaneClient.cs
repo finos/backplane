@@ -19,22 +19,22 @@ namespace Finos.Fdc3.Backplane.Client.API
     /// </summary>
     internal class BackplaneClient : IBackplaneClient
     {
-        private readonly List<Channel> _systemChannels;
+        private readonly List<Channel> _userChannels;
         private AppIdentifier _appIdentifier;
         private readonly Lazy<IBackplaneTransport> _backplaneTransport;
 
 
         public BackplaneClient(Lazy<IBackplaneTransport> backplaneTransport)
         {
-            _systemChannels = new List<Channel>();
+            _userChannels = new List<Channel>();
             _backplaneTransport = backplaneTransport;
         }
 
         public async Task<AppIdentifier> ConnectAsync(Action<MessageEnvelope> onMessage, Func<Exception, Task> onDisconnect,CancellationToken ct = default)
         {
             _appIdentifier = await _backplaneTransport.Value.ConnectAsync(onMessage,onDisconnect, ct).ConfigureAwait(false);
-            IEnumerable<Channel> channels = await _backplaneTransport.Value.GetSystemChannelsAsync().ConfigureAwait(false);
-            _systemChannels.AddRange(channels);
+            IEnumerable<Channel> channels = await _backplaneTransport.Value.GetUserChannelsAsync().ConfigureAwait(false);
+            _userChannels.AddRange(channels);
             return _appIdentifier;
         }
 
@@ -45,9 +45,9 @@ namespace Finos.Fdc3.Backplane.Client.API
         }
 
 
-        public async Task<IEnumerable<Channel>> GetSystemChannelsAsync(CancellationToken ct = default)
+        public async Task<IEnumerable<Channel>> GetUserChannelsAsync(CancellationToken ct = default)
         {
-            return await Task.FromResult(_systemChannels);
+            return await Task.FromResult(_userChannels);
         }
 
         public async ValueTask DisposeAsync()

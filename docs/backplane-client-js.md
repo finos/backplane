@@ -10,6 +10,14 @@ Javascript client which allows web based desktop agents to connect and communica
 
 ```ts
 import { BackplaneClient } from "@finos/fdc3-backplane-client";
+const instrument = {
+  type: "fdc3.instrument",
+  id: {
+    ticker: "AAPL",
+    ISIN: "US0378331005",
+    FIGI: "BBG000B9XRY4",
+  },
+};
 
 var backplaneClient = new backplaneClient.BackplaneClient({
   appIdentifier: {
@@ -33,6 +41,8 @@ await backplaneClient.connect(
     console.error(`Backplane Client: Disconnected.${err}`);
   }
 );
+
+await backplaneClient.broadcast(instrument, "fdc3.channel.1");
 ```
 
 ## Installation

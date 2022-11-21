@@ -12,7 +12,6 @@ import {
   JsonHubProtocol,
   LogLevel,
 } from '@microsoft/signalr';
-import { Context } from '@finos/fdc3';
 import { InitializeParams } from '../API/initializeParams';
 import { AppIdentifier, MessageEnvelope } from '../DTO/MessageEnvelope';
 
@@ -39,8 +38,8 @@ export class BackplaneClientTransport {
     await this.hubConnection?.invoke('Broadcast', msg);
   }
 
-  public async getSystemChannels() {
-    return await this.hubConnection.invoke<Channel[]>('GetSystemChannels');
+  public async getUserChannels() {
+    return await this.hubConnection.invoke<Channel[]>('GetUserChannels');
   }
 
   public async Disconnect() {

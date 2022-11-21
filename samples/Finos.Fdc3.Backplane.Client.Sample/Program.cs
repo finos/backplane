@@ -61,8 +61,8 @@ await backplaneClient2.ConnectAsync((msg) =>
     Console.WriteLine($"Backplane_Client_2: {JsonConvert.SerializeObject(msg)}{Environment.NewLine}");
 }, async (ex) => { await Task.CompletedTask; Console.WriteLine($"Backplane_Client_2 disconnected. {ex}"); });
 
-//get system channels
-IEnumerable<Channel>? channels = await backplaneClient1.GetSystemChannelsAsync();
+//get user channels
+IEnumerable<Channel>? channels = await backplaneClient1.GetUserChannelsAsync();
 System.Console.WriteLine($"**Populated channels:{string.Join(", ", channels.Select(x => $"Id {x.Id} and Name: {x.DisplayMetadata.Name}"))}**{Environment.NewLine}");
 
 /*
@@ -71,12 +71,12 @@ System.Console.WriteLine($"**Populated channels:{string.Join(", ", channels.Sele
 System.Console.WriteLine($"**Running Scenario for Broadcast**{Environment.NewLine}");
 
 System.Console.WriteLine($"**Broadcasting context: fdc3.instrument**{Environment.NewLine}");
-await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "channel1");
+await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "fdc3.channel.1");
 
 await backplaneClient1.DisposeAsync();
 System.Console.WriteLine($"**Backplane_Client_1 disposed**{Environment.NewLine}");
 System.Console.WriteLine($"**Broadcasting context: fdc3.instrument**{Environment.NewLine}. This will have no effect");
-await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "channel1");
+await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "fdc3.channel.1");
 
 
 Console.WriteLine("**Done**");

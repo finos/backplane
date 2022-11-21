@@ -12,31 +12,31 @@ import { randomBytes } from 'crypto';
 export class BackplaneClient {
   private backplaneClientService: BackplaneClientTransport;
   private appIdentifier: AppIdentifier = { appId: '' };
-  private systemChannels: Channel[];
+  private userChannels: Channel[];
 
   constructor(initializeParams: InitializeParams) {
     this.backplaneClientService = new BackplaneClientTransport(initializeParams);
-    this.systemChannels = [];
+    this.userChannels = [];
   }
 
   /**
    * Connect with backplane
    *
-   * @param {{ (msg: MessageEnvelope): void }} onMessage
-   * @param {{ (error?: Error): void }} onDisconnect
+   * @param {{ (msg: MessageEnvelope): void }} onMessage The handler that will be invoked when message is recieved by this client.
+   * @param {{ (error?: Error): void }} onDisconnect The handler that will be invoked when the connection is closed.
    * @return {*}
    * @memberof BackplaneClient
    */
   public async connect(onMessage: { (msg: MessageEnvelope): void }, onDisconnect: { (error?: Error): void }) {
     this.appIdentifier = await this.backplaneClientService.connect(onMessage, onDisconnect);
-    this.systemChannels = await this.getSystemChannels();
+    this.userChannels = await this.backplaneClientService.getUserChannels();
     return this.appIdentifier;
   }
 
   /**
-   * Broadcast context
-   * @param {Context} context
-   * @param {string} channelId
+   * Broadcasts a context on the specified channel.
+   * @param {Context} context context
+   * @param {string} channelId channelId 
    * @memberof DesktopAgentBackplaneClient
    */
   public async broadcast(context: Context, channelId: string) {
@@ -49,11 +49,11 @@ export class BackplaneClient {
   }
 
   /**
-   * Get system channels exposed by backplane
+   * Get user channels exposed by backplane
    * @memberof BackplaneClient
    */
-  public getSystemChannels() {
-    return this.systemChannels;
+  public getUserChannels() {
+    return this.userChannels;
   }
 
   /**
