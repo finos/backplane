@@ -23,7 +23,7 @@ namespace Finos.Fdc3.Backplane.Config
         private readonly List<Uri> _memberNodes;
 
         /// <summary>
-        /// List of system channels
+        /// List of user channels
         /// </summary>
 
         public IEnumerable<Channel> Channels => _channels;
@@ -47,10 +47,10 @@ namespace Finos.Fdc3.Backplane.Config
         {
             IEnumerable<Uri> memberNodesFromConfig = _config.GetSection("MultiHostConfig:MemberNodes").Get<IEnumerable<Uri>>();
             _memberNodes.AddRange(memberNodesFromConfig);
-            IEnumerable<ChannelConfig> systemChannelsConfig = _config.GetSection("ChannelsConfig:SystemChannels").Get<IEnumerable<ChannelConfig>>();
-            IEnumerable<Channel> systemChannels = systemChannelsConfig.Select(x => new Channel(x.Id, x.Type, new DisplayMetadata(x.Name, x.Color, x.Glyph)));
-            _channels.AddRange(systemChannels);
-            _logger.LogInformation($"Populated system channels from config: {string.Join(",", Channels.Select(x => x.Id))}");
+            IEnumerable<ChannelConfig> userChannelsConfig = _config.GetSection("ChannelsConfig:UserChannels").Get<IEnumerable<ChannelConfig>>();
+            IEnumerable<Channel> userChannels = userChannelsConfig.Select(x => new Channel(x.Id, x.Type, new DisplayMetadata(x.Name, x.Color, x.Glyph)));
+            _channels.AddRange(userChannels);
+            _logger.LogInformation($"Populated user channels from config: {string.Join(",", Channels.Select(x => x.Id))}");
             HttpRequestTimeoutInMilliseconds = TimeSpan.FromMilliseconds(_config.GetValue<int>("HttpRequestTimeoutInMilliseconds", 5000));
             MemberNodesHealthCheckIntervalInMilliseconds = TimeSpan.FromMilliseconds(_config.GetValue<int>("MemberNodesHealthCheckIntervalInMilliseconds", 5000));
             HubEndpoint = _config.GetValue<string>("HubEndpoint");

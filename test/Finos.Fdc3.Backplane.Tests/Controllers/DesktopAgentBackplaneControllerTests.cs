@@ -57,7 +57,7 @@ namespace Finos.Fdc3.Backplane.Tests.Controllers
             //Arrange
             JObject context = JObject.Parse(@"{'type': 'fdc3.Instrument'}");
             string uniqueMessageId = Guid.NewGuid().ToString();
-            MessageEnvelope broadcastContext = new MessageEnvelope() { Payload = new EnvelopeData() { ChannelId = "channel1", Context = context }, Meta = new EnvelopeMeta() { UniqueMessageId = uniqueMessageId, Source = new AppIdentifier() { AppId = "Test" } } };
+            MessageEnvelope broadcastContext = new MessageEnvelope() { Payload = new EnvelopeData() { ChannelId = "fdc3.channel.1", Context = context }, Meta = new EnvelopeMeta() { UniqueMessageId = uniqueMessageId, Source = new AppIdentifier() { AppId = "Test" } } };
             IDesktopAgentHub hub = _fixture.Freeze<IDesktopAgentHub>();
             hub.BroadcastToLocalClients(broadcastContext).ReturnsForAnyArgs(x => { throw new Exception("Exception Occured"); });
             BackplaneController sut = _fixture.Build<BackplaneController>().OmitAutoProperties().Create();

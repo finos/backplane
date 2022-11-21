@@ -38,7 +38,7 @@ namespace Finos.Fdc3.Backplane.MultiHost
         {
             //You can implement own discovery mechanism. Current implementation uses config based settings
             IEnumerable<Uri> nodes = _memberNodes;
-            _logger.LogInformation($"Discovered nodes:{nodes}");
+            _logger.LogDebug($"Discovered nodes:{nodes}");
             return await Task.FromResult(nodes);
         }
 

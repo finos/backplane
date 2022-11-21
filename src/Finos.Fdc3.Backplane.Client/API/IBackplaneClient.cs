@@ -37,11 +37,11 @@ namespace Finos.Fdc3.Backplane.Client.API
         Task BroadcastAsync(Context context, string channelId, CancellationToken ct = default);
 
         /// <summary>
-        /// Get system channels from backplane
+        /// Get user channels from backplane
         /// </summary>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<IEnumerable<Channel>> GetSystemChannelsAsync(CancellationToken ct = default);
+        Task<IEnumerable<Channel>> GetUserChannelsAsync(CancellationToken ct = default);
 
     }
 }

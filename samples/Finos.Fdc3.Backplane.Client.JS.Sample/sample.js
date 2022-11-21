@@ -59,10 +59,10 @@ async function main(params) {
     }
   );
 
-  var systemChannels = await backplaneClient1.getSystemChannels();
-  console.info(`System channels: ${JSON.stringify(systemChannels)}`);
+  var userChannels = await backplaneClient1.getUserChannels();
+  console.info(`User channels: ${JSON.stringify(userChannels)}`);
 
-  await backplaneClient2.broadcast(instrument, "group1");
+  await backplaneClient2.broadcast(instrument, "fdc3.channel.1");
 
   console.info(`Disconnecting client1`);
   await backplaneClient1.Disconnect();
@@ -70,7 +70,7 @@ async function main(params) {
   console.info(
     `Broadcasting context by client2, but this has no effect as client1 has disconnected`
   );
-  await backplaneClient2.broadcast(instrument, "group1");
+  await backplaneClient2.broadcast(instrument, "fdc3.channel.1");
   console.info("**DONE**");
 }
 

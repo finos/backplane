@@ -49,13 +49,13 @@ namespace Finos.Fdc3.Backplane.Client.Transport
 
 
 
-        public async Task<IEnumerable<Channel>> GetSystemChannelsAsync(CancellationToken ct = default)
+        public async Task<IEnumerable<Channel>> GetUserChannelsAsync(CancellationToken ct = default)
         {
             if (_hubConnection.State != HubConnectionState.Connected)
             {
                 throw new InvalidOperationException(MSG_CONNECTION_CLOSED);
             }
-            return await _hubConnection.InvokeAsync<IEnumerable<Channel>>("GetSystemChannels", ct);
+            return await _hubConnection.InvokeAsync<IEnumerable<Channel>>("GetUserChannels", ct);
         }
 
         public async Task BroadcastAsync(MessageEnvelope message, CancellationToken ct = default)

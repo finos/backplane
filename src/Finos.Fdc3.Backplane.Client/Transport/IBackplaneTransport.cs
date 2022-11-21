@@ -27,11 +27,11 @@ namespace Finos.Fdc3.Backplane.Client.Transport
         Task<AppIdentifier> ConnectAsync(Action<MessageEnvelope> onMessage, Func<Exception, Task> onDisconnect, CancellationToken ct = default);
 
         /// <summary>
-        /// Get system channels from backplane
+        /// Get user channels from backplane
         /// </summary>
         /// <param name="ct"></param>
         /// <returns></returns>
-        Task<IEnumerable<Channel>> GetSystemChannelsAsync(CancellationToken ct = default);
+        Task<IEnumerable<Channel>> GetUserChannelsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Broadcast Context

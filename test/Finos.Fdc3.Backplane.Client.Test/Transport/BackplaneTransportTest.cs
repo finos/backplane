@@ -36,7 +36,7 @@ namespace Finos.Fdc3.Backplane.Client.Test.Transport
         public void GetSystemChannelsShouldThrowExceptionIfNotConnected()
         {
             SignalRBackplaneTransport sut = _fixture.Create<SignalRBackplaneTransport>();
-            Assert.ThrowsAsync<InvalidOperationException>(async () => await sut.GetSystemChannelsAsync());
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await sut.GetUserChannelsAsync());
         }
 
         [Test]

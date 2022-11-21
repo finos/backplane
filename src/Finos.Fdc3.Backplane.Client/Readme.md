@@ -51,7 +51,7 @@ async (ex) =>
 { await Task.CompletedTask; Console.WriteLine($"Backplane_Client disconnected. {ex}");
 });
 //broadcast
-await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "channel1");
+await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "fdc3.channel.1");
 ```
 
 ## License

@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Finos.Fdc3.Backplane.DTO.FDC3
 {
     /// <summary>
-    /// A system channel will be global enough to have a presence across many apps. This gives us some hints
+    /// A user channel will be global enough to have a presence across many apps. This gives us some hints
     /// to render them in a standard way.It is assumed it may have other properties too, but if it has these,
     /// this is their meaning.
     /// </summary>
