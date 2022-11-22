@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['channelid_0',['ChannelId',['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_envelope_1_1_envelope_data.html#a18cebda078232cde8f4a25c406077209',1,'Finos::Fdc3::Backplane::DTO::Envelope::EnvelopeData']]],
+  ['channels_1',['Channels',['../class_finos_1_1_fdc3_1_1_backplane_1_1_config_1_1_config_repository.html#a95c4d6d6122a35eba9ee06da60280f48',1,'Finos.Fdc3.Backplane.Config.ConfigRepository.Channels()'],['../interface_finos_1_1_fdc3_1_1_backplane_1_1_config_1_1_i_config_repository.html#a53867f03a34edad4cc482a99f6d9c1d3',1,'Finos.Fdc3.Backplane.Config.IConfigRepository.Channels()']]],
+  ['color_2',['Color',['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_f_d_c3_1_1_display_metadata.html#a78eefd849247c0dfc703ffd013af8561',1,'Finos.Fdc3.Backplane.DTO.FDC3.DisplayMetadata.Color()'],['../class_finos_1_1_fdc3_1_1_backplane_1_1_models_1_1_config_1_1_channel_config.html#a48072ae016e893b5d4bd9c0d4aecc577',1,'Finos.Fdc3.Backplane.Models.Config.ChannelConfig.Color()']]],
+  ['context_3',['Context',['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_envelope_1_1_envelope_data.html#a6eac6b0aa59ba0879cdb13fcbbf91151',1,'Finos::Fdc3::Backplane::DTO::Envelope::EnvelopeData']]],
+  ['currentnodeuri_4',['CurrentNodeUri',['../interface_finos_1_1_fdc3_1_1_backplane_1_1_multi_host_1_1_i_node_registration_client.html#ac6e790a9a676e9726280e301de4751ef',1,'Finos.Fdc3.Backplane.MultiHost.INodeRegistrationClient.CurrentNodeUri()'],['../class_finos_1_1_fdc3_1_1_backplane_1_1_multi_host_1_1_node_registration_client.html#a7863bea69ef354065343cfe8faf4c87d',1,'Finos.Fdc3.Backplane.MultiHost.NodeRegistrationClient.CurrentNodeUri()']]]
+];
