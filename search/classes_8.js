@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['membernodeshealthcheckservice_0',['MemberNodesHealthCheckService',['../class_finos_1_1_fdc3_1_1_backplane_1_1_worker_service_1_1_member_nodes_health_check_service.html',1,'Finos::Fdc3::Backplane::WorkerService']]],
-  ['messageenvelope_1',['MessageEnvelope',['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_envelope_1_1_message_envelope.html',1,'Finos::Fdc3::Backplane::DTO::Envelope']]]
+  ['noderegistrationclient_0',['NodeRegistrationClient',['../class_finos_1_1_fdc3_1_1_backplane_1_1_multi_host_1_1_node_registration_client.html',1,'Finos::Fdc3::Backplane::MultiHost']]],
+  ['nodesdiscoveryclient_1',['NodesDiscoveryClient',['../class_finos_1_1_fdc3_1_1_backplane_1_1_multi_host_1_1_nodes_discovery_client.html',1,'Finos::Fdc3::Backplane::MultiHost']]],
+  ['nodesrepository_2',['NodesRepository',['../class_finos_1_1_fdc3_1_1_backplane_1_1_multi_host_1_1_nodes_repository.html',1,'Finos::Fdc3::Backplane::MultiHost']]]
 ];
