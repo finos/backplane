@@ -13,27 +13,25 @@ using Newtonsoft.Json.Serialization;
 namespace Finos.Fdc3.Backplane.DTO.Envelope
 {
     /// <summary>
-    /// The message which is sent by backplane to clients.
-    /// Clients listen this message on transport
-    /// It wraps FDC3 data like intent,context etc.
+    /// The message object shared between backplane and clients.
     /// </summary>
     public class MessageEnvelope
     {
         /// <summary>
-        /// Fdc3 operation enum: RaiseIntent, Broadcast, Open
+        /// Identifier used to declare what aspect of FDC3 that the message relates to.e.g. "broadcast"
         /// </summary>
         [JsonConverter(typeof(StringEnumConverter), typeof(CamelCaseNamingStrategy))]
         [JsonProperty("type", Required = Required.Always)]
         public Fdc3Action ActionType { get; set; }
 
         /// <summary>
-        /// Wraps Fdc3 data.
+        /// Request body, containing any the arguments to the FDC3 interactions.
         /// </summary>
         [JsonProperty("payload", Required = Required.Always)]
         public EnvelopeData Payload { get; set; }
 
         /// <summary>
-        /// 
+        /// Metadata relating to the message, its sender and destination.
         /// </summary>
         [JsonProperty("meta", Required = Required.Always)]
         public EnvelopeMeta Meta { get; set; }
@@ -41,45 +39,43 @@ namespace Finos.Fdc3.Backplane.DTO.Envelope
     }
 
     /// <summary>
-    /// Fdc3 data envelope
+    ///  Request body, containing any the arguments to the FDC3 interactions.
     /// </summary>
     public class EnvelopeData
     {
         /// <summary>
-        /// Context channel id
+        ///Used to indicate which channel `broadcast` functions were called on.
         /// </summary>
         [JsonProperty("channelId", Required = Required.Always)]
         public string ChannelId { get; set; }
 
         /// <summary>
-        /// Context json
+        /// Used as an argument to `broadcast`, `findIntent` and `raiseIntent` functions.
         /// </summary>
         [JsonProperty("context", Required = Required.Always)]
         public JObject Context { get; set; }
     }
 
     /// <summary>
-    /// Meta data 
+    /// Metadata relating to the message, its sender and destination.
     /// </summary>
     public class EnvelopeMeta
     {
         /// <summary>
-        /// Sender details
+        /// AppIdentifier for the source application that the request was received from.
         /// </summary>
         [JsonProperty("source", Required = Required.Always)]
         public AppIdentifier Source { get; set; }
 
         /// <summary>
-        /// This is unique id of message which would be set by sender and transfered as is to destination.
-        /// Useful in tracing messages.
+        /// Unique GUID for this request.
         /// </summary>
-        /// 
-        [JsonProperty("uniqueMessageId", Required = Required.Always)]
-        public string UniqueMessageId { get; set; }
+        [JsonProperty("requestGuid", Required = Required.Always)]
+        public string RequestGuid { get; set; }
     }
 
     /// <summary>
-    /// Enum denoting Fdc3 operation
+    /// Identifier used to declare what aspect of FDC3 that the message relates to.e.g. "broadcast"
     /// </summary>
     public enum Fdc3Action
     {

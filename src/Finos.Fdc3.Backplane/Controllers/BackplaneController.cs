@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace Finos.Fdc3.Backplane.Controllers
 {
     /// <summary>
-    /// REST API for multihost communication. 
+    /// REST endpoints exposed by backplane.
     /// </summary>
     [ApiController]
     [Route("api/backplane")]
@@ -32,10 +32,10 @@ namespace Finos.Fdc3.Backplane.Controllers
         }
 
         /// <summary>
-        /// Member node call this end point to send broadcast context to this node.
+        /// Member nodes call this endpoint to propagate broadcast context originated from them to this node.
         /// </summary>
-        /// <param name="message"> Input message</param>
-        /// <returns>Response with appropriate status code.</returns>
+        /// <param name="message">message envelope</param>
+        /// <returns>HTTP Response code</returns>
         [ApiExplorerSettings(IgnoreApi = true)]
         [HttpPost]
         [Route("broadcast/context")]
@@ -58,7 +58,7 @@ namespace Finos.Fdc3.Backplane.Controllers
         }
 
         /// <summary>
-        /// This end point allows member nodes to register them with this node 
+        /// Automated recovery: This end point allows member nodes to register them with this node as part of health check.
         /// </summary>
         /// <param name="memberNodeUri"></param>
         /// <returns></returns>

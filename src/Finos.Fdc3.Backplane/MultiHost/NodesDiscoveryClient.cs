@@ -14,7 +14,7 @@ namespace Finos.Fdc3.Backplane.MultiHost
 {
     /// <summary>
     /// Template implementation of member nodes discovery interface. 
-    /// Please use your own discovery mechanism here.
+    /// Member nodes are populated from config as default implementation.
     /// </summary>
     public class NodesDiscoveryClient : INodesDiscoveryClient
     {
@@ -30,10 +30,10 @@ namespace Finos.Fdc3.Backplane.MultiHost
         }
 
         /// <summary>
-        /// Discovers member nodes
+        /// Discovers member nodes for multihost scenario
         /// </summary>
-        /// <param name="ct"></param>
-        /// <returns></returns>
+        /// <param name="ct">cancellation token</param>
+        /// <returns>Member nodes uri</returns>
         public async Task<IEnumerable<Uri>> DiscoverAsync(CancellationToken ct = default)
         {
             //You can implement own discovery mechanism. Current implementation uses config based settings

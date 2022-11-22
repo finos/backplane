@@ -12,7 +12,8 @@ using System.Threading;
 namespace Finos.Fdc3.Backplane.MultiHost
 {
     /// <summary>
-    /// Repository of member nodes
+    /// Member nodes repository.
+    /// This is updated with latest live nodes through health check.
     /// </summary>
     public class NodesRepository : INodesRepository, IDisposable
     {
@@ -28,6 +29,10 @@ namespace Finos.Fdc3.Backplane.MultiHost
             _logger = logger;
         }
 
+        /// <summary>
+        /// List of nodes uri running on other host under same user.
+        /// Broadcast context propagation happens over nodes in this list only.
+        /// </summary>
         public IEnumerable<Uri> MemberNodes
         {
             get
@@ -44,11 +49,19 @@ namespace Finos.Fdc3.Backplane.MultiHost
             }
         }
 
+        /// <summary>
+        /// Add a node to repository.For example dead node comes alive, it adds itself as member node
+        /// </summary>
+        /// <param name="nodeUri"></param>
         public void AddNode(Uri nodeUri)
         {
             AddRemoveNode(nodeUri, false);
         }
 
+        /// <summary>
+        /// Remove node from repository. For example a dead/non-responding node.
+        /// </summary>
+        /// <param name="nodeUri"></param>
         public void RemoveNode(Uri nodeUri)
         {
             AddRemoveNode(nodeUri, true);
@@ -96,6 +109,9 @@ namespace Finos.Fdc3.Backplane.MultiHost
             }
         }
 
+        /// <summary>
+        /// Dispose
+        /// </summary>
         public void Dispose()
         {
             Dispose(disposeManagedObjects: true);

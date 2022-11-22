@@ -13,31 +13,31 @@ using System.Threading.Tasks;
 namespace Finos.Fdc3.Backplane.Client.API
 {
     /// <summary>
-    /// 
+    /// Backplane client exposing API to communicate with backplane.
     /// </summary>
     public interface IBackplaneClient : IAsyncDisposable
     {
 
         /// <summary>
-        /// Start connection with backplane
+        /// Connects with backplane.
         /// </summary>
-        /// <param name="onMessage">Message handler</param>
-        /// <param name="onDisconnect">On disconnection</param>
-        /// <param name="ct"></param>
+        /// <param name="onMessage">Handler to be invoked when backplane send message to this client</param>
+        /// <param name="onDisconnect">Handler to be invoked when websocket disconnection happens</param>
+        /// <param name="ct">cancellation token</param>
         /// <returns></returns>
         Task<AppIdentifier> ConnectAsync(Action<MessageEnvelope> onMessage, Func<Exception, Task> onDisconnect, CancellationToken ct = default);
 
         /// <summary>
         /// Broadcast context  
         /// </summary>
-        /// <param name="context">Context Json</param>
-        /// <param name="channelId">channelId</param>
-        /// <param name="ct"></param>
+        /// <param name="context">FDC3 Context</param>
+        /// <param name="channelId">channelId to associate context with</param>
+        /// <param name="ct">cancellation token</param>
         /// <returns></returns>
         Task BroadcastAsync(Context context, string channelId, CancellationToken ct = default);
 
         /// <summary>
-        /// Get user channels from backplane
+        /// Get FDC3 recommended 8 user channels from backplane
         /// </summary>
         /// <param name="ct"></param>
         /// <returns></returns>

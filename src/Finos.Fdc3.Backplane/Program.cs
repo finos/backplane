@@ -15,6 +15,11 @@ using System.Threading.Tasks;
 
 namespace Finos.Fdc3.Backplane
 {
+    /// <summary>
+    /// Entry point.
+    /// Create and Host backplane.
+    /// Only single instance of backplane is enforced.See 'SingalInstance.cs' for more info.
+    /// </summary>
     public class Program
     {
         private static SingleInstance _singleInstance;
@@ -38,6 +43,11 @@ namespace Finos.Fdc3.Backplane
         }
 
 
+        /// <summary>
+        /// Configures and start backplane host
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static async Task Init(string[] args)
         {
             try

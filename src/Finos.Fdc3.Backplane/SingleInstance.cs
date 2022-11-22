@@ -9,6 +9,9 @@ using System.Threading;
 
 namespace Finos.Fdc3.Backplane
 {
+    /// <summary>
+    /// Singal instance enforcer for backplane.
+    /// </summary>
     public class SingleInstance : IDisposable
     {
 

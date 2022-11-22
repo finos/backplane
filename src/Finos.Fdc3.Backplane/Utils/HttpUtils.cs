@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Finos.Fdc3.Backplane.Utils
 {
     /// <summary>
-    /// Http Utils
+    /// Utility functions for HTTP operations
     /// </summary>
     public class HttpUtils
     {
@@ -21,9 +21,9 @@ namespace Finos.Fdc3.Backplane.Utils
         /// HTTP Post 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="httpClientFactory"></param>
-        /// <param name="uri"></param>
-        /// <param name="body"></param>
+        /// <param name="httpClientFactory">HttpClientFactory</param>
+        /// <param name="uri">uri</param>
+        /// <param name="body">body</param>
         /// <returns></returns>
         public static async Task<HttpResponseMessage> PostAsync<T>(IHttpClientFactory httpClientFactory, Uri uri, T body, TimeSpan timeOut, CancellationToken ct = default
             )

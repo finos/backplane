@@ -8,7 +8,7 @@ using Finos.Fdc3.Backplane.DTO.FDC3;
 namespace Finos.Fdc3.Backplane.Client
 {
     /// <summary>
-    /// 
+    /// Backplane client initialization parameters
     /// </summary>
     public class InitializeParams
     {

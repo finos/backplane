@@ -18,7 +18,7 @@ namespace Finos.Fdc3.Backplane.Client.Transport
     public interface IBackplaneTransport : IAsyncDisposable
     {
         /// <summary>
-        /// 
+        /// Connect with backplane
         /// </summary>
         /// <param name="onMessage"></param>
         /// <param name="onDisconnect"></param>

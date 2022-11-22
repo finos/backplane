@@ -93,7 +93,7 @@ namespace Finos.Fdc3.Backplane.WorkerService
                         }
                         catch (Exception ex)
                         {
-                            _logger.LogError($"Failed to check heart beat of node:{nodeUri}.{ex}");
+                            _logger.LogError($"Failed to check heartbeat of node:{nodeUri}.{ex}");
                         }
 
                     }

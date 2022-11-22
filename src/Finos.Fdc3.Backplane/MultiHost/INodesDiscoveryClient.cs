@@ -18,8 +18,8 @@ namespace Finos.Fdc3.Backplane.MultiHost
         /// <summary>
         /// Discover member backplane.
         /// </summary>
-        /// <param name="ct"></param>
-        /// <returns></returns>
+        /// <param name="ct">cancellation token</param>
+        /// <returns>Member nodes uri</returns>
         Task<IEnumerable<Uri>> DiscoverAsync(CancellationToken ct = default);
     }
 }
