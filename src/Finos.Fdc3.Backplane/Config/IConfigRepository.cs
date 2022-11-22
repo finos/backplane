@@ -9,41 +9,42 @@ using System.Collections.Generic;
 namespace Finos.Fdc3.Backplane.Config
 {
     /// <summary>
-    /// Configuration
+    ///  Backplane configurations 
     /// </summary>
     public interface IConfigRepository
     {
         /// <summary>
-        /// Member nodes from config
+        /// Multihost scenario: member nodes defined in config statically
         /// </summary>
         IEnumerable<Uri> MemberNodes { get; }
 
         /// <summary>
-        /// Channels list from config
+        /// List of 8 recommended user channels populated from config.
         /// </summary>
         IEnumerable<Channel> Channels { get; }
+
         /// <summary>
-        /// Http Request timeout
+        /// HTTP request timeout in ms
         /// </summary>
         TimeSpan HttpRequestTimeoutInMilliseconds { get; }
 
         /// <summary>
-        /// Health check interval for member nodes
+        /// In multihost scenario, member nodes health check interval in ms.
         /// </summary>
         TimeSpan MemberNodesHealthCheckIntervalInMilliseconds { get; }
 
         /// <summary>
-        /// Add node endpoint in mutihost scenario
+        /// REST endpoint to register node in cluster in multihost scenario.
         /// </summary>
         string AddNodeEndpoint { get; }
 
         /// <summary>
-        /// Broadcast endpoint 
+        /// REST endpoint to propagate message to other member node in multihost scenario.
         /// </summary>
         string BroadcastEndpoint { get; }
 
         /// <summary>
-        /// Backplane endpoint
+        /// SignalR hub end point
         /// </summary>
         string HubEndpoint { get; }
     }

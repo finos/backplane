@@ -9,6 +9,9 @@ using System;
 
 namespace Finos.Fdc3.Backplane.Client.Utils
 {
+    /// <summary>
+    /// Generate message envelope.
+    /// </summary>
     internal class MessageEnvelopGenerator
     {
         public static MessageEnvelope GetMessageEnvelope(Context context, string channelId, AppIdentifier appIdentifier)
@@ -20,7 +23,7 @@ namespace Finos.Fdc3.Backplane.Client.Utils
                 Meta = new EnvelopeMeta()
                 {
                     Source = appIdentifier,
-                    UniqueMessageId = Guid.NewGuid().ToString(),
+                    RequestGuid = Guid.NewGuid().ToString(),
                 }
             };
         }

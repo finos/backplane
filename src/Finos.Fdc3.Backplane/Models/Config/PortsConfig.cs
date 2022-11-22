@@ -4,8 +4,14 @@
 	*/
 namespace Finos.Fdc3.Backplane.Models.Config
 {
+    /// <summary>
+    /// Backplane ports config model
+    /// </summary>
     public class PortsConfig
     {
+        /// <summary>
+        /// Port range
+        /// </summary>
         public int[] Ports { get; set; }
     }
 }

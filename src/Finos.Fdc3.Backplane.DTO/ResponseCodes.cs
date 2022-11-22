@@ -6,7 +6,7 @@
 namespace Finos.Fdc3.Backplane.DTO
 {
     /// <summary>
-    /// Response codes 
+    /// Backplane Response codes 
     /// </summary>
     public enum ResponseCodes
     {

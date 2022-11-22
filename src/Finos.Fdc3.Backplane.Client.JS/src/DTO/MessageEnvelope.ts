@@ -22,7 +22,7 @@ export interface EnvelopeData {
 
 export interface EnvelopeMeta {
 	source: AppIdentifier;
-	uniqueMessageId: string;
+	requestGuid: string;
 }
 
 export interface AppIdentifier {

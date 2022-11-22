@@ -16,7 +16,7 @@ using System.Threading;
 namespace Finos.Fdc3.Backplane.Utils
 {
     /// <summary>
-    /// Hosting utils
+    /// Utility functions related to hosting
     /// </summary>
     public class HostingUtils : IHostingUtils
     {
@@ -47,8 +47,7 @@ namespace Finos.Fdc3.Backplane.Utils
         {
             return _lifetime.ApplicationStarted.Register(async () =>
              {
-                 //Notify backplane is running..
-
+                
                  try
                  {
                      IServer server = _serviceProvider.GetRequiredService<IServer>();
@@ -82,6 +81,12 @@ namespace Finos.Fdc3.Backplane.Utils
 
         }
 
+        /// <summary>
+        /// Replace uri with host name
+        /// </summary>
+        /// <param name="original"></param>
+        /// <param name="newHostName"></param>
+        /// <returns></returns>
         public Uri ReplaceHost(string original, string newHostName)
         {
             UriBuilder builder = new UriBuilder(original)

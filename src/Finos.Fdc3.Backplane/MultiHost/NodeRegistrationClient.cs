@@ -12,13 +12,12 @@ using System.Threading.Tasks;
 namespace Finos.Fdc3.Backplane.MultiHost
 {
     /// <summary>
-    /// Template implementation of registration interface. 
+    /// Template implementation of registration interface for backplane discovery. 
     /// Please use your own registry mechanism here.
     /// </summary>
     public class NodeRegistrationClient : INodeRegistrationClient
     {
         private readonly ILogger<INodeRegistrationClient> _logger;
-
 
         public NodeRegistrationClient(ILogger<INodeRegistrationClient> logger)
         {
@@ -33,9 +32,9 @@ namespace Finos.Fdc3.Backplane.MultiHost
         /// <summary>
         /// Register node for discovery. 
         /// </summary>
-        /// <param name="uri"></param>
-        /// <param name="ct"></param>
-        /// <returns></returns>
+        /// <param name="uri">backplane uri</param>
+        /// <param name="ct">cancellation token</param>
+        /// <returns>Task</returns>
         public async Task RegisterAsync(Uri uri, CancellationToken ct = default)
         {
             CurrentNodeUri = uri;

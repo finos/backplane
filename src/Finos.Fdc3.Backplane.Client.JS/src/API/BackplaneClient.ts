@@ -9,11 +9,20 @@ import { BackplaneClientTransport } from '../transport/BackplaneTransport';
 import { InitializeParams } from './initializeParams';
 import { randomBytes } from 'crypto';
 
+/**
+ * Backplane client exposing API to connect and communicate with backplane.
+ */
 export class BackplaneClient {
   private backplaneClientService: BackplaneClientTransport;
   private appIdentifier: AppIdentifier = { appId: '' };
   private userChannels: Channel[];
 
+
+  /**
+   * Creates an instance of BackplaneClient.
+   * @param {InitializeParams} initializeParams
+   * @memberof BackplaneClient
+   */
   constructor(initializeParams: InitializeParams) {
     this.backplaneClientService = new BackplaneClientTransport(initializeParams);
     this.userChannels = [];
@@ -43,7 +52,7 @@ export class BackplaneClient {
     var message: MessageEnvelope = {
       type: Fdc3Action.Broadcast,
       payload: { channelId: channelId, context: context },
-      meta: { source: this.appIdentifier, uniqueMessageId: randomBytes(20).toString('hex') },
+      meta: { source: this.appIdentifier, requestGuid: randomBytes(20).toString('hex') },
     };
     await this.backplaneClientService.broadcast(message);
   }

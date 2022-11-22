@@ -21,6 +21,9 @@ using System.Net;
 
 namespace Finos.Fdc3.Backplane
 {
+    /// <summary>
+    /// Startup class for backplane host services and configurations.
+    /// </summary>
     public class Startup
     {
         private readonly ILogger<Startup> _logger;

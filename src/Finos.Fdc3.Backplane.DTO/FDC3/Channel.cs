@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Finos.Fdc3.Backplane.DTO.FDC3
 {
     /// <summary>
-    /// Broadcast context channel 
+    /// Object representing a context channel.
     /// </summary>
     public class Channel
     {
@@ -20,6 +20,7 @@ namespace Finos.Fdc3.Backplane.DTO.FDC3
 
         /// <summary>
         ///  Uniquely defines each channel type.
+        ///  Can be "user", "app" or "private".
         /// </summary>
         [JsonProperty("type", Required = Required.Always)]
         public string Type { get; }
