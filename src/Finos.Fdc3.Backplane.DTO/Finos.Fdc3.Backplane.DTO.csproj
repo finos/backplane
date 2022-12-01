@@ -11,7 +11,7 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageTags>FDC3 Backplane DTO</PackageTags>
 		<Company>FINOS</Company>
-		<RepositoryUrl>https://github.com/bankofapis/backplane</RepositoryUrl>
+		<RepositoryUrl>https://github.com/finos/backplane</RepositoryUrl>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -6,7 +6,7 @@
 		<Authors>FINOS</Authors>
 		<Product>FDC3 'Backplane' client</Product>
 		<Description>.NET client for connecting and communicating with FDC3 'backplane'</Description>
-		<RepositoryUrl>https://github.com/bankofapis/backplane</RepositoryUrl>
+		<RepositoryUrl>https://github.com/finos/backplane</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>FDC3 Backplane Client</PackageTags>
 		<PackageOutputPath>..\..\output\netclient</PackageOutputPath>
