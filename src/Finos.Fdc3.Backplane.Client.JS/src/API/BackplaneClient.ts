@@ -7,7 +7,7 @@ import { Channel, Context } from '@finos/fdc3';
 import { AppIdentifier, Fdc3Action, MessageEnvelope } from '../DTO/MessageEnvelope';
 import { BackplaneClientTransport } from '../transport/BackplaneTransport';
 import { InitializeParams } from './initializeParams';
-import { randomBytes } from 'crypto';
+import uuid from 'uuid-random';
 
 /**
  * Backplane client exposing API to connect and communicate with backplane.
@@ -16,7 +16,6 @@ export class BackplaneClient {
   private backplaneClientService: BackplaneClientTransport;
   private appIdentifier: AppIdentifier = { appId: '' };
   private userChannels: Channel[];
-
 
   /**
    * Creates an instance of BackplaneClient.
@@ -45,14 +44,14 @@ export class BackplaneClient {
   /**
    * Broadcasts a context on the specified channel.
    * @param {Context} context context
-   * @param {string} channelId channelId 
+   * @param {string} channelId channelId
    * @memberof DesktopAgentBackplaneClient
    */
   public async broadcast(context: Context, channelId: string) {
     var message: MessageEnvelope = {
       type: Fdc3Action.Broadcast,
       payload: { channelId: channelId, context: context },
-      meta: { source: this.appIdentifier, requestGuid: randomBytes(20).toString('hex') },
+      meta: { source: this.appIdentifier, requestGuid: uuid() },
     };
     await this.backplaneClientService.broadcast(message);
   }
