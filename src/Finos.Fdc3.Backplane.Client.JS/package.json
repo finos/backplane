@@ -49,13 +49,13 @@
   },
   "devDependencies": {
     "husky": "^4.3.0",
-    "tsdx": "^0.14.1",
     "tslib": "^2.4.0",
     "typescript": "^4.8.3"
   },
   "dependencies": {
     "@finos/fdc3": "^1.2.0",
     "@microsoft/signalr": "^6.0.10",
-    "uuid-random": "^1.3.2"
+    "uuid-random": "^1.3.2",
+    "tsdx": "^0.14.1"
   }
 }
