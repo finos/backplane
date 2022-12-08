@@ -1,5 +1,10 @@
 {
     "ignore": [
-        { "id": "sonatype-2022-3677", "reason": "Low score (3.7) and no way to update it as its transitive of @microsoft/signalr" }
+        { "id": "sonatype-2022-3677", "reason": "Low score (3.7) and no way to update it as its transitive of @microsoft/signalr" },
+        { "id": "sonatype-2019-0206", "reason": "execa@1.0.0 can be ignored as it's a devDependency" },
+        { "id": "CVE-2020-7789", "reason": "node-notifier@6.0.0 can be ignored as it's a devDependency" },
+        { "id": "sonatype-2017-0655", "reason": "request@2.88.2 can be ignored as it's a devDependency" },
+        { "id": "sonatype-2014-0038", "reason": "shelljs@0.8.5 can be ignored as it's a devDependency" },
+        { "id": "sonatype-2021-0459", "reason": "unset-value@1.0.0 can be ignored as it's a devDependency" }
     ]
 }
