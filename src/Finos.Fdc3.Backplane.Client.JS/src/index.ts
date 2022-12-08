@@ -4,3 +4,4 @@
  */
 
 export { BackplaneClient } from './API/BackplaneClient';
+export { EnvelopeData, EnvelopeMeta, Fdc3Action, MessageEnvelope } from './DTO/MessageEnvelope';

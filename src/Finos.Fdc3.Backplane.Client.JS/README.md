@@ -40,24 +40,19 @@ await backplaneClient.connect(
 		console.error(`Backplane Client: Disconnected.${err}`);
 	}
 );
-await backplaneClient.broadcast(instrument, "fdc3.channel.1");
+await backplaneClient.broadcast(instrument, "Channel 1");
 ```
 
 ## Installation
-
-1. Open folder '\src\Finos.Fdc3.Backplane.Client.JS' in vs code.
-2. Run command 'yarn run buildPack' in new terminal.
-3. npm package should be created in 'output\jsclient' folder at root.
-
-   To access the APIs in your application, simply install '@finos/fdc3-backplane-client' npm package:
+To access the APIs in your application, simply install '@finos/fdc3-backplane-client' npm package:
 
 ```sh
 
 # npm
-npm install file:/path/to/local/folder/@finos/fdc3-backplane-client
+npm install @finos/fdc3-backplane-client
 
 #yarn
-yarn add file:/path/to/local/folder/@finos/fdc3-backplane-client
+yarn add @finos/fdc3-backplane-client
 
 ```
 

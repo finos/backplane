@@ -6,28 +6,28 @@
 import { Context } from '@finos/fdc3';
 
 export interface MessageEnvelope {
-	type: Fdc3Action;
-	payload: EnvelopeData;
-	meta: EnvelopeMeta;
+  type: Fdc3Action;
+  payload: EnvelopeData;
+  meta: EnvelopeMeta;
 }
 
 export enum Fdc3Action {
-	Broadcast = 'broadcast',
+  Broadcast = 'broadcast',
 }
 
 export interface EnvelopeData {
-	channelId: string;
-	context: Context;
+  channelId: string;
+  context: Context;
 }
 
 export interface EnvelopeMeta {
-	source: AppIdentifier;
-	requestGuid: string;
+  source: AppIdentifier;
+  requestGuid: string;
 }
 
 export interface AppIdentifier {
-	readonly appId: string;
-	readonly instanceId?: string;
-	/** Field that represents the Desktop Agent that the app is available on.**/
-	readonly desktopAgent?: string;
+  readonly appId: string;
+  readonly instanceId?: string;
+  /** Field that represents the Desktop Agent that the app is available on.**/
+  readonly desktopAgent?: string;
 }

@@ -7,27 +7,27 @@ import { ILogger } from '@microsoft/signalr';
 import { AppIdentifier } from '../DTO/MessageEnvelope';
 
 export interface InitializeParams {
-	/**
-	 * App/desktop agent identifier
-	 *
-	 * @type {DesktopAgentIdentifier}
-	 * @memberof InitializeOptions
-	 */
-	appIdentifier: AppIdentifier;
+  /**
+   * App/desktop agent identifier
+   *
+   * @type {DesktopAgentIdentifier}
+   * @memberof InitializeOptions
+   */
+  appIdentifier: AppIdentifier;
 
-	/**
-	 * Injected logger
-	 *
-	 * @type {Logger}
-	 * @memberof InitializeOptions
-	 */
-	logger?: ILogger;
+  /**
+   * Injected logger
+   *
+   * @type {Logger}
+   * @memberof InitializeOptions
+   */
+  logger?: ILogger;
 
-	/**
-	 *
-	 *
-	 * @type {Url}
-	 * @memberof InitializeParams
-	 */
-	url: string;
+  /**
+   *
+   * Backplane Url
+   * @type {Url}
+   * @memberof InitializeParams
+   */
+  url: string;
 }

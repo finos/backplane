@@ -1,25 +1,37 @@
 {
   "name": "@finos/fdc3-backplane-client",
-  "version": "1.0.0-alpha",
+  "version": "0.1.0",
   "description": "JS client for connecting and communicating with 'backplane'",
-  "main": "./lib/index.js",
-  "scripts": {
-    "build": "tsc",
-    "buildPack": "yarn && tsc && npm pack --pack-destination ../../output/jsclient"
+  "author": "Fintech Open Source Foundation (FINOS)",
+  "homepage": "https://backplane.finos.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/finos/backplane"
   },
-  "author": "FINOS",
+  "publishConfig": {
+    "tag": "latest"
+  },
   "license": "Apache-2.0",
-  "devDependencies": {
-    "tslib": "^2.4.0",
-    "typescript": "^4.8.3"
-  },
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "files": [
-    "lib/**/*"
+    "dist",
+    "src"
   ],
-  "dependencies": {
-    "@finos/fdc3": "^1.2.0",
-    "@microsoft/signalr": "^6.0.10",
-    "@types/node": "^14.11.5"
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test --verbose",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint src"
+    }
   },
   "prettier": {
     "semi": true,
@@ -29,8 +41,21 @@
     "endOfLine": "auto",
     "printWidth": 120
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/finos/backplane"
+  "resolutions": {
+    "node-fetch": "^2.6.1",
+    "node-notifier": "^8.0.1",
+    "yargs-parser": "^13.1.2",
+    "y18n": "^4.0.1"
+  },
+  "devDependencies": {
+    "husky": "^4.3.0",
+    "tslib": "^2.4.0",
+    "typescript": "^4.8.3"
+  },
+  "dependencies": {
+    "@finos/fdc3": "^1.2.0",
+    "@microsoft/signalr": "^6.0.10",
+    "uuid-random": "^1.3.2",
+    "tsdx": "^0.14.1"
   }
 }
