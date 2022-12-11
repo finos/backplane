@@ -50,13 +50,15 @@
   "devDependencies": {
     "husky": "^4.3.0",
     "semantic-release": "^19.0.5",
+    "tsdx": "^0.14.1",
     "tslib": "^2.4.0",
     "typescript": "^4.8.3",
-    "tsdx": "^0.14.1"
+    "@semantic-release/changelog": "^6.0.2",
+    "@semantic-release/git": "^10.0.1"
   },
   "dependencies": {
     "@finos/fdc3": "^1.2.0",
-    "@microsoft/signalr": "^6.0.10",
+    "@microsoft/signalr": "^6.0.10", 
     "uuid-random": "^1.3.2"
   }
 }
