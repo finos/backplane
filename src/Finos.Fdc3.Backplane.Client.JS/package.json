@@ -1,6 +1,6 @@
 {
   "name": "@finos/fdc3-backplane-client",
-  "version": "0.1.0",
+  "version": "1.0.0-develop.1",
   "description": "JS client for connecting and communicating with 'backplane'",
   "author": "Fintech Open Source Foundation (FINOS)",
   "homepage": "https://backplane.finos.org",
@@ -58,7 +58,7 @@
   },
   "dependencies": {
     "@finos/fdc3": "^1.2.0",
-    "@microsoft/signalr": "^6.0.10", 
+    "@microsoft/signalr": "^6.0.10",
     "uuid-random": "^1.3.2"
   }
 }
