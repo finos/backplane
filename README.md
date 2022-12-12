@@ -12,7 +12,7 @@
 
 Desktop Agent bridge aka 'Backplane' is a component which allows different desktop agents to connect and communicate through websockets.
 
-Where FDC3 Desktop Agent API addresses interoperability between apps running within the context of a single Desktop Agent (DA), facilitating cross-application workflows, FDC3 Desktop Agent Backplane addresses the interconnection of Desktop Agents (DAs) such that apps running under different Desktop Agents can also interoperate, allowing workflows to span multiple Desktop Agents
+Where FDC3 Desktop Agent API addresses interoperability between apps running within the context of a single Desktop Agent (DA), facilitating cross-application workflows, FDC3 Desktop Agent Backplane addresses the interconnection of Desktop Agents (DAs) such that apps running under different Desktop Agents can also interoperate, allowing workflows to span multiple Desktop Agents.
 
 ## Why Backplane?
 
