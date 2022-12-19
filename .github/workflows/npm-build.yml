@@ -21,13 +21,12 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
     - name: package install
-      run: |
-        yarn install
+      run: npm ci
       working-directory: ./src/Finos.Fdc3.Backplane.Client.JS
     - name: build
-      run: |
-        yarn build
+      run: npm build
       working-directory: ./src/Finos.Fdc3.Backplane.Client.JS
   
