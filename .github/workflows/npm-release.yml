@@ -1,4 +1,4 @@
-name: NPM Release
+name: npm release
 on:
   push:
     branches:
@@ -10,18 +10,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
+      - name: Setup Node.js 
+        uses: actions/setup-node@v3
         with:
-          node-version: 'lts/*'
-      - name: Install dependencies
+           node-version: latest
+           cache: 'npm'
+           cache-dependency-path: '**/package-lock.json'
+           
+      - name: package install
         run: npm ci
         working-directory: ./src/Finos.Fdc3.Backplane.Client.JS
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release --debug
+        run: npx semantic-release
         working-directory: ./src/Finos.Fdc3.Backplane.Client.JS

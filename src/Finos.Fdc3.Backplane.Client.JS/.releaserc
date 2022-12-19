@@ -7,6 +7,7 @@
 	],
 	"repositoryUrl": "https://github.com/finos/backplane",
 	"debug": "true",
+	"extends": "semantic-release-monorepo",
 	"plugins": [
 		"@semantic-release/commit-analyzer",
 		"@semantic-release/release-notes-generator",
