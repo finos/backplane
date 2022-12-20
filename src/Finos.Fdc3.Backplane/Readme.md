@@ -1,4 +1,4 @@
-# Backplane
+![backplane](../../docs/resources/BackplaneIcon.png)
 
 A desktop service which act as a message bus between multiple desktop agents for sending/receiving FDC3 compliant data.
 It serves two purposes:
