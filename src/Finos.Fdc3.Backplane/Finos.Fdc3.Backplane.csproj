@@ -2,11 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <ApplicationIcon />
+    <ApplicationIcon>Backplane.ico</ApplicationIcon>
     <OutputType>Exe</OutputType>
     <StartupObject />
     <AssemblyName>Finos.Fdc3.Backplane</AssemblyName>
-    <Version>1.0.0-alpha</Version>
     <Company>FINOS</Company>
     <Product>FDC3 Backplane</Product>
     <Authors>FINOS</Authors>
@@ -15,6 +14,10 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>C:\Repo\Fdc3.DesktopAgent.Backplane\src\.output\Debug\Fdc3.DesktopAgent.Backplane\</OutputPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Backplane.ico" />
+  </ItemGroup>
 
   <ItemGroup> 
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.*" />  
@@ -30,10 +33,6 @@
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
 </Project>
