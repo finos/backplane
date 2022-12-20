@@ -1,10 +1,15 @@
 name: npm build
-
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - main
+      - alpha
+      - beta
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - main
+      - alpha
+      - beta
 
 jobs:
   build:
@@ -12,7 +17,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [16.x, 18.x]
 
     steps:
     - uses: actions/checkout@v3
@@ -21,13 +26,12 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-
-    - name: package install
-      run: |
-        yarn install
+        cache: 'npm'
+        cache-dependency-path: '**/package-lock.json'
+    - name: Package install
+      run: npm ci
       working-directory: ./src/Finos.Fdc3.Backplane.Client.JS
-    - name: build
-      run: |
-        yarn build
+    - name: Build
+      run: npm run build
       working-directory: ./src/Finos.Fdc3.Backplane.Client.JS
   

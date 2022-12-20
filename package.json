@@ -1,0 +1,22 @@
+{
+  "devDependencies": {
+    "@commitlint/cli": "^17.3.0",
+    "@commitlint/config-conventional": "^17.3.0",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^8.0.2"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "scripts": {
+    "prepare": "npx husky install",
+    "cn-commit": "cz"
+  }
+}

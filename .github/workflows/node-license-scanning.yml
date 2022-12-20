@@ -1,7 +1,20 @@
-name: Node.js License Scanning
+name: js floss license check
 
 on:
   push:
+    branches:
+      - main
+      - alpha
+      - beta
+    paths:
+      - 'src/Finos.Fdc3.Backplane.Client.JS/package.json'
+      - 'src/Finos.Fdc3.Backplane.Client.JS/package-lock.json'
+      - '.github/workflows/node-license-scanning.yml'
+  pull_request:
+    branches:
+      - main
+      - alpha
+      - beta
     paths:
       - 'src/Finos.Fdc3.Backplane.Client.JS/package.json'
       - 'src/Finos.Fdc3.Backplane.Client.JS/package-lock.json'
@@ -19,7 +32,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install --prod
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      - run: npm ci --omit dev
         working-directory: src/Finos.Fdc3.Backplane.Client.JS
       - run: npm install -g node-license-validator
         working-directory: src/Finos.Fdc3.Backplane.Client.JS

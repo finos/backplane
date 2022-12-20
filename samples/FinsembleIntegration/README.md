@@ -1,24 +1,52 @@
 # Finsemble Backplane Bridge Service (Code Snippet)
 
-Sample code snippet showcase setup of finsemble connection to backplane for sending receiving message
+Sample code snippet showcase integration of backplane with desktop agent 'finsemble'.Finsemble v7.3.2 is used.
 
 ## Installation
 
-1. Copy the folders under 'src\' to 'src\services\finsembleBackplaneBridge' in your finsemble project.
-2. Go to config.json file in your finsemble project, and include the path to 'src\finsembleBackplaneBridge\config.json' in the "importConfig" key. For example:
+1. Copy the files under 'src/' to 'src/services/finsembleBackplaneBridge' in your finsemble project.
+
+
+![directory structure](../../docs/resources/finsembleBridgeDirectoryStructure.PNG)
+
+2. Go to appD.json file at path '$applicationRoot/public/configs/application' and add the following:
 
 ```JSON
-   "importConfig": [
-	   ..,
-	   "$applicationRoot/services/finsembleBackplaneBridge/config.json"
-   ]
+   "finsembleBackplaneBridge":{
+			"name": "finsembleBackplaneBridge",
+			"appId": "finsembleBackplaneBridge",
+			"manifest":
+			{
+				"bootParams":
+				{
+					"stage":"earlyuser",
+					"stopOnFailure":false,
+					"autoStart": true,
+					"timeout":10000
+				},
+				"appService":true,
+				"waitForInitialization":true,
+				"window": {
+					"url": "$applicationRoot/services/finsembleBackplaneBridge/finsembleBackplaneBridge.html"
+				}
+			}
+			
+		},
 ```
 
-3. Install npm package '@finos/fdc3-backplane-client' from outputfolder at root. [details](../../docs/backplane-client-js.md)
+3. Install npm package '@finos/fdc3-backplane-client'.
 
-- npm package can be found under package folder in root. Install this package.
+```sh
 
-4. Run build and start your finsemble project.
+# npm
+npm install @finos/fdc3-backplane-client
+
+#yarn
+yarn add @finos/fdc3-backplane-client
+
+```
+
+4. Run: yarn run dev.
 
 ## License
 

@@ -1,0 +1,61 @@
+{
+    "branches": [
+      "main",
+      {
+        "name": "alpha",
+        "prerelease": true
+      },
+      {
+        "name": "beta",
+        "prerelease": true
+      }
+    ],
+    "debug": "true",
+    "extends": "semantic-release-monorepo",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      [
+        "semantic-release-dotnet",
+        {
+          "paths": ["Finos.Fdc3.Backplane.Client.csproj"]
+        }
+      ],
+      [
+        "@semantic-release/exec",
+        {
+          "publishCmd": "dotnet nuget push ./artifacts/*.nupkg -k ${process.env.NUGET_TOKEN} -s https://api.nuget.org/v3/index.json"
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "assets": ["artifacts/**/*.nupkg"]
+        }
+      ],
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "CHANGELOG.md"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "Finos.Fdc3.Backplane.Client.csproj",
+            "package.json",
+            "package-lock.json",
+            "CHANGELOG.md"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
+  }

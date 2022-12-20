@@ -9,18 +9,11 @@ The library is written in .NET standard 2.0.
 
 ## Supported Features
 
-- Broadcast context
+- Broadcast context.
 
 ## Installation
 
-Nuget package is generated as part of local build in output directory at root.
-
-1.  Open 'Finos.Fdc3.Backplane.sln' at root in visual studio.
-2.  Build Solution.
-3.  Nuget package is created in 'output/netclient' folder at root.
-4.  Add local path of nuget package in nuget.config.
-
-        PM> Install-Package Finos.Fdc3.Backplane.Client
+    PM> Install-Package Finos.Fdc3.Backplane.Client
 
 ## Usage example
 
@@ -35,7 +28,7 @@ string? instrument = @"{
               }";
 
 Uri backplaneUrl = new Uri("http://localhost:4475");
-services.ConfigureBackplaneClient(new InitializeParams(new AppIdentifier() { AppId = "Backplane_Client" }), () => backplaneUrl);
+services.ConfigureBackplaneClient(new InitializeParams(new AppIdentifier() { AppId = "DesktopAgentNET" }), () => backplaneUrl);
 ServiceProvider container = services.BuildServiceProvider();
 
 //resolve from IOC
@@ -44,14 +37,14 @@ await backplaneClient1.ConnectAsync(
 //hook for receiving message from backplane
 (msg) =>
 {
-    Console.WriteLine($"Backplane_Client: {JsonConvert.SerializeObject(msg)}{Environment.NewLine}");
+    Console.WriteLine($"DesktopAgentNET: {JsonConvert.SerializeObject(msg)}{Environment.NewLine}");
 },
 //hook for disconnection with error.
 async (ex) =>
-{ await Task.CompletedTask; Console.WriteLine($"Backplane_Client disconnected. {ex}");
+{ await Task.CompletedTask; Console.WriteLine($"DesktopAgentNET: backplane disconnected. {ex}");
 });
 //broadcast
-await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "fdc3.channel.1");
+await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "Channel 1");
 ```
 
 ## License

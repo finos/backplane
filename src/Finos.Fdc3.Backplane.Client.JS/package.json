@@ -9,7 +9,7 @@
     "url": "https://github.com/Vivek-NatWest/backplane"
   },
   "publishConfig": {
-    "tag": "latest"
+    "access": "public"
   },
   "license": "Apache-2.0",
   "main": "dist/index.js",
@@ -25,8 +25,7 @@
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test --verbose",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build"
+    "lint": "tsdx lint"
   },
   "husky": {
     "hooks": {
@@ -48,14 +47,18 @@
     "y18n": "^4.0.1"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^6.0.2",
+    "@semantic-release/git": "^10.0.1",
     "husky": "^4.3.0",
+    "semantic-release": "^19.0.5",
+    "semantic-release-monorepo": "^7.0.5",
+    "tsdx": "^0.14.1",
     "tslib": "^2.4.0",
     "typescript": "^4.8.3"
   },
   "dependencies": {
     "@finos/fdc3": "^1.2.0",
     "@microsoft/signalr": "^6.0.10",
-    "uuid-random": "^1.3.2",
-    "tsdx": "^0.14.1"
+    "uuid-random": "^1.3.2"
   }
 }
