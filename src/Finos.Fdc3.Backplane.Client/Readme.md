@@ -9,18 +9,11 @@ The library is written in .NET standard 2.0.
 
 ## Supported Features
 
-- Broadcast context
+- Broadcast context.
 
 ## Installation
 
-Nuget package is generated as part of local build in output directory at root.
-
-1.  Open 'Finos.Fdc3.Backplane.sln' at root in visual studio.
-2.  Build Solution.
-3.  Nuget package is created in 'output/netclient' folder at root.
-4.  Add local path of nuget package in nuget.config.
-
-        PM> Install-Package Finos.Fdc3.Backplane.Client
+    PM> Install-Package Finos.Fdc3.Backplane.Client
 
 ## Usage example
 
