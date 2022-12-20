@@ -18,11 +18,15 @@ Written in .NET 6.0 C# which supports multiple operating systems. See: https://g
 
 ## Installation
 
-1. Open 'Finos.Fdc3.Backplane.sln' at root in visual studio.
-2. Build Solution.
-3. Righ click on 'Finos.Fdc3.Backplane' project and click Publish
-4. Above step would publish backplane as self contained in folder output/backplane
-5. Navigate to above folder and run 'Finos.Fdc3.Backplane.exe
+- Download the artifacts zipped as part of release: Finos-Fdc3-Backplane*.zip.
+- Unzip the downloaded zip folder.
+- Run 'Finos.Fdc3.Backplane.exe'.
+
+## Multihost support.
+Workflows can be spanned to multiple host machines by running instances of backplane on each machine and configuring the member nodes in config file. 
+
+Look at MultiHostConfig section in [appsettings](./appsettings.json).
+
 
 ## License
 

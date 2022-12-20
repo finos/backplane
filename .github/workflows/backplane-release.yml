@@ -1,0 +1,41 @@
+name: backplane release
+on:
+  push:
+    branches:
+      - main
+      - alpha
+      - beta
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+      working-directory: ./src/Finos.Fdc3.Backplane
+    - name: Build
+      run: dotnet build --no-restore
+      working-directory: ./src/Finos.Fdc3.Backplane
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+      working-directory: ./src/Finos.Fdc3.Backplane
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+          node-version: latest
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+    - name: Package install
+      run: npm ci
+      working-directory: ./src/Finos.Fdc3.Backplane
+
+    - name: Release
+      env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: npx semantic-release 
+      working-directory: ./src/Finos.Fdc3.Backplane
