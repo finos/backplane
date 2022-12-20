@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Backplane.ico" />
+    <Resource Include="Backplane.ico" />
   </ItemGroup>
 
   <ItemGroup> 
@@ -30,6 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update=".releaserc.json">
+		<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </Content>
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
