@@ -19,7 +19,7 @@ jobs:
            cache: 'npm'
            cache-dependency-path: '**/package-lock.json'
            
-      - name: package install
+      - name: Package install
         run: npm ci
         working-directory: ./src/Finos.Fdc3.Backplane.Client.JS
       - name: Release
