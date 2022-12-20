@@ -6,7 +6,7 @@
   "homepage": "https://backplane.finos.org",
   "repository": {
     "type": "git",
-    "url": "https://github.com/finos/backplane"
+    "url": "https://github.com/Vivek-NatWest/backplane"
   },
   "publishConfig": {
     "access": "public"
