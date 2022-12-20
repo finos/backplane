@@ -7,7 +7,7 @@
 [![node.js floss license check](https://github.com/finos/backplane/actions/workflows/node-license-scanning.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/node-license-scanning.yml)
 [![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-# Backplane
+![backplane](./docs/resources/BackplaneIcon.png)
 
 Desktop Agent bridge aka 'Backplane' is a component which allows different desktop agents to connect and communicate through websockets.
 
