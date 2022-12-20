@@ -1,7 +1,11 @@
-name: Node.js License Scanning
+name: Node.js license scanning
 
 on:
   push:
+  pull_request:
+    branches:
+      - main
+      - alpha
     paths:
       - 'src/Finos.Fdc3.Backplane.Client.JS/package.json'
       - 'src/Finos.Fdc3.Backplane.Client.JS/package-lock.json'

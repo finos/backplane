@@ -1,10 +1,10 @@
 name: npm build
-
 on:
   push:
-    branches: [ "master" ]
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - main
+      - alpha
 
 jobs:
   build:
@@ -23,10 +23,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: '**/package-lock.json'
-    - name: package install
+    - name: Package install
       run: npm ci
       working-directory: ./src/Finos.Fdc3.Backplane.Client.JS
-    - name: build
-      run: npm build
+    - name: Build
+      run: npm run build
       working-directory: ./src/Finos.Fdc3.Backplane.Client.JS
   
