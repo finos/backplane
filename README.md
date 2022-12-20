@@ -1,4 +1,4 @@
-![npm](https://img.shields.io/npm/v/@finos/fdc3-backplane-client)
+![npm](https://img.shields.io/npm/v/@finos/fdc3-backplane-client)(https://www.npmjs.com/package/@finos/fdc3-backplane-client)
 [![FINOS - Incubating](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-incubating.svg)](https://community.finos.org/docs/governance/Software-Projects/stages/incubating)
 [![codeql](https://github.com/finos/backplane/actions/workflows/codeql.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/codeql.yml)
 [![node.js cve checks](https://github.com/finos/backplane/actions/workflows/node-cve-scanning.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/node-cve-scanning.yml) 
