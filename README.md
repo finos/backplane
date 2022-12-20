@@ -1,11 +1,9 @@
 [![FINOS - Incubating](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-incubating.svg)](https://community.finos.org/docs/governance/Software-Projects/stages/incubating)
 [![codeql](https://github.com/finos/backplane/actions/workflows/codeql.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/codeql.yml)
-[![vulnerabilities js](https://github.com/finos/backplane/actions/workflows/node-cve-scanning.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/node-cve-scanning.yml) 
-[![vulnerabilities .net](https://github.com/finos/backplane/actions/workflows/dotnet-cve-scanning.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/dotnet-cve-scanning.yml)
-[![.net build](https://github.com/finos/backplane/actions/workflows/dot-net-build.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/dot-net-build.yml) 
-[![npm build](https://github.com/finos/backplane/actions/workflows/npm-build.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/npm-build.yml)
+[![node.js cve checks](https://github.com/finos/backplane/actions/workflows/node-cve-scanning.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/node-cve-scanning.yml) 
+[![.net cve checks](https://github.com/finos/backplane/actions/workflows/dotnet-cve-scanning.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/dotnet-cve-scanning.yml)
 [![ossf best practices](https://bestpractices.coreinfrastructure.org/projects/6700/badge)](https://bestpractices.coreinfrastructure.org/projects/6700)
-[![floss license](https://github.com/finos/backplane/actions/workflows/node-license-scanning.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/node-license-scanning.yml)
+[![node.js floss license check](https://github.com/finos/backplane/actions/workflows/node-license-scanning.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/node-license-scanning.yml)
 [![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 # Backplane
