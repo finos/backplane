@@ -1,4 +1,4 @@
-name: Node.js license scanning
+name: js floss license check
 
 on:
   push:
