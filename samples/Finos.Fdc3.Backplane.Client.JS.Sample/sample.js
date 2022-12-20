@@ -3,10 +3,7 @@
  * Copyright 2021 FINOS FDC3 contributors - see NOTICE file
  */
 
-const {
-  Fdc3Action,
-} = require("../../src/Finos.Fdc3.Backplane.Client.JS/lib/DTO/MessageEnvelope");
-var backplaneClient = require("../../src/Finos.Fdc3.Backplane.Client.JS/lib/index");
+const backplaneClient= require("@finos/fdc3-backplane-client");
 const instrument = {
   type: "fdc3.instrument",
   id: {
@@ -34,7 +31,7 @@ async function main(params) {
 
   await backplaneClient1.connect(
     (msg) => {
-      if (msg.type == Fdc3Action.Broadcast) {
+      if (msg.type == backplaneClient.Fdc3Action.Broadcast) {
         console.info(
           `Backplane Client1: Recived broadcast over channel: ${msg.payload.channelId}`
         );
@@ -47,7 +44,7 @@ async function main(params) {
   );
   await backplaneClient2.connect(
     (msg) => {
-      if (msg.type == Fdc3Action.Broadcast) {
+      if (msg.type == backplaneClient.Fdc3Action.Broadcast) {
         console.info(
           `Backplane Client2: Recived broadcast over channel: ${msg.payload.channelId}`
         );
