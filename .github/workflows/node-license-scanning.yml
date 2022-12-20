@@ -19,7 +19,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install --prod
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+      - run: npm ci --omit dev
         working-directory: src/Finos.Fdc3.Backplane.Client.JS
       - run: npm install -g node-license-validator
         working-directory: src/Finos.Fdc3.Backplane.Client.JS

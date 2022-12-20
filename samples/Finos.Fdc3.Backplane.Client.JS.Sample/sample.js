@@ -3,10 +3,7 @@
  * Copyright 2021 FINOS FDC3 contributors - see NOTICE file
  */
 
-const {
-  Fdc3Action,
-} = require("../../src/Finos.Fdc3.Backplane.Client.JS/lib/DTO/MessageEnvelope");
-var backplaneClient = require("../../src/Finos.Fdc3.Backplane.Client.JS/lib/index");
+const backplaneClient= require("@finos/fdc3-backplane-client");
 const instrument = {
   type: "fdc3.instrument",
   id: {
@@ -17,60 +14,40 @@ const instrument = {
 };
 
 async function main(params) {
-  console.log("***Setting up clients***");
+
+  console.log("***Setting up client***");
   var backplaneUrl= "http://localhost:4475";
-  var backplaneClient1 = new backplaneClient.BackplaneClient({
+  var desktopAgentConsole = new backplaneClient.BackplaneClient({
     appIdentifier: {
-      appId: "backplaneJSClient1",
+      appId: "desktopAgentConsole",
     },
     url: backplaneUrl,
   });
-  var backplaneClient2 = new backplaneClient.BackplaneClient({
-    appIdentifier: {
-      appId: "backplaneJSClient2",
-    },
-    url: backplaneUrl,
-  });
+  
 
-  await backplaneClient1.connect(
+  await desktopAgentConsole.connect(
     (msg) => {
-      if (msg.type == Fdc3Action.Broadcast) {
+      if (msg.type == backplaneClient.Fdc3Action.Broadcast) {
         console.info(
-          `Backplane Client1: Recived broadcast over channel: ${msg.payload.channelId}`
+          `desktopAgentConsole: Recived broadcast over channel: ${msg.payload.channelId}`
         );
       }
       console.info(JSON.stringify(msg));
     },
     (err) => {
-      console.error(`Backplane Client1:Disconnected.${err}`);
+      console.error(`desktopAgentConsole:Disconnected.${err}`);
     }
   );
-  await backplaneClient2.connect(
-    (msg) => {
-      if (msg.type == Fdc3Action.Broadcast) {
-        console.info(
-          `Backplane Client2: Recived broadcast over channel: ${msg.payload.channelId}`
-        );
-      }
-      console.info(JSON.stringify(msg));
-    },
-    (err) => {
-      console.error(`Backplane Client2:Disconnected.${err}`);
-    }
-  );
+  
 
-  var userChannels = await backplaneClient1.getUserChannels();
+  var userChannels = await desktopAgentConsole.getUserChannels();
   console.info(`User channels: ${JSON.stringify(userChannels)}`);
 
-  await backplaneClient2.broadcast(instrument, "fdc3.channel.1");
+  await desktopAgentConsole.broadcast(instrument, "Channel 1");
 
-  console.info(`Disconnecting client1`);
-  await backplaneClient1.Disconnect();
+  console.info(`Disconnecting desktopAgentConsole`);
+  await desktopAgentConsole.Disconnect();
 
-  console.info(
-    `Broadcasting context by client2, but this has no effect as client1 has disconnected`
-  );
-  await backplaneClient2.broadcast(instrument, "fdc3.channel.1");
   console.info("**DONE**");
 }
 
