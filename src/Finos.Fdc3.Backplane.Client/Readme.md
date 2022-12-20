@@ -35,7 +35,7 @@ string? instrument = @"{
               }";
 
 Uri backplaneUrl = new Uri("http://localhost:4475");
-services.ConfigureBackplaneClient(new InitializeParams(new AppIdentifier() { AppId = "Backplane_Client" }), () => backplaneUrl);
+services.ConfigureBackplaneClient(new InitializeParams(new AppIdentifier() { AppId = "DesktopAgentNET" }), () => backplaneUrl);
 ServiceProvider container = services.BuildServiceProvider();
 
 //resolve from IOC
@@ -44,14 +44,14 @@ await backplaneClient1.ConnectAsync(
 //hook for receiving message from backplane
 (msg) =>
 {
-    Console.WriteLine($"Backplane_Client: {JsonConvert.SerializeObject(msg)}{Environment.NewLine}");
+    Console.WriteLine($"DesktopAgentNET: {JsonConvert.SerializeObject(msg)}{Environment.NewLine}");
 },
 //hook for disconnection with error.
 async (ex) =>
-{ await Task.CompletedTask; Console.WriteLine($"Backplane_Client disconnected. {ex}");
+{ await Task.CompletedTask; Console.WriteLine($"DesktopAgentNET: backplane disconnected. {ex}");
 });
 //broadcast
-await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "fdc3.channel.1");
+await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "Channel 1");
 ```
 
 ## License

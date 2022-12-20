@@ -9,8 +9,8 @@ It serves two purposes:
 There are client libraries to this runtime which expose API enabling interoperability across consuming applications.
 Currently available client libs:
 
-- C#: Fdc3.Backplane.Client [details](../../docs/backplane-client-net.md)
-- JS: @finos/fdc3-backplane-client [details](../../docs/backplane-client-js.md)
+- C#: Fdc3.Backplane.Client [details](../Finos.Fdc3.Backplane.Client/Readme.md)
+- JS: @finos/fdc3-backplane-client [details](../Finos.Fdc3.Backplane.Client.JS/README.md)
 
 ## Supported Platforms
 

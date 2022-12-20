@@ -4,7 +4,7 @@ Sample code snippet showcase integration of backplane with desktop agent 'finsem
 
 ## Installation
 
-1. Copy the files under 'src\' to 'src\services\finsembleBackplaneBridge' in your finsemble project.
+1. Copy the files under 'src/' to 'src/services/finsembleBackplaneBridge' in your finsemble project.
 
 
 ![directory structure](../../docs/resources/finsembleBridgeDirectoryStructure.PNG)

@@ -30,16 +30,16 @@ The power and benefits of FDC3 based interoperability can be harnessed to full p
 
 See readme files.
 
-- [backplane](./docs/backplane.md).
-- [backplane-client-js](./docs/backplane-client-js.md).
-- [backplane-client-net](./docs/backplane-client-net.md)
+- [backplane](./src/Finos.Fdc3.Backplane/Readme.md).
+- [backplane-client-js](./src/Finos.Fdc3.Backplane.Client.JS/README.md).
+- [backplane-client-net](./src/Finos.Fdc3.Backplane.Client/Readme.md)
 
 Check the samples available under samples folder: [samples](./samples/)
 
 ### Backplane
 
 A desktop service which act as a message bus between multiple desktop agents for sending/receiving FDC3 compliant data.
-See more here: [backplane](./docs/backplane.md).
+See more here: [backplane](./src/Finos.Fdc3.Backplane/Readme.md).
 
 Client libraries provide API to connect and communicate with backplane.
 
@@ -47,13 +47,13 @@ Client libraries provide API to connect and communicate with backplane.
 
 Javascript client which allows web based desktop agents to connect and communicate with backplane.
 
-See more here: [backplane-client-js](./docs/backplane-client-js.md).
+See more here: [backplane-client-js](./src/Finos.Fdc3.Backplane.Client.JS/README.md).
 
 ### Backplane client .NET
 
 For desktop agent build in .NET, this client library exposed API to connect and communicate with backplane.
 
-see more here: [backplane-client-net](./docs/backplane-client-net.md)
+see more here: [backplane-client-net](./src/Finos.Fdc3.Backplane.Client/Readme.md)
 
 ## Development setup
 
@@ -66,15 +66,15 @@ Build
 
 - Backplane
 
-  See details here: [backplane](./docs/backplane.md).
+  See details here: [backplane](./src/Finos.Fdc3.Backplane/Readme.md).
 
 - .Net Client
 
-  see details here: [backplane-client-net](./docs/backplane-client-net.md)
+  see details here: [backplane-client-net](./src/Finos.Fdc3.Backplane.Client/Readme.md)
 
 - JS Client
 
-  see details here: [backplane-client-js](./docs/backplane-client-js.md)
+  see details here: [backplane-client-js](./src/Finos.Fdc3.Backplane.Client.JS/README.md)
 
 ## Roadmap
 
