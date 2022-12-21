@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Backplane: Backplane Client .NET</title>
+<title>Backplane: Readme</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,30 +69,26 @@ $(function() {
 
 </div><!-- top -->
 <div><div class="header">
-  <div class="headertitle"><div class="title">Backplane Client .NET </div></div>
+  <div class="headertitle"><div class="title">Readme </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p >.NET client exposing API to connect and communicate with backplane.</p>
-<h1><a class="anchor" id="autotoc_md45"></a>
-Supported Platforms</h1>
+<div class="textblock"><p ><img src="../../docs/resources/BackplaneIcon.png" alt="backplane logo" class="inline"/></p>
+<h1><a class="anchor" id="autotoc_md27"></a>
+Backplane Client .NET</h1>
+<p >.NET client exposing API to connect and communicate with backplane.</p>
+<h2><a class="anchor" id="autotoc_md28"></a>
+Supported Platforms</h2>
 <p >The library is written in .NET standard 2.0. .NET Standard 2.0 is supported by all modern platforms and is the recommended way to support multiple platforms with one target.</p>
-<h1><a class="anchor" id="autotoc_md46"></a>
-Supported Features</h1>
+<h2><a class="anchor" id="autotoc_md29"></a>
+Supported Features</h2>
 <ul>
-<li>Broadcast context</li>
+<li>Broadcast context.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md47"></a>
-Installation</h1>
-<p >Nuget package is generated as part of local build in output directory at root.</p>
-<ol type="1">
-<li>Open 'Finos.Fdc3.Backplane.sln' at root in visual studio.</li>
-<li>Build Solution.</li>
-<li>Nuget package is created in 'output/netclient' folder at root.</li>
-<li>Add local path of nuget package in nuget.config. <pre class="fragment">PM&gt; Install-Package Finos.Fdc3.Backplane.Client
-</pre> </li>
-</ol>
-<h1><a class="anchor" id="autotoc_md48"></a>
-Usage example</h1>
+<h2><a class="anchor" id="autotoc_md30"></a>
+Installation</h2>
+<pre class="fragment">PM&gt; Install-Package Finos.Fdc3.Backplane.Client
+</pre> <h2><a class="anchor" id="autotoc_md31"></a>
+Usage example</h2>
 <div class="fragment"><div class="line"> {C#}</div>
 <div class="line">string? instrument = @&quot;{</div>
 <div class="line">                type: &#39;fdc3.instrument&#39;,</div>
@@ -104,7 +100,7 @@ Usage example</h1>
 <div class="line">              }&quot;;</div>
 <div class="line"> </div>
 <div class="line">Uri backplaneUrl = new Uri(&quot;http://localhost:4475&quot;);</div>
-<div class="line">services.ConfigureBackplaneClient(new InitializeParams(new AppIdentifier() { AppId = &quot;Backplane_Client&quot; }), () =&gt; backplaneUrl);</div>
+<div class="line">services.ConfigureBackplaneClient(new InitializeParams(new AppIdentifier() { AppId = &quot;DesktopAgentNET&quot; }), () =&gt; backplaneUrl);</div>
 <div class="line">ServiceProvider container = services.BuildServiceProvider();</div>
 <div class="line"> </div>
 <div class="line">//resolve from IOC</div>
@@ -113,16 +109,16 @@ Usage example</h1>
 <div class="line">//hook for receiving message from backplane</div>
 <div class="line">(msg) =&gt;</div>
 <div class="line">{</div>
-<div class="line">    Console.WriteLine($&quot;Backplane_Client: {JsonConvert.SerializeObject(msg)}{Environment.NewLine}&quot;);</div>
+<div class="line">    Console.WriteLine($&quot;DesktopAgentNET: {JsonConvert.SerializeObject(msg)}{Environment.NewLine}&quot;);</div>
 <div class="line">},</div>
 <div class="line">//hook for disconnection with error.</div>
 <div class="line">async (ex) =&gt;</div>
-<div class="line">{ await Task.CompletedTask; Console.WriteLine($&quot;Backplane_Client disconnected. {ex}&quot;);</div>
+<div class="line">{ await Task.CompletedTask; Console.WriteLine($&quot;DesktopAgentNET: backplane disconnected. {ex}&quot;);</div>
 <div class="line">});</div>
 <div class="line">//broadcast</div>
-<div class="line">await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), &quot;fdc3.channel.1&quot;);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md49"></a>
-License</h1>
+<div class="line">await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), &quot;Channel 1&quot;);</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md32"></a>
+License</h2>
 <p >Copyright (C) 2022 Backplane open source project</p>
 <p >Distributed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.</p>
 <p >SPDX-License-Identifier: <a href="https://spdx.org/licenses/Apache-2.0">Apache-2.0</a> </p>
