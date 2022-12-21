@@ -1,4 +1,6 @@
-# Backplane
+![backplane logo](../../docs/resources/BackplaneIcon.png)
+
+## Backplane 
 
 A desktop service which act as a message bus between multiple desktop agents for sending/receiving FDC3 compliant data.
 It serves two purposes:
@@ -9,20 +11,24 @@ It serves two purposes:
 There are client libraries to this runtime which expose API enabling interoperability across consuming applications.
 Currently available client libs:
 
-- C#: Fdc3.Backplane.Client [details](../../docs/backplane-client-net.md)
-- JS: @finos/fdc3-backplane-client [details](../../docs/backplane-client-js.md)
+- C#: Fdc3.Backplane.Client [details](../Finos.Fdc3.Backplane.Client/Readme.md)
+- JS: @finos/fdc3-backplane-client [details](../Finos.Fdc3.Backplane.Client.JS/README.md)
 
 ## Supported Platforms
 
-Written in .NET 6.0 C# which supports multiple operating systems. See: https://github.com/dotnet/core/blob/main/release-notes/6.0/supported-os.md
+Written in .NET 6.0 C# which supports multiple operating systems. See: https://github.com/dotnet/core/blob/main/release-notes/6.0/supported-os.md.
 
 ## Installation
 
-1. Open 'Finos.Fdc3.Backplane.sln' at root in visual studio.
-2. Build Solution.
-3. Righ click on 'Finos.Fdc3.Backplane' project and click Publish
-4. Above step would publish backplane as self contained in folder output/backplane
-5. Navigate to above folder and run 'Finos.Fdc3.Backplane.exe
+- Download the artifacts zipped as part of release: Finos-Fdc3-Backplane*.zip.
+- Unzip the downloaded zip folder.
+- Run 'Finos.Fdc3.Backplane.exe'.
+
+## Multihost support.
+Workflows can be spanned to multiple host machines by running instances of backplane on each machine and configuring the member nodes in config file. 
+
+Look at MultiHostConfig section in [appsettings](./appsettings.json).
+
 
 ## License
 
