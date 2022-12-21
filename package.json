@@ -16,7 +16,6 @@
     }
   },
   "scripts": {
-    "prepare": "npx husky install",
-    "cn-commit": "cz"
+    "prepare": "npx husky install"
   }
 }

@@ -9,9 +9,8 @@
 		<RepositoryUrl>https://github.com/finos/backplane</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>FDC3 Backplane Client</PackageTags>
-		<PackageOutputPath>..\..\output\netclient</PackageOutputPath>
+		<PackageOutputPath>artifacts</PackageOutputPath>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<Version>1.0.0-alpha</Version>
 		<PackageReadmeFile>Readme.md</PackageReadmeFile>
 
 	</PropertyGroup>
