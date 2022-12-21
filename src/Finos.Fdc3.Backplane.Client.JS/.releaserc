@@ -1,7 +1,12 @@
 {
-	"branches": ["main",
+	"branches": [
+		"main",
 		{
-			"name": "develop",
+			"name": "alpha",
+			"prerelease": true
+		},
+		{
+			"name": "beta",
 			"prerelease": true
 		}
 	],
