@@ -24,7 +24,8 @@ Written in .NET 6.0 C# which supports multiple operating systems. See: https://g
 - Unzip the downloaded zip folder.
 - Run 'Finos.Fdc3.Backplane.exe'.
 
-## Multihost support.
+## Multihost support
+
 Workflows can be spanned to multiple host machines by running instances of backplane on each machine and configuring the member nodes in config file. 
 
 Look at MultiHostConfig section in [appsettings](./appsettings.json).
