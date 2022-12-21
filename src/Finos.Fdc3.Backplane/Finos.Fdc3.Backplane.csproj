@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ApplicationIcon>Backplane.ico</ApplicationIcon>
@@ -8,6 +8,7 @@
     <Company>FINOS</Company>
     <Product>FDC3 Backplane</Product>
     <Authors>FINOS</Authors>
+    <Version>1.0.0-alpha.1</Version>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>.output\Debug</OutputPath>
@@ -25,7 +26,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Update=".releaserc.json">
-		<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
     </Content>
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
