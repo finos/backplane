@@ -23,7 +23,13 @@ The power and benefits of FDC3 based interoperability can be harnessed to full p
 
 ### ✔️ Workflows can be spanned across multiple machines, provided they are operated by same user.
 
-\*Discovery interface implementation is not in in scope of this project. It has to be implemented by consumer based on own approach of registration and discovery of member backplanes)
+## Demo
+
+Below is a short demonstration of how backplane is used to connect two desktop agents(finsemble), running on different desktops, to share context among apps running in context of those desktop agents. 
+
+This demonstrate how backplane can help you harness the benefits of FDC3 based interoperability to next level where interop breaks the boundry of not just desktop agents but, single desktop too, to span workflows across multiple desktop agents and desktops.
+
+![demo_gif](./docs/resources/Backplane_Demo.gif)
 
 ## Usage example
 
