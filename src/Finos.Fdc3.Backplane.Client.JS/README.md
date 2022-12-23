@@ -1,15 +1,18 @@
+![backplane logo](../../docs/resources/BackplaneIcon.png)
+
 # Backplane Client JS
 
 Javascript client which allows web based desktop agents to connect and communicate with backplane through API.
 
 ## Supported Operations
 
-- Broadcast context
+- Broadcast context.
 
 ## Usage example
 
 ```ts
-import { BackplaneClient } from '@finos/fdc3-backplane-client';
+
+const backplaneClient= require("@finos/fdc3-backplane-client");
 
 const instrument = {
   type: "fdc3.instrument",
@@ -20,27 +23,27 @@ const instrument = {
   },
 };
 
-var backplaneClient = new backplaneClient.BackplaneClient({
+var desktopAgentBackplaneClient = new backplaneClient.BackplaneClient({
 	appIdentifier: {
-		appId: 'backplaneJSClient',
+		appId: 'desktopAgent',
 	},
 	url: 'http://localhost:4475',
 });
 
-await backplaneClient.connect(
+await desktopAgentBackplaneClient.connect(
 	//hook for receive message from backplane
 	msg => {
-		if (msg.type == Fdc3Action.Broadcast) {
-			console.info(`Backplane Client: Recived broadcast over channel: ${msg.payload.channelId}`);
+		if (msg.type == backplaneClient.Fdc3Action.Broadcast) {
+			console.info(`desktopAgent: Recived broadcast over channel: ${msg.payload.channelId}`);
 		}
 		console.info(JSON.stringify(msg));
 	},
 	//hook on disconnection
 	err => {
-		console.error(`Backplane Client: Disconnected.${err}`);
+		console.error(`desktopAgent: Backplane disconnected.${err}`);
 	}
 );
-await backplaneClient.broadcast(instrument, "Channel 1");
+await desktopAgentBackplaneClient.broadcast(instrument, "Channel 1");
 ```
 
 ## Installation

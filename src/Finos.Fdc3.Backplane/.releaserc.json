@@ -1,0 +1,68 @@
+{
+    "branches": [
+      "main",
+      {
+        "name": "alpha",
+        "prerelease": true
+      },
+      {
+        "name": "beta",
+        "prerelease": true
+      }
+    ],
+    "debug": "true",
+    "extends": "semantic-release-monorepo",
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      [
+        "semantic-release-dotnet",
+        {
+          "paths": ["Finos.Fdc3.Backplane.csproj"]
+        }
+      ],
+      [
+        "@semantic-release/exec",
+        {
+          "prepareCmd": "dotnet publish -p:Version=${nextRelease.version} --self-contained true -r win-x64 -p:PublishSingleFile=true -o ./artifacts; zip -r Finos-Fdc3-Backplane.zip artifacts"
+        }
+      ],
+      [
+        "@semantic-release/github",
+        {
+          "assets": [
+            {
+              "path": "Finos-Fdc3-Backplane.zip",
+              "label": "${nextRelease.gitTag}-x64.zip",
+              "name": "${nextRelease.gitTag}-x64.zip"
+            }
+          ]
+        }
+      ],
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "CHANGELOG.md"
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "Finos.Fdc3.Backplane.csproj",
+            "package.json",
+            "package-lock.json",
+            "CHANGELOG.md"
+          ],
+          "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        }
+      ]
+    ]
+  }
+  

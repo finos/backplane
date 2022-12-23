@@ -1,39 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <ApplicationIcon />
+    <ApplicationIcon>Backplane.ico</ApplicationIcon>
     <OutputType>Exe</OutputType>
-    <StartupObject />
+    <StartupObject/>
     <AssemblyName>Finos.Fdc3.Backplane</AssemblyName>
-    <Version>1.0.0-alpha</Version>
     <Company>FINOS</Company>
     <Product>FDC3 Backplane</Product>
     <Authors>FINOS</Authors>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>C:\Repo\Fdc3.DesktopAgent.Backplane\src\.output\Debug\Fdc3.DesktopAgent.Backplane\</OutputPath>
+    <OutputPath>.output\Debug</OutputPath>
   </PropertyGroup>
-
-  <ItemGroup> 
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.*" />  
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" Version="6.0.*" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.*" />
-  </ItemGroup>
-
   <ItemGroup>
-    <ProjectReference Include="..\Finos.Fdc3.Backplane.DTO\Finos.Fdc3.Backplane.DTO.csproj" />
+    <Resource Include="Backplane.ico" CopyToOutputDirectory="Always"/>
   </ItemGroup>
-
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.*"/>
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" Version="6.0.*"/>
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.*"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Finos.Fdc3.Backplane.DTO\Finos.Fdc3.Backplane.DTO.csproj"/>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update=".releaserc.json">
+		<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </Content>
     <Content Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\PublishProfiles\" />
-  </ItemGroup>
-
 </Project>

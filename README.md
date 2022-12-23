@@ -1,14 +1,13 @@
+[![npm](https://img.shields.io/npm/v/@finos/fdc3-backplane-client)](https://www.npmjs.com/package/@finos/fdc3-backplane-client)
 [![FINOS - Incubating](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-incubating.svg)](https://community.finos.org/docs/governance/Software-Projects/stages/incubating)
-[![CodeQL](https://github.com/finos/backplane/actions/workflows/codeql.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/codeql.yml)
-[![Node.js CVE Scanning](https://github.com/finos/backplane/actions/workflows/node-cve-scanning.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/node-cve-scanning.yml) 
-[![CVE Scanning for .NET](https://github.com/finos/backplane/actions/workflows/dotnet-cve-scanning.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/dotnet-cve-scanning.yml)
-[![.NET](https://github.com/finos/backplane/actions/workflows/dot-net-build.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/dot-net-build.yml) 
-[![npm build](https://github.com/finos/backplane/actions/workflows/npm-build.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/npm-build.yml)
-[![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/6700/badge)](https://bestpractices.coreinfrastructure.org/projects/6700)
-[![Node.js License Scanning](https://github.com/finos/backplane/actions/workflows/node-license-scanning.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/node-license-scanning.yml)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![codeql](https://github.com/finos/backplane/actions/workflows/codeql.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/codeql.yml)
+[![vulnerabilities check(js)](https://github.com/finos/backplane/actions/workflows/node-cve-scanning.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/node-cve-scanning.yml) 
+[![vulnerabilities check(.net)](https://github.com/finos/backplane/actions/workflows/dotnet-cve-scanning.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/dotnet-cve-scanning.yml)
+[![ossf best practices](https://bestpractices.coreinfrastructure.org/projects/6700/badge)](https://bestpractices.coreinfrastructure.org/projects/6700)
+[![floss license(js)](https://github.com/finos/backplane/actions/workflows/node-license-scanning.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/node-license-scanning.yml)
+[![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-# Backplane
+![backplane logo](./docs/resources/BackplaneIcon.png)
 
 Desktop Agent bridge aka 'Backplane' is a component which allows different desktop agents to connect and communicate through websockets.
 
@@ -24,36 +23,42 @@ The power and benefits of FDC3 based interoperability can be harnessed to full p
 
 ### ✔️ Workflows can be spanned across multiple machines, provided they are operated by same user.
 
-\*Discovery interface implementation is not in in scope of this project. It has to be implemented by consumer based on own approach of registration and discovery of member backplanes)
+## Demo
+
+Below is a short demonstration of how backplane is used to connect two desktop agents(finsemble), running on different machines, to share context among apps running in context of those desktop agents. 
+
+This demonstrate how backplane can help you harness the benefits of FDC3 based interoperability to next level where interop breaks the boundry of not just desktop agents but single desktop too to span workflows across multiple desktop agents and machines.
+
+![demo_gif](./docs/resources/Backplane_Demo.gif)
 
 ## Usage example
 
 See readme files.
 
-- [backplane](./docs/backplane.md).
-- [backplane-client-js](./docs/backplane-client-js.md).
-- [backplane-client-net](./docs/backplane-client-net.md)
+- [backplane](./src/Finos.Fdc3.Backplane/Readme.md).
+- [backplane-client-js](./src/Finos.Fdc3.Backplane.Client.JS/README.md).
+- [backplane-client-net](./src/Finos.Fdc3.Backplane.Client/Readme.md)
 
 Check the samples available under samples folder: [samples](./samples/)
 
 ### Backplane
 
 A desktop service which act as a message bus between multiple desktop agents for sending/receiving FDC3 compliant data.
-See more here: [backplane](./docs/backplane.md).
+See more here: [backplane](./src/Finos.Fdc3.Backplane/Readme.md).
 
 Client libraries provide API to connect and communicate with backplane.
 
-### Backplane client Web
+### Backplane client JS
 
 Javascript client which allows web based desktop agents to connect and communicate with backplane.
 
-See more here: [backplane-client-js](./docs/backplane-client-js.md).
+See more here: [backplane-client-js](./src/Finos.Fdc3.Backplane.Client.JS/README.md).
 
 ### Backplane client .NET
 
 For desktop agent build in .NET, this client library exposed API to connect and communicate with backplane.
 
-see more here: [backplane-client-net](./docs/backplane-client-net.md)
+see more here: [backplane-client-net](./src/Finos.Fdc3.Backplane.Client/Readme.md)
 
 ## Development setup
 
@@ -66,15 +71,15 @@ Build
 
 - Backplane
 
-  See details here: [backplane](./docs/backplane.md).
+  See details here: [backplane](./src/Finos.Fdc3.Backplane/Readme.md).
 
 - .Net Client
 
-  see details here: [backplane-client-net](./docs/backplane-client-net.md)
+  see details here: [backplane-client-net](./src/Finos.Fdc3.Backplane.Client/Readme.md)
 
 - JS Client
 
-  see details here: [backplane-client-js](./docs/backplane-client-js.md)
+  see details here: [backplane-client-js](./src/Finos.Fdc3.Backplane.Client.JS/README.md)
 
 ## Roadmap
 
@@ -87,13 +92,12 @@ Build
 ## Contributing
 
 For any questions, bugs or feature requests please open an [issue](https://github.com/finos/backplane/issues)
-For anything else please send an email to {project mailing list}.
 
 To submit a contribution:
 
 1. Fork it (<https://github.com/finos/backplane/fork>)
 2. Create your feature branch (`git checkout -b feature/fooBar`)
-3. Read our [contribution guidelines](.github/CONTRIBUTING.md) and [Community Code of Conduct](https://www.finos.org/code-of-conduct)
+3. Read our [contribution guidelines](./CONTRIBUTING.md) and [Community Code of Conduct](https://www.finos.org/code-of-conduct)
 4. Commit your changes (`git commit -am 'Add some fooBar'`)
 5. Push to the branch (`git push origin feature/fooBar`)
 6. Create a new Pull Request
