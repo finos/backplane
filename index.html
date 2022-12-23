@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Backplane: Backplane</title>
+<title>My Project: My Project</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -22,7 +22,7 @@
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="BackplaneIcon.png"/></td>
   <td id="projectalign">
-   <div id="projectname">Backplane
+   <div id="projectname">My Project
    </div>
   </td>
  </tr>
@@ -70,12 +70,15 @@ $(function() {
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Backplane </div></div>
+  <div class="headertitle"><div class="title">My Project </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p ><a class="anchor" id="md_README"></a> <a href="https://www.npmjs.com/package/@finos/fdc3-backplane-client"><img src="https://img.shields.io/npm/v/@finos/fdc3-backplane-client" alt="npm" class="inline"/></a> <a href="https://community.finos.org/docs/governance/Software-Projects/stages/incubating"><img src="https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-incubating.svg" alt="FINOS - Incubating" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/finos/backplane/actions/workflows/codeql.yml"><img src="https://github.com/finos/backplane/actions/workflows/codeql.yml/badge.svg" alt="codeql" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/finos/backplane/actions/workflows/node-cve-scanning.yml"><img src="https://github.com/finos/backplane/actions/workflows/node-cve-scanning.yml/badge.svg" alt="vulnerabilities check(js)" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/finos/backplane/actions/workflows/dotnet-cve-scanning.yml"><img src="https://github.com/finos/backplane/actions/workflows/dotnet-cve-scanning.yml/badge.svg" alt="vulnerabilities check(.net)" style="pointer-events: none;" class="inline"/></a> <a href="https://bestpractices.coreinfrastructure.org/projects/6700"><img src="https://bestpractices.coreinfrastructure.org/projects/6700/badge" alt="ossf best practices" class="inline"/></a> <a href="https://github.com/finos/backplane/actions/workflows/node-license-scanning.yml"><img src="https://github.com/finos/backplane/actions/workflows/node-license-scanning.yml/badge.svg" alt="floss license(js)" style="pointer-events: none;" class="inline"/></a> <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="license" style="pointer-events: none;" class="inline"/></a></p>
-<p ><img src="./docs/resources/BackplaneIcon.png" alt="backplane logo" class="inline"/></p>
-<p >Desktop Agent bridge aka 'Backplane' is a component which allows different desktop agents to connect and communicate through websockets.</p>
+<div class="image">
+<img src="BackplaneIcon.png" alt=""/>
+<div class="caption">
+backplane logo</div></div>
+    <p >Desktop Agent bridge aka 'Backplane' is a component which allows different desktop agents to connect and communicate through websockets.</p>
 <p >Where FDC3 Desktop Agent API addresses interoperability between apps running within the context of a single Desktop Agent (DA), facilitating cross-application workflows, FDC3 Desktop Agent Backplane addresses the interconnection of Desktop Agents (DAs) such that apps running under different Desktop Agents can also interoperate, allowing workflows to span multiple Desktop Agents</p>
 <h2><a class="anchor" id="autotoc_md8"></a>
 Why Backplane?</h2>
@@ -85,8 +88,15 @@ Why Backplane?</h2>
 ✔️ Workflows can be spanned to multiple desktop agents (DAs) on desktop.</h3>
 <h3><a class="anchor" id="autotoc_md10"></a>
 ✔️ Workflows can be spanned across multiple machines, provided they are operated by same user.</h3>
-<p >*Discovery interface implementation is not in in scope of this project. It has to be implemented by consumer based on own approach of registration and discovery of member backplanes)</p>
 <h2><a class="anchor" id="autotoc_md11"></a>
+Demo</h2>
+<p >Below is a short demonstration of how backplane is used to connect two desktop agents(finsemble), running on different machines, to share context among apps running in context of those desktop agents.</p>
+<p >This demonstrate how backplane can help you harness the benefits of FDC3 based interoperability to next level where interop breaks the boundry of not just desktop agents but single desktop too to span workflows across multiple desktop agents and machines.</p>
+<div class="image">
+<img src="Backplane_Demo.gif" alt=""/>
+<div class="caption">
+demo_gif</div></div>
+    <h2><a class="anchor" id="autotoc_md12"></a>
 Usage example</h2>
 <p >See readme files.</p>
 <ul>
@@ -95,19 +105,19 @@ Usage example</h2>
 <li><a class="el" href="md_src__finos__fdc3__backplane__client__readme.html">backplane-client-net</a></li>
 </ul>
 <p >Check the samples available under samples folder: <a href="./samples/">samples</a></p>
-<h3><a class="anchor" id="autotoc_md12"></a>
+<h3><a class="anchor" id="autotoc_md13"></a>
 Backplane</h3>
 <p >A desktop service which act as a message bus between multiple desktop agents for sending/receiving FDC3 compliant data. See more here: <a class="el" href="md_src__finos__fdc3__backplane__readme.html">backplane</a>.</p>
 <p >Client libraries provide API to connect and communicate with backplane.</p>
-<h3><a class="anchor" id="autotoc_md13"></a>
+<h3><a class="anchor" id="autotoc_md14"></a>
 Backplane client JS</h3>
 <p >Javascript client which allows web based desktop agents to connect and communicate with backplane.</p>
 <p >See more here: <a class="el" href="/github/workspace/src/Finos.Fdc3.Backplane.Client.JS/README.md#md_src_Finos_Fdc3_Backplane_Client_JS_README">backplane-client-js</a>.</p>
-<h3><a class="anchor" id="autotoc_md14"></a>
+<h3><a class="anchor" id="autotoc_md15"></a>
 Backplane client .NET</h3>
 <p >For desktop agent build in .NET, this client library exposed API to connect and communicate with backplane.</p>
 <p >see more here: <a class="el" href="md_src__finos__fdc3__backplane__client__readme.html">backplane-client-net</a></p>
-<h2><a class="anchor" id="autotoc_md15"></a>
+<h2><a class="anchor" id="autotoc_md16"></a>
 Development setup</h2>
 <p >IDE</p>
 <ol type="1">
@@ -126,7 +136,7 @@ Development setup</h2>
 <p class="startli">see details here: <a class="el" href="/github/workspace/src/Finos.Fdc3.Backplane.Client.JS/README.md#md_src_Finos_Fdc3_Backplane_Client_JS_README">backplane-client-js</a></p>
 </li>
 </ul>
-<h2><a class="anchor" id="autotoc_md16"></a>
+<h2><a class="anchor" id="autotoc_md17"></a>
 Roadmap</h2>
 <ol type="1">
 <li>Provide/enhance developer documentation.</li>
@@ -135,7 +145,7 @@ Roadmap</h2>
 <li>Provide examples for multi host discovery implementations in line with concrete use cases.</li>
 <li>Update system topology to include use of standalone Desktop Agent in line with emerging standard.</li>
 </ol>
-<h2><a class="anchor" id="autotoc_md17"></a>
+<h2><a class="anchor" id="autotoc_md18"></a>
 Contributing</h2>
 <p >For any questions, bugs or feature requests please open an <a href="https://github.com/finos/backplane/issues">issue</a></p>
 <p >To submit a contribution:</p>
@@ -149,7 +159,7 @@ Contributing</h2>
 </ol>
 <p ><em>NOTE:</em> Commits and pull requests to FINOS repositories will only be accepted from those contributors with an active, executed Individual Contributor License Agreement (ICLA) with FINOS OR who are covered under an existing and active Corporate Contribution License Agreement (CCLA) executed with FINOS. Commits from individuals not covered under an ICLA or CCLA will be flagged and blocked by the FINOS Clabot tool (or <a href="https://community.finos.org/docs/governance/Software-Projects/easycla">EasyCLA</a>). Please note that some CCLAs require individuals/employees to be explicitly named on the CCLA.</p>
 <p >_Need an ICLA? Unsure if you are covered under an existing CCLA? Email <a href="#" onclick="location.href='mai'+'lto:'+'hel'+'p@'+'fin'+'os'+'.or'+'g'; return false;">help@finos.org</a>_</p>
-<h2><a class="anchor" id="autotoc_md18"></a>
+<h2><a class="anchor" id="autotoc_md19"></a>
 License</h2>
 <p >Copyright (C) 2022 Backplane open source project</p>
 <p >Distributed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.</p>
