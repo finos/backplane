@@ -25,9 +25,9 @@ The power and benefits of FDC3 based interoperability can be harnessed to full p
 
 ## Demo
 
-Below is a short demonstration of how backplane is used to connect two desktop agents(finsemble), running on different desktops, to share context among apps running in context of those desktop agents. 
+Below is a short demonstration of how backplane is used to connect two desktop agents(finsemble), running on different machines, to share context among apps running in context of those desktop agents. 
 
-This demonstrate how backplane can help you harness the benefits of FDC3 based interoperability to next level where interop breaks the boundry of not just desktop agents but, single desktop too, to span workflows across multiple desktop agents and desktops.
+This demonstrate how backplane can help you harness the benefits of FDC3 based interoperability to next level where interop breaks the boundry of not just desktop agents but single desktop too to span workflows across multiple desktop agents and machines.
 
 ![demo_gif](./docs/resources/Backplane_Demo.gif)
 
