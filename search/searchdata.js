@@ -5,9 +5,10 @@ var indexSectionsWithContent =
   2: "f",
   3: "abcdgiprs",
   4: "fr",
-  5: "abcdghimnprst",
-  6: "b",
-  7: "bmr"
+  5: "bn",
+  6: "abcdghimnprst",
+  7: "b",
+  8: "bmr"
 };
 
 var indexSectionNames =
@@ -17,9 +18,10 @@ var indexSectionNames =
   2: "namespaces",
   3: "functions",
   4: "enums",
-  5: "properties",
-  6: "events",
-  7: "pages"
+  5: "enumvalues",
+  6: "properties",
+  7: "events",
+  8: "pages"
 };
 
 var indexSectionLabels =
@@ -29,8 +31,9 @@ var indexSectionLabels =
   2: "Namespaces",
   3: "Functions",
   4: "Enumerations",
-  5: "Properties",
-  6: "Events",
-  7: "Pages"
+  5: "Enumerator",
+  6: "Properties",
+  7: "Events",
+  8: "Pages"
 };
 
