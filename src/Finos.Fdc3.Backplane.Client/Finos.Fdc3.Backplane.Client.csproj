@@ -8,7 +8,8 @@
 		<Description>.NET client for connecting and communicating with FDC3 'backplane'</Description>
 		<RepositoryUrl>https://github.com/finos/backplane</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>FDC3 Backplane Client</PackageTags>
+		<PackageId>Finos.Backplane.Client</PackageId>
+                <PackageTags>FDC3 Backplane Client</PackageTags>
 		<PackageOutputPath>artifacts</PackageOutputPath>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageReadmeFile>Readme.md</PackageReadmeFile>
@@ -43,5 +44,10 @@
 			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
+        <ItemGroup>
+  	  <None Remove="node_modules\**\*"/>
+	  <None Remove="package-lock.json"/>
+	  <None Remove="package.json"/>
+        </ItemGroup>
 
 </Project>
