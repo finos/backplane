@@ -8,6 +8,7 @@
 		<Description>.NET client for connecting and communicating with FDC3 'backplane'</Description>
 		<RepositoryUrl>https://github.com/finos/backplane</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
+		<PackageId>Finos.Backplane.Client</PackageId>
 		<PackageTags>FDC3 Backplane Client</PackageTags>
 		<PackageOutputPath>artifacts</PackageOutputPath>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
