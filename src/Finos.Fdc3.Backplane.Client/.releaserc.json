@@ -30,7 +30,7 @@
       [
         "@semantic-release/exec",
         {
-          "publishCmd": "dotnet nuget push ./artifacts/*.nupkg -k ${process.env.NUGET_TOKEN} -s https://api.nuget.org/v3/index.json"
+          "publishCmd": "dotnet build --no-restore; dotnet nuget push ./artifacts/*.nupkg -k ${process.env.NUGET_TOKEN} -s https://api.nuget.org/v3/index.json"
         }
       ],
       [
