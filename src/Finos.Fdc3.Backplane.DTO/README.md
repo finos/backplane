@@ -1,5 +1,3 @@
-![backplane logo](../../docs/resources/BackplaneIcon.png)
-
 # Backplane DTO
 
 Data transfer objects shared between backplane and clients.
