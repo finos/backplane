@@ -1,4 +1,6 @@
+[![backplane](https://img.shields.io/github/package-json/v/finos/backplane?filename=src%2FFinos.Fdc3.Backplane%2Fpackage.json&label=backplane)](https://github.com/finos/backplane/releases?q=finos-fdc3-backplane)
 [![npm](https://img.shields.io/npm/v/@finos/fdc3-backplane-client)](https://www.npmjs.com/package/@finos/fdc3-backplane-client)
+[![nuget](https://img.shields.io/nuget/vpre/Finos.Backplane.Client?color=olive)](https://www.nuget.org/packages/Finos.Backplane.Client)
 [![FINOS - Incubating](https://cdn.jsdelivr.net/gh/finos/contrib-toolbox@master/images/badge-incubating.svg)](https://community.finos.org/docs/governance/Software-Projects/stages/incubating)
 [![codeql](https://github.com/finos/backplane/actions/workflows/codeql.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/codeql.yml)
 [![vulnerabilities check(js)](https://github.com/finos/backplane/actions/workflows/node-cve-scanning.yml/badge.svg)](https://github.com/finos/backplane/actions/workflows/node-cve-scanning.yml) 
@@ -39,7 +41,7 @@ See readme files.
 - [backplane-client-js](./src/Finos.Fdc3.Backplane.Client.JS/README.md).
 - [backplane-client-net](./src/Finos.Fdc3.Backplane.Client/Readme.md)
 
-Check the samples available under samples folder: [samples](./samples/)
+Check the samples available under samples folder: [samples](https://github.com/finos/backplane/tree/main/samples)
 
 ### Backplane
 

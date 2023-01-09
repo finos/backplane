@@ -1,5 +1,3 @@
-![backplane logo](../../docs/resources/BackplaneIcon.png)
-
 # Backplane Client JS
 
 Javascript client which allows web based desktop agents to connect and communicate with backplane through API.

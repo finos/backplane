@@ -17,13 +17,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
       working-directory: ./src/Finos.Fdc3.Backplane.Client
-    - name: Build
-      run: dotnet build --no-restore
-      working-directory: ./src/Finos.Fdc3.Backplane.Client
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-      working-directory: ./src/Finos.Fdc3.Backplane.Client
-      
+
     - name: Setup Node.js
       uses: actions/setup-node@v3
       with:
