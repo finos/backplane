@@ -1,6 +1,6 @@
 {
     "name": "backplane-client-net",
-    "version": "1.0.0-alpha.1",
+    "version": "1.0.0-alpha.2",
     "private": "true",
     "devDependencies": {
         "@semantic-release/changelog": "^6.0.2",
