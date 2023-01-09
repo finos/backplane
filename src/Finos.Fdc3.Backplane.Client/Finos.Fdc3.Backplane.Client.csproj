@@ -41,8 +41,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Remove="node_modules\**\*"/>
-    <None Remove="package-lock.json"/>
-    <None Remove="package.json"/>
+    <Compile Remove="node_modules\**\*;package-lock.json;package.json"/>
   </ItemGroup>
 </Project>
