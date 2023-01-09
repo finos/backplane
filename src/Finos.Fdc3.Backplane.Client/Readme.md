@@ -13,7 +13,7 @@ The library is written in .NET standard 2.0.
 
 ## Installation
 
-    PM> Install-Package Finos.Fdc3.Backplane.Client
+    PM> Install-Package Finos.Backplane.Client
 
 ## Usage example
 
