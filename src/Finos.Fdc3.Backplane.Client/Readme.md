@@ -1,5 +1,3 @@
-![backplane logo](../../docs/resources/BackplaneIcon.png)
-
 # Backplane Client .NET
 
 .NET client exposing API to connect and communicate with backplane.
