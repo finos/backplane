@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
@@ -13,7 +13,6 @@
 		<PackageOutputPath>artifacts</PackageOutputPath>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageReadmeFile>Readme.md</PackageReadmeFile>
-
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -44,5 +43,9 @@
 			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
-
+  <ItemGroup>
+    <None Remove="node_modules\**\*"/>
+    <None Remove="package-lock.json"/>
+    <None Remove="package.json"/>
+  </ItemGroup>
 </Project>
