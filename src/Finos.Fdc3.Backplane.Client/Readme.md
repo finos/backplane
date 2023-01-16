@@ -49,7 +49,7 @@ await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "C
 
 ## License
 
-Copyright (C) 2022 Backplane open source project
+Copyright (C) 2022 Backplane open source project.
 
 Distributed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
