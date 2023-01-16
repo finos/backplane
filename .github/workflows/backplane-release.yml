@@ -37,9 +37,9 @@ jobs:
     - name: Release
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GIT_AUTHOR_NAME: vivek-natwest  
-          GIT_AUTHOR_EMAIL: vivek.kumargiri@natwestmarkets.com
-          GIT_COMMITTER_NAME: vivek-natwest
-          GIT_COMMITTER_EMAIL: vivek.kumargiri@natwestmarkets.com
+          GIT_AUTHOR_NAME: manish-nwm  
+          GIT_AUTHOR_EMAIL: manish.bhutani@natwestmarkets.com
+          GIT_COMMITTER_NAME: manish-nwm
+          GIT_COMMITTER_EMAIL: manish.bhutani@natwestmarkets.com
       run: npx semantic-release 
       working-directory: ./src/Finos.Fdc3.Backplane
