@@ -74,18 +74,18 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p>.NET client exposing API to connect and communicate with backplane.</p>
-<h1><a class="anchor" id="autotoc_md35"></a>
+<h1><a class="anchor" id="autotoc_md49"></a>
 Supported Platforms</h1>
 <p>The library is written in .NET standard 2.0. .NET Standard 2.0 is supported by all modern platforms and is the recommended way to support multiple platforms with one target.</p>
-<h1><a class="anchor" id="autotoc_md36"></a>
+<h1><a class="anchor" id="autotoc_md50"></a>
 Supported Features</h1>
 <ul>
 <li>Broadcast context.</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md37"></a>
+<h1><a class="anchor" id="autotoc_md51"></a>
 Installation</h1>
 <pre class="fragment">PM&gt; Install-Package Finos.Backplane.Client
-</pre> <h1><a class="anchor" id="autotoc_md38"></a>
+</pre> <h1><a class="anchor" id="autotoc_md52"></a>
 Usage example</h1>
 <div class="fragment"><div class="line"> {C#}</div>
 <div class="line">string? instrument = @&quot;{</div>
@@ -115,7 +115,7 @@ Usage example</h1>
 <div class="line">});</div>
 <div class="line">//broadcast</div>
 <div class="line">await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), &quot;Channel 1&quot;);</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md39"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md53"></a>
 License</h1>
 <p>Copyright (C) 2022 Backplane open source project.</p>
 <p>Distributed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.</p>
