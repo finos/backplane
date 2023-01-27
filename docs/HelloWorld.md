@@ -1,9 +1,10 @@
 ![backplane logo](./resources/BackplaneIcon.png)
 
-# Hello World! with Backplane
+# Hello World! with Backplane 
+** This is for demonstration only and is not the strategic way of finsemble integration. Such integration services are out of scope of backplane and would be part of vendor implementation compliant to bridging specs.
 
 ## Use case
-User want a workflow automation were on applying filter in app running in context of finsemble on Desktop A is automaticaly applied to apps running in context of finsemble on Desktop B to avoid hassle of manual copy paste.
+User want a workflow automation where on applying *filter in an app running in context of finsemble on Desktop A is automatically applied to apps running in context of finsemble on Desktop B* to avoid hassle of manual copy paste.
 
 ## Workflow
 
@@ -17,11 +18,16 @@ Grid App[Finsemble: Desktop A] &harr; Bridge[Finsemble: Desktop A]  &harr; Backp
 
 
 Download latest version of backplane:
-- go to [backplane-releases](https://github.com/finos/backplane/releases?q=finos-fdc3-backplane).
-- Download finos-fdc3-backplane-vx.x.xX.zip from assets.
-- Unzip the zip folder.
-- Open appsettings.json file.
-- Navigate to key MultiHostConfig and add the address of Desktop B. Ex below
+1. go to [backplane-releases](https://github.com/finos/backplane/releases?q=finos-fdc3-backplane).
+2. Download finos-fdc3-backplane-vx.x.xX.zip from assets.
+3. Unzip the zip folder.
+
+
+*If multi desktop interop is not required, skip and jump to step 6*
+
+
+4. Open appsettings.json file.
+5. Navigate to key MultiHostConfig and add the address of Desktop B. Ex below
 
 ```JSON
 - "MultiHostConfig": {
@@ -32,7 +38,8 @@ Download latest version of backplane:
     ]
   },
   ```
-  - Run 'Finos.Fdc3.Backplane.exe'.
+  6. Run 'Finos.Fdc3.Backplane.exe'.
+  7. If multi desktop interop is not required, jump to [finsemble-backplane bridge setup](#finsemble-backplane-bridge)  
 
   ### On Desktop B
 
@@ -64,14 +71,5 @@ Download latest version of backplane:
 cd finsemble-seed
 yarn install
 ```
-- Set up the bridge service as described here: [readme](../samples/FinsembleIntegration/README.md)
-
-Note: Both instance of finsemble on desktop A and B must have this configuration to communicate with backplane.
-
-- Launch finsemble on both desktops.
-
- 
-
-
-
+- Set up the bridge service and launch finsemble as described here: [readme](../samples/FinsembleIntegration/README.md)
 
