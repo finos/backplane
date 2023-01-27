@@ -76,9 +76,10 @@ $(function() {
 <div class="textblock"><p><img src="BackplaneIcon.png" alt="" class="inline" title="backplane logo"/>    </p>
 <h1><a class="anchor" id="autotoc_md8"></a>
 Hello World! with Backplane</h1>
+<p>** This is for demonstration only and is not the strategic way of finsemble integration. Such integration services are out of scope of backplane and would be part of vendor implementation compliant to bridging specs.</p>
 <h2><a class="anchor" id="autotoc_md9"></a>
 Use case</h2>
-<p>User want a workflow automation were on applying filter in app running in context of finsemble on Desktop A is automaticaly applied to apps running in context of finsemble on Desktop B to avoid hassle of manual copy paste.</p>
+<p>User want a workflow automation where on applying <em>filter in an app running in context of finsemble on Desktop A is automatically applied to apps running in context of finsemble on Desktop B</em> to avoid hassle of manual copy paste.</p>
 <h2><a class="anchor" id="autotoc_md10"></a>
 Workflow</h2>
 <p>Broadcast</p>
@@ -87,13 +88,16 @@ Workflow</h2>
 Set Up</h2>
 <h3><a class="anchor" id="autotoc_md12"></a>
 On Desktop A</h3>
-<p>Download latest version of backplane:</p><ul>
+<p>Download latest version of backplane:</p><ol type="1">
 <li>go to <a href="https://github.com/finos/backplane/releases?q=finos-fdc3-backplane">backplane-releases</a>.</li>
 <li>Download finos-fdc3-backplane-vx.x.xX.zip from assets.</li>
 <li>Unzip the zip folder.</li>
+</ol>
+<p><em>If multi desktop interop is not required, skip and jump to step 6</em></p>
+<ol type="1">
 <li>Open appsettings.json file.</li>
 <li>Navigate to key MultiHostConfig and add the address of Desktop B. Ex below</li>
-</ul>
+</ol>
 <div class="fragment"><div class="line">- &quot;MultiHostConfig&quot;: {</div>
 <div class="line">    &quot;MemberNodes&quot;: [</div>
 <div class="line">      //put your member nodes url here</div>
@@ -101,9 +105,11 @@ On Desktop A</h3>
 <div class="line">      &quot;http://Desktop_B:4475&quot;</div>
 <div class="line">    ]</div>
 <div class="line">  },</div>
-</div><!-- fragment --><ul>
+</div><!-- fragment --><ol type="1">
 <li>Run 'Finos.Fdc3.Backplane.exe'.</li>
-</ul>
+<li>If multi desktop interop is not required, jump to finsemble-backplane bridge setup <br  />
+</li>
+</ol>
 <h3><a class="anchor" id="autotoc_md13"></a>
 On Desktop B</h3>
 <p>Download latest version of backplane:</p><ul>
@@ -130,11 +136,7 @@ Finsemble-Backplane Bridge</h3>
 <li>Install dependencies: <div class="fragment"><div class="line">cd finsemble-seed</div>
 <div class="line">yarn install</div>
 </div><!-- fragment --></li>
-<li>Set up the bridge service as described here: <a class="el" href="/github/workspace/samples/FinsembleIntegration/README.md#md_samples_FinsembleIntegration_README">readme</a></li>
-</ul>
-<p>Note: Both instance of finsemble on desktop A and B must have this configuration to communicate with backplane.</p>
-<ul>
-<li>Launch finsemble on both desktops. </li>
+<li>Set up the bridge service and launch finsemble as described here: <a class="el" href="/github/workspace/samples/FinsembleIntegration/README.md#md_samples_FinsembleIntegration_README">readme</a> </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
