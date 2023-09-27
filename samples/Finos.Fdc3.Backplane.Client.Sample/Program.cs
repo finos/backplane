@@ -7,7 +7,7 @@
 using Finos.Fdc3.Backplane.Client;
 using Finos.Fdc3.Backplane.Client.API;
 using Finos.Fdc3.Backplane.Client.Extensions;
-using Finos.Fdc3.Backplane.DTO.FDC3;
+using Finos.Fdc3.Backplane.DTO;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -71,12 +71,12 @@ System.Console.WriteLine($"**Populated channels:{string.Join(", ", channels.Sele
 System.Console.WriteLine($"**Running Scenario for Broadcast**{Environment.NewLine}");
 
 System.Console.WriteLine($"**Broadcasting context: fdc3.instrument**{Environment.NewLine}");
-await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "fdc3.channel.1");
+await backplaneClient2.BroadcastAsync(Context.FromJson(instrument), "fdc3.channel.1");
 
 await backplaneClient1.DisposeAsync();
 System.Console.WriteLine($"**Backplane_Client_1 disposed**{Environment.NewLine}");
 System.Console.WriteLine($"**Broadcasting context: fdc3.instrument**{Environment.NewLine}. This will have no effect");
-await backplaneClient2.BroadcastAsync(new Context(JObject.Parse(instrument)), "fdc3.channel.1");
+await backplaneClient2.BroadcastAsync(Context.FromJson(instrument), "fdc3.channel.1");
 
 
 Console.WriteLine("**Done**");

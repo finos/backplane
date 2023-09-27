@@ -5,8 +5,8 @@
 
 using Finos.Fdc3.Backplane.Client.Transport;
 using Finos.Fdc3.Backplane.Client.Utils;
+using Finos.Fdc3.Backplane.DTO;
 using Finos.Fdc3.Backplane.DTO.Envelope;
-using Finos.Fdc3.Backplane.DTO.FDC3;
 using System;
 using System.Collections.Generic;
 using System.Threading;

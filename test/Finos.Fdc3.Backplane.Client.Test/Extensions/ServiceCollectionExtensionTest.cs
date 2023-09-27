@@ -6,7 +6,7 @@
 using AutoFixture;
 using Finos.Fdc3.Backplane.Client.Extensions;
 using Finos.Fdc3.Backplane.Client.Transport;
-using Finos.Fdc3.Backplane.DTO.FDC3;
+using Finos.Fdc3.Backplane.DTO;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using System;

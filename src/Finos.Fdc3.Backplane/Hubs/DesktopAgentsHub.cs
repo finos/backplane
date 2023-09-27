@@ -6,7 +6,6 @@
 using Finos.Fdc3.Backplane.Config;
 using Finos.Fdc3.Backplane.DTO;
 using Finos.Fdc3.Backplane.DTO.Envelope;
-using Finos.Fdc3.Backplane.DTO.FDC3;
 using Finos.Fdc3.Backplane.MultiHost;
 using Finos.Fdc3.Backplane.Utils;
 using Microsoft.AspNetCore.SignalR;

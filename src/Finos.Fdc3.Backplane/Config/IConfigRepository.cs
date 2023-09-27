@@ -2,7 +2,7 @@
 	* SPDX-License-Identifier: Apache-2.0
 	* Copyright 2022 FINOS FDC3 contributors - see NOTICE file
 	*/
-using Finos.Fdc3.Backplane.DTO.FDC3;
+using Finos.Fdc3.Backplane.DTO;
 using System;
 using System.Collections.Generic;
 

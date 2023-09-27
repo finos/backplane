@@ -3,8 +3,8 @@
 	* Copyright 2022 FINOS FDC3 contributors - see NOTICE file
 	*/
 
+using Finos.Fdc3.Backplane.DTO;
 using Finos.Fdc3.Backplane.DTO.Envelope;
-using Finos.Fdc3.Backplane.DTO.FDC3;
 using System;
 using System.Collections.Generic;
 using System.Threading;

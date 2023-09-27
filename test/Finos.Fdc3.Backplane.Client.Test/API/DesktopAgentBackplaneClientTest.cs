@@ -6,7 +6,7 @@
 using AutoFixture;
 using Finos.Fdc3.Backplane.Client.API;
 using Finos.Fdc3.Backplane.Client.Transport;
-using Finos.Fdc3.Backplane.DTO.FDC3;
+using  Finos.Fdc3.Backplane.DTO;
 using Newtonsoft.Json.Linq;
 using NSubstitute;
 using NUnit.Framework;
@@ -36,7 +36,7 @@ namespace Finos.Fdc3.Backplane.Client.Test.API
         {
             _fixture = AutoFixture.Create();
             _backplaneTransport = _fixture.Freeze<Lazy<IBackplaneTransport>>();
-            _backplaneTransport.Value.GetUserChannelsAsync().Returns(new Channel[] { new Channel("fdc3.channel.1", "system") });
+            _backplaneTransport.Value.GetUserChannelsAsync().Returns(new Channel[] { new Channel() {Id= "fdc3.channel.1",Type= TypeEnum.User } });
             _backplaneTransport.Value.ConnectAsync(default, default, default).ReturnsForAnyArgs(new AppIdentifier() { AppId = "Test" });
         }
 
@@ -62,7 +62,7 @@ namespace Finos.Fdc3.Backplane.Client.Test.API
         {
             BackplaneClient sut = _fixture.Create<BackplaneClient>();
             await sut.ConnectAsync(default, default, default);
-            await sut.BroadcastAsync(new Context(JObject.Parse(instrument)), "fdc3.channel.1");
+            await sut.BroadcastAsync(Context.FromJson(instrument), "fdc3.channel.1");
             await _backplaneTransport.Value.ReceivedWithAnyArgs().BroadcastAsync(default);
         }
     }

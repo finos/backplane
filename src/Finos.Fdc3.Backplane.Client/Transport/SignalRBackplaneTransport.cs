@@ -5,8 +5,8 @@
 
 
 using Finos.Fdc3.Backplane.Client.Extensions;
+using Finos.Fdc3.Backplane.DTO;
 using Finos.Fdc3.Backplane.DTO.Envelope;
-using Finos.Fdc3.Backplane.DTO.FDC3;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;

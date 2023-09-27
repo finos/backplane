@@ -4,10 +4,8 @@
 */
 
 
-using Finos.Fdc3.Backplane.DTO.FDC3;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 
 namespace Finos.Fdc3.Backplane.DTO.Envelope
@@ -53,7 +51,7 @@ namespace Finos.Fdc3.Backplane.DTO.Envelope
         /// Used as an argument to `broadcast`, `findIntent` and `raiseIntent` functions.
         /// </summary>
         [JsonProperty("context", Required = Required.Always)]
-        public JObject Context { get; set; }
+        public Context Context { get; set; }
     }
 
     /// <summary>

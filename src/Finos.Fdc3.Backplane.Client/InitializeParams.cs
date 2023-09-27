@@ -3,7 +3,7 @@
 	* Copyright 2022 FINOS FDC3 contributors - see NOTICE file
 	*/
 
-using Finos.Fdc3.Backplane.DTO.FDC3;
+using Finos.Fdc3.Backplane.DTO;
 
 namespace Finos.Fdc3.Backplane.Client
 {

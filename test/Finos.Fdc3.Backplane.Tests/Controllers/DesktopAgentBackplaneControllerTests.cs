@@ -6,7 +6,7 @@
 using AutoFixture;
 using Finos.Fdc3.Backplane.Controllers;
 using Finos.Fdc3.Backplane.DTO.Envelope;
-using Finos.Fdc3.Backplane.DTO.FDC3;
+using Finos.Fdc3.Backplane.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using NSubstitute;
@@ -41,9 +41,9 @@ namespace Finos.Fdc3.Backplane.Tests.Controllers
         public void Test_BroadcastToLocalClients_ShouldReturn_200_WhenParameterIsPassed()
         {
             //Arrange
-            JObject context = JObject.Parse(@"{'type': 'fdc3.Instrument'}");
+            var context = @"{'type': 'fdc3.Instrument'}";
             string uniqueMessageId = Guid.NewGuid().ToString();
-            MessageEnvelope broadcastContext = new MessageEnvelope() { Payload = new EnvelopeData() { ChannelId = "abc", Context = context }, Meta = new EnvelopeMeta() { RequestGuid = uniqueMessageId, Source = new AppIdentifier() { AppId = "Test" } } };
+            MessageEnvelope broadcastContext = new MessageEnvelope() { Payload = new EnvelopeData() { ChannelId = "abc", Context = Context.FromJson(context) }, Meta = new EnvelopeMeta() { RequestGuid = uniqueMessageId, Source = new AppIdentifier() { AppId = "Test" } } };
             BackplaneController sut = _fixture.Build<BackplaneController>().OmitAutoProperties().Create();
             //Act
             ObjectResult result = sut.BroadcastToLocalClients(broadcastContext).Result as ObjectResult;
@@ -55,9 +55,9 @@ namespace Finos.Fdc3.Backplane.Tests.Controllers
         public void ShouldReturnErrorCodeIfExceptionOccurs()
         {
             //Arrange
-            JObject context = JObject.Parse(@"{'type': 'fdc3.Instrument'}");
+            var context = @"{'type': 'fdc3.Instrument'}";
             string uniqueMessageId = Guid.NewGuid().ToString();
-            MessageEnvelope broadcastContext = new MessageEnvelope() { Payload = new EnvelopeData() { ChannelId = "fdc3.channel.1", Context = context }, Meta = new EnvelopeMeta() { RequestGuid = uniqueMessageId, Source = new AppIdentifier() { AppId = "Test" } } };
+            MessageEnvelope broadcastContext = new MessageEnvelope() { Payload = new EnvelopeData() { ChannelId = "fdc3.channel.1", Context = Context.FromJson(context) }, Meta = new EnvelopeMeta() { RequestGuid = uniqueMessageId, Source = new AppIdentifier() { AppId = "Test" } } };
             IDesktopAgentHub hub = _fixture.Freeze<IDesktopAgentHub>();
             hub.BroadcastToLocalClients(broadcastContext).ReturnsForAnyArgs(x => { throw new Exception("Exception Occured"); });
             BackplaneController sut = _fixture.Build<BackplaneController>().OmitAutoProperties().Create();

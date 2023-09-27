@@ -2,7 +2,7 @@
 	* SPDX-License-Identifier: Apache-2.0
 	* Copyright 2022 FINOS FDC3 contributors - see NOTICE file
 	*/
-using Finos.Fdc3.Backplane.DTO.FDC3;
+using Finos.Fdc3.Backplane.DTO;
 using Finos.Fdc3.Backplane.Models.Config;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -72,7 +72,7 @@ namespace Finos.Fdc3.Backplane.Config
             IEnumerable<Uri> memberNodesFromConfig = _config.GetSection("MultiHostConfig:MemberNodes").Get<IEnumerable<Uri>>();
             _memberNodes.AddRange(memberNodesFromConfig);
             IEnumerable<ChannelConfig> userChannelsConfig = _config.GetSection("ChannelsConfig:UserChannels").Get<IEnumerable<ChannelConfig>>();
-            IEnumerable<Channel> userChannels = userChannelsConfig.Select(x => new Channel(x.Id, x.Type, new DisplayMetadata(x.Name, x.Color, x.Glyph)));
+            IEnumerable<Channel> userChannels = userChannelsConfig.Select(x => new Channel() { Id = x.Id, Type = (TypeEnum)Enum.Parse(typeof(TypeEnum), x.Type), DisplayMetadata = new DisplayMetadata() { Name = x.Name, Color = x.Color, Glyph = x.Glyph } });
             _channels.AddRange(userChannels);
             _logger.LogInformation($"Populated user channels from config: {string.Join(",", Channels.Select(x => x.Id))}");
             HttpRequestTimeoutInMilliseconds = TimeSpan.FromMilliseconds(_config.GetValue<int>("HttpRequestTimeoutInMilliseconds", 5000));
