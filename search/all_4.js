@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['desktopagent_0',['DesktopAgent',['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_f_d_c3_1_1_app_identifier.html#a45e6d61eb626c6847e16d11a685ed60f',1,'Finos::Fdc3::Backplane::DTO::FDC3::AppIdentifier']]],
-  ['desktopagentshub_1',['DesktopAgentsHub',['../class_finos_1_1_fdc3_1_1_backplane_1_1_hubs_1_1_desktop_agents_hub.html',1,'Finos::Fdc3::Backplane::Hubs']]],
-  ['discoverasync_2',['DiscoverAsync',['../interface_finos_1_1_fdc3_1_1_backplane_1_1_multi_host_1_1_i_nodes_discovery_client.html#a4080d3ff7e724bcdf70b29a21676a89b',1,'Finos.Fdc3.Backplane.MultiHost.INodesDiscoveryClient.DiscoverAsync()'],['../class_finos_1_1_fdc3_1_1_backplane_1_1_multi_host_1_1_nodes_discovery_client.html#a93c5316816e7b801089debd8620f70b9',1,'Finos.Fdc3.Backplane.MultiHost.NodesDiscoveryClient.DiscoverAsync()']]],
-  ['displaymetadata_3',['DisplayMetadata',['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_f_d_c3_1_1_channel.html#ac37f0b2035e564f63b0219f43f98864d',1,'Finos.Fdc3.Backplane.DTO.FDC3.Channel.DisplayMetadata()'],['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_f_d_c3_1_1_display_metadata.html#acaa723dd8312e8b9193fba0a090cb7a9',1,'Finos.Fdc3.Backplane.DTO.FDC3.DisplayMetadata.DisplayMetadata()'],['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_f_d_c3_1_1_display_metadata.html',1,'Finos.Fdc3.Backplane.DTO.FDC3.DisplayMetadata']]],
-  ['dispose_4',['Dispose',['../class_finos_1_1_fdc3_1_1_backplane_1_1_multi_host_1_1_nodes_repository.html#a293da82e22549fc4d9468aa0df2774f6',1,'Finos::Fdc3::Backplane::MultiHost::NodesRepository']]]
+  ['envelopedata_0',['EnvelopeData',['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_envelope_1_1_envelope_data.html',1,'Finos::Fdc3::Backplane::DTO::Envelope']]],
+  ['envelopemeta_1',['EnvelopeMeta',['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_envelope_1_1_envelope_meta.html',1,'Finos::Fdc3::Backplane::DTO::Envelope']]],
+  ['example_2',['example',['../index.html#autotoc_md12',1,'Usage example'],['..//github/workspace/src/Finos.Fdc3.Backplane.Client.JS/README.md#autotoc_md25',1,'Usage example'],['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_readme.html#autotoc_md32',1,'Usage example']]]
 ];
