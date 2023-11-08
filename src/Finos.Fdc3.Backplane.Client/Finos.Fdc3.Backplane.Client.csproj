@@ -1,7 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <!--This is advance msbuild setting to enable project reference copied to nuget pack
+see: https://github.com/NuGet/Home/issues/3891#issuecomment-569491001
+-->
+  <PropertyGroup>
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+  </PropertyGroup>
+  <Target Name="CopyProjectReferencesToPackage" DependsOnTargets="BuildOnlySettings;ResolveReferences">
+    <ItemGroup>
+      <!-- Filter out unnecessary files -->
+      <_ReferenceCopyLocalPaths Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference')->WithMetadataValue('PrivateAssets', 'All'))"/>
+    </ItemGroup>
+    <!-- Print batches for debug purposes -->
+    <Message Text="Batch for .nupkg: ReferenceCopyLocalPaths = @(_ReferenceCopyLocalPaths), ReferenceCopyLocalPaths.DestinationSubDirectory = %(_ReferenceCopyLocalPaths.DestinationSubDirectory) Filename = %(_ReferenceCopyLocalPaths.Filename) Extension = %(_ReferenceCopyLocalPaths.Extension)" Importance="High" Condition="'@(_ReferenceCopyLocalPaths)' != ''"/>
+    <ItemGroup>
+      <!-- Add file to package with consideration of sub folder. If empty, the root folder is chosen. -->
+      <BuildOutputInPackage Include="@(_ReferenceCopyLocalPaths)" TargetPath="%(_ReferenceCopyLocalPaths.DestinationSubDirectory)"/>
+    </ItemGroup>
+  </Target>
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>FINOS</Authors>
     <Product>FDC3 'Backplane' client</Product>
     <Description>.NET client for connecting and communicating with FDC3 'backplane'</Description>
@@ -12,7 +30,7 @@
     <PackageOutputPath>artifacts</PackageOutputPath>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
-    <Version>1.0.0-beta.1</Version>
+    <Version>1.0.0-alpha.4</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.*"/>
@@ -32,7 +50,7 @@
     </AssemblyAttribute>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Finos.Fdc3.Backplane.DTO\Finos.Fdc3.Backplane.DTO.csproj"/>
+    <ProjectReference Include="..\Finos.Fdc3.Backplane.DTO\Finos.Fdc3.Backplane.DTO.csproj" PrivateAssets="all"/>
   </ItemGroup>
   <ItemGroup>
     <None Update="Readme.md">
