@@ -11,8 +11,8 @@ var searchData=
   ['start_8',['Quick Start',['../index.html#autotoc_md21',1,'']]],
   ['start_20guide_9',['Quick Start Guide',['../md_docs_2_quick_start.html#autotoc_md15',1,'']]],
   ['startup_10',['Startup',['../class_finos_1_1_fdc3_1_1_backplane_1_1_startup.html',1,'Finos::Fdc3::Backplane']]],
-  ['support_11',['Multihost support',['../md_src_2_finos_8_fdc3_8_backplane_2_readme.html#autotoc_md55',1,'']]],
-  ['supported_20features_12',['Supported Features',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_readme.html#autotoc_md46',1,'']]],
+  ['support_11',['Multihost support',['../md_src_2_finos_8_fdc3_8_backplane_2_readme.html#autotoc_md57',1,'']]],
+  ['supported_20features_12',['Supported Features',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_readme.html#autotoc_md48',1,'']]],
   ['supported_20operations_13',['Supported Operations',['..//github/workspace/src/Finos.Fdc3.Backplane.Client.JS/README.md#autotoc_md36',1,'']]],
-  ['supported_20platforms_14',['supported platforms',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_readme.html#autotoc_md45',1,'Supported Platforms'],['../md_src_2_finos_8_fdc3_8_backplane_2_readme.html#autotoc_md53',1,'Supported Platforms']]]
+  ['supported_20platforms_14',['supported platforms',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_readme.html#autotoc_md47',1,'Supported Platforms'],['../md_src_2_finos_8_fdc3_8_backplane_2_readme.html#autotoc_md55',1,'Supported Platforms']]]
 ];
