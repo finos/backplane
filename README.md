@@ -25,6 +25,15 @@ The power and benefits of FDC3 based interoperability can be harnessed to full p
 
 ### ✔️ Workflows can be spanned across multiple machines, provided they are operated by same user.
 
+## Quick Start
+
+See the guide here: [quick start](./docs/QuickStart.md).
+
+## Hello World!
+
+See how multi machine interop set up is done: [multi machine desktop agent(finsemble) bridging](./docs/HelloWorld.md) 
+
+
 ## Demo
 
 Below is a short demonstration of how backplane is used to connect two desktop agents(finsemble), running on different machines, to share context among apps running in context of those desktop agents. 
@@ -114,4 +123,4 @@ Copyright (C) 2022 Backplane open source project
 
 Distributed under the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
-SPDX-License-Identifier: [Apache-2.0](https://spdx.org/licenses/Apache-2.0)
+SPDX-License-Identifier: [Apache-2.0](https://spdx.org/licenses/Apache-2.0).

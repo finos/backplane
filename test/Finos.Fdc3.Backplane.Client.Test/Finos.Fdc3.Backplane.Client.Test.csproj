@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Finos.Fdc3.Backplane.Client\Finos.Fdc3.Backplane.Client.csproj" />
+    <ProjectReference Include="..\..\src\Finos.Fdc3.Backplane.DTO\Finos.Fdc3.Backplane.DTO.csproj" />
   </ItemGroup>
 
 </Project>
