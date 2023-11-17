@@ -1,14 +1,15 @@
 var searchData=
 [
-  ['das_20on_20desktop_0',['✔️ Workflows can be spanned to multiple desktop agents (DAs) on desktop.',['../index.html#autotoc_md9',1,'']]],
-  ['demo_1',['Demo',['../index.html#autotoc_md11',1,'']]],
-  ['desktop_20agents_20das_20on_20desktop_2',['✔️ Workflows can be spanned to multiple desktop agents (DAs) on desktop.',['../index.html#autotoc_md9',1,'']]],
-  ['desktopagent_3',['DesktopAgent',['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_f_d_c3_1_1_app_identifier.html#a45e6d61eb626c6847e16d11a685ed60f',1,'Finos::Fdc3::Backplane::DTO::FDC3::AppIdentifier']]],
-  ['desktopagentshub_4',['DesktopAgentsHub',['../class_finos_1_1_fdc3_1_1_backplane_1_1_hubs_1_1_desktop_agents_hub.html',1,'Finos::Fdc3::Backplane::Hubs']]],
-  ['development_20setup_5',['Development setup',['../index.html#autotoc_md16',1,'']]],
-  ['discoverasync_6',['discoverasync',['../interface_finos_1_1_fdc3_1_1_backplane_1_1_multi_host_1_1_i_nodes_discovery_client.html#a4080d3ff7e724bcdf70b29a21676a89b',1,'Finos.Fdc3.Backplane.MultiHost.INodesDiscoveryClient.DiscoverAsync()'],['../class_finos_1_1_fdc3_1_1_backplane_1_1_multi_host_1_1_nodes_discovery_client.html#a93c5316816e7b801089debd8620f70b9',1,'Finos.Fdc3.Backplane.MultiHost.NodesDiscoveryClient.DiscoverAsync()']]],
-  ['displaymetadata_7',['displaymetadata',['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_f_d_c3_1_1_display_metadata.html',1,'Finos.Fdc3.Backplane.DTO.FDC3.DisplayMetadata'],['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_f_d_c3_1_1_channel.html#ac37f0b2035e564f63b0219f43f98864d',1,'Finos.Fdc3.Backplane.DTO.FDC3.Channel.DisplayMetadata'],['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_f_d_c3_1_1_display_metadata.html#acaa723dd8312e8b9193fba0a090cb7a9',1,'Finos.Fdc3.Backplane.DTO.FDC3.DisplayMetadata.DisplayMetadata()']]],
-  ['dispose_8',['Dispose',['../class_finos_1_1_fdc3_1_1_backplane_1_1_multi_host_1_1_nodes_repository.html#a293da82e22549fc4d9468aa0df2774f6',1,'Finos::Fdc3::Backplane::MultiHost::NodesRepository']]],
-  ['document_9',['Changes to this Document',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md7',1,'']]],
-  ['dto_10',['Backplane DTO',['..//github/workspace/src/Finos.Fdc3.Backplane.DTO/README.md#autotoc_md34',1,'']]]
+  ['a_0',['On Desktop A',['../md_docs_2_hello_world.html#autotoc_md12',1,'']]],
+  ['across_20multiple_20machines_20provided_20they_20are_20operated_20by_20same_20user_1',['✔️ Workflows can be spanned across multiple machines, provided they are operated by same user.',['../index.html#autotoc_md20',1,'']]],
+  ['actiontype_2',['ActionType',['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_envelope_1_1_message_envelope.html#a3a96ffbb1d157edf69a36daa5c282a04',1,'Finos::Fdc3::Backplane::DTO::Envelope::MessageEnvelope']]],
+  ['addmembernode_3',['AddMemberNode',['../class_finos_1_1_fdc3_1_1_backplane_1_1_controllers_1_1_backplane_controller.html#ad3ef57b425bbef38386c6ba1bf5acea8',1,'Finos::Fdc3::Backplane::Controllers::BackplaneController']]],
+  ['addnode_4',['addnode',['../interface_finos_1_1_fdc3_1_1_backplane_1_1_multi_host_1_1_i_nodes_repository.html#aef2954da8355e4a33e065be7e8081831',1,'Finos.Fdc3.Backplane.MultiHost.INodesRepository.AddNode()'],['../class_finos_1_1_fdc3_1_1_backplane_1_1_multi_host_1_1_nodes_repository.html#a9a6f1c85140a68c2f02729612a590b0f',1,'Finos.Fdc3.Backplane.MultiHost.NodesRepository.AddNode()']]],
+  ['addnodeendpoint_5',['addnodeendpoint',['../class_finos_1_1_fdc3_1_1_backplane_1_1_config_1_1_config_repository.html#ab26aee86485f142e2d928cd6f27538b4',1,'Finos.Fdc3.Backplane.Config.ConfigRepository.AddNodeEndpoint'],['../interface_finos_1_1_fdc3_1_1_backplane_1_1_config_1_1_i_config_repository.html#a2da49f56cc1c1e435b705611bfd7c80d',1,'Finos.Fdc3.Backplane.Config.IConfigRepository.AddNodeEndpoint']]],
+  ['agents_20das_20on_20desktop_6',['✔️ Workflows can be spanned to multiple desktop agents (DAs) on desktop.',['../index.html#autotoc_md19',1,'']]],
+  ['alpha_201_202023_2001_2007_7',['backplane-client-net-v1.0.0-alpha.1 (2023-01-07)',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_c_h_a_n_g_e_l_o_g.html#autotoc_md42',1,'']]],
+  ['and_20governance_20policies_8',['Backplane Contribution and Governance Policies',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html',1,'']]],
+  ['appid_9',['AppId',['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_f_d_c3_1_1_app_identifier.html#a3ffc7eadc27cde317b0b49ada602657c',1,'Finos::Fdc3::Backplane::DTO::FDC3::AppIdentifier']]],
+  ['appidentifier_10',['appidentifier',['../class_finos_1_1_fdc3_1_1_backplane_1_1_d_t_o_1_1_f_d_c3_1_1_app_identifier.html',1,'Finos.Fdc3.Backplane.DTO.FDC3.AppIdentifier'],['../class_finos_1_1_fdc3_1_1_backplane_1_1_client_1_1_initialize_params.html#a6e02f84e5c2ff119c32b484dc336addb',1,'Finos.Fdc3.Backplane.Client.InitializeParams.AppIdentifier']]],
+  ['are_20operated_20by_20same_20user_11',['✔️ Workflows can be spanned across multiple machines, provided they are operated by same user.',['../index.html#autotoc_md20',1,'']]]
 ];

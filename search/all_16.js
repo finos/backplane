@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['✔️_20workflows_20can_20be_20spanned_20across_20multiple_20machines_20provided_20they_20are_20operated_20by_20same_20user_0',['✔️ Workflows can be spanned across multiple machines, provided they are operated by same user.',['../index.html#autotoc_md10',1,'']]],
-  ['✔️_20workflows_20can_20be_20spanned_20to_20multiple_20desktop_20agents_20das_20on_20desktop_1',['✔️ Workflows can be spanned to multiple desktop agents (DAs) on desktop.',['../index.html#autotoc_md9',1,'']]]
+  ['up_0',['Set Up',['../md_docs_2_hello_world.html#autotoc_md11',1,'']]],
+  ['usage_20example_1',['usage example',['../index.html#autotoc_md24',1,'Usage example'],['..//github/workspace/src/Finos.Fdc3.Backplane.Client.JS/README.md#autotoc_md37',1,'Usage example'],['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_readme.html#autotoc_md48',1,'Usage example']]],
+  ['use_20case_2',['Use case',['../md_docs_2_hello_world.html#autotoc_md9',1,'']]],
+  ['user_3',['✔️ Workflows can be spanned across multiple machines, provided they are operated by same user.',['../index.html#autotoc_md20',1,'']]]
 ];

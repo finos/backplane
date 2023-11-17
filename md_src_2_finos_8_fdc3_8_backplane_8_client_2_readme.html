@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: Readme</title>
+<title>My Project: Backplane Client .NET</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -70,26 +70,23 @@ $(function() {
 
 </div><!-- top -->
 <div><div class="header">
-  <div class="headertitle"><div class="title">Readme</div></div>
+  <div class="headertitle"><div class="title">Backplane Client .NET</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><img src="../../docs/resources/BackplaneIcon.png" alt="backplane logo" class="inline"/></p>
-<h1><a class="anchor" id="autotoc_md28"></a>
-Backplane Client .NET</h1>
-<p>.NET client exposing API to connect and communicate with backplane.</p>
-<h2><a class="anchor" id="autotoc_md29"></a>
-Supported Platforms</h2>
+<div class="textblock"><p><a class="anchor" id="autotoc_md44"></a> .NET client exposing API to connect and communicate with backplane.</p>
+<h1><a class="anchor" id="autotoc_md45"></a>
+Supported Platforms</h1>
 <p>The library is written in .NET standard 2.0. .NET Standard 2.0 is supported by all modern platforms and is the recommended way to support multiple platforms with one target.</p>
-<h2><a class="anchor" id="autotoc_md30"></a>
-Supported Features</h2>
+<h1><a class="anchor" id="autotoc_md46"></a>
+Supported Features</h1>
 <ul>
 <li>Broadcast context.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md31"></a>
-Installation</h2>
-<pre class="fragment">PM&gt; Install-Package Finos.Fdc3.Backplane.Client
-</pre> <h2><a class="anchor" id="autotoc_md32"></a>
-Usage example</h2>
+<h1><a class="anchor" id="autotoc_md47"></a>
+Installation</h1>
+<pre class="fragment">PM&gt; Install-Package Finos.Backplane.Client
+</pre> <h1><a class="anchor" id="autotoc_md48"></a>
+Usage example</h1>
 <div class="fragment"><div class="line"><span class="preprocessor"> #</span></div>
 <div class="line"><span class="keywordtype">string</span>? instrument = <span class="stringliteral">@&quot;{</span></div>
 <div class="line"><span class="stringliteral">                type: &#39;fdc3.instrument&#39;,</span></div>
@@ -118,11 +115,11 @@ Usage example</h2>
 <div class="line">});</div>
 <div class="line"><span class="comment">//broadcast</span></div>
 <div class="line">await backplaneClient2.BroadcastAsync(<span class="keyword">new</span> Context(JObject.Parse(instrument)), <span class="stringliteral">&quot;Channel 1&quot;</span>);</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md33"></a>
-License</h2>
-<p>Copyright (C) 2022 Backplane open source project</p>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md49"></a>
+License</h1>
+<p>Copyright (C) 2022 Backplane open source project.</p>
 <p>Distributed under the <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a>.</p>
-<p>SPDX-License-Identifier: <a href="https://spdx.org/licenses/Apache-2.0">Apache-2.0</a> </p>
+<p>SPDX-License-Identifier: <a href="https://spdx.org/licenses/Apache-2.0">Apache-2.0</a>. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 <!-- start footer part -->
