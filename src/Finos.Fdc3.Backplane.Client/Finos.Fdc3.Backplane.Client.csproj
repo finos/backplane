@@ -30,7 +30,7 @@ see: https://github.com/NuGet/Home/issues/3891#issuecomment-569491001
     <PackageOutputPath>artifacts</PackageOutputPath>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageReadmeFile>Readme.md</PackageReadmeFile>
-    <Version></Version>
+    <Version>1.0.0</Version>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
   <ItemGroup>
@@ -60,11 +60,11 @@ see: https://github.com/NuGet/Home/issues/3891#issuecomment-569491001
     </None>
     <None Include="..\..\LICENSE">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath/>
     </None>
     <None Include="..\..\NOTICE">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath/>
     </None>
   </ItemGroup>
   <ItemGroup>
