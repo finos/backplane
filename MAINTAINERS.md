@@ -9,7 +9,7 @@ This file lists the maintainers of this repository.
 | @Aaron-Haines | *please add name* | *please add organization* | *please add email* |
 | @Vivek-NatWest | *please add name* | *please add organization* | *please add email* |
 | @bingenito | Brian Ingenito | @morganstanley  | *please add email* |
-| @kriswest | Kris West | NatWest Group | *please add email* |
+| @kriswest | Kris West | NatWest Group | kristopher.west@natwest.com |
 | @manish-nwm | *please add name* | *please add organization* | *please add email* |
 
 For information about maintainer responsibilities and resources, see the [FINOS Maintainers Cheatsheet](https://community.finos.org/docs/finos-maintainers-cheatsheet).
