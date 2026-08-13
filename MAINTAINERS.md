@@ -4,8 +4,8 @@ This file lists the maintainers of this repository.
 
 ## Current maintainers
 
-| GitHub Username | Name | Organization | Email |
-|----------------|------|--------------|-------|
+| GitHub Username | Name | Organization | Email (optional) |
+|----------------|------|--------------|------------------|
 | @Aaron-Haines | *please add name* | *please add organization* |  |
 | @Vivek-NatWest | *please add name* | *please add organization* |  |
 | @bingenito | Brian Ingenito | @morganstanley  |  |
