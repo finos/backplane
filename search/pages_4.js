@@ -1,8 +1,26 @@
 var searchData=
 [
-  ['backplane_0',['Backplane',['../md_src_2_finos_8_fdc3_8_backplane_2_readme.html',1,'']]],
-  ['backplane_20client_20net_1',['Backplane Client .NET',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_readme.html',1,'']]],
-  ['backplane_20compare_20backplane_20client_20net_20v1_200_200_20beta_201_20backplane_20client_20net_20v1_200_200_20beta_202_20backplane_20client_20net_20v1_200_200_20beta_202_20a_202023_2011_2017_2',['&lt;a href=&quot;https://github.com/finos/backplane/compare/backplane-client-net-v1.0.0-beta.1...backplane-client-net-v1.0.0-beta.2&quot; &gt;backplane-client-net-v1.0.0-beta.2&lt;/a&gt; (2023-11-17)',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_c_h_a_n_g_e_l_o_g.html',1,'']]],
-  ['backplane_20contribution_20and_20governance_20policies_3',['Backplane Contribution and Governance Policies',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html',1,'']]],
-  ['beta_201_20backplane_20client_20net_20v1_200_200_20beta_202_20backplane_20client_20net_20v1_200_200_20beta_202_20a_202023_2011_2017_4',['&lt;a href=&quot;https://github.com/finos/backplane/compare/backplane-client-net-v1.0.0-beta.1...backplane-client-net-v1.0.0-beta.2&quot; &gt;backplane-client-net-v1.0.0-beta.2&lt;/a&gt; (2023-11-17)',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_c_h_a_n_g_e_l_o_g.html',1,'']]]
+  ['b_0',['On Desktop B',['../md_docs_2_hello_world.html#autotoc_md13',1,'']]],
+  ['backplane_1',['Backplane',['../index.html#autotoc_md25',1,'Backplane'],['../dir_80f0df8c1873f91a32b1dafd8e1fc9fa.html#autotoc_md56',1,'Backplane'],['../md_docs_2_hello_world.html#autotoc_md8',1,'Hello World! with Backplane'],['../index.html#autotoc_md18',1,'Why Backplane?']]],
+  ['backplane_20bridge_2',['Finsemble-Backplane Bridge',['../md_docs_2_hello_world.html#autotoc_md14',1,'']]],
+  ['backplane_20bridge_20service_20code_20snippet_3',['Finsemble Backplane Bridge Service (Code Snippet)',['../dir_ecd7043b2daba3434278d4d36a066ffc.html#autotoc_md32',1,'']]],
+  ['backplane_20client_20js_4',['Backplane Client JS',['../dir_58b40646ed0f1e956714fcb6dc418174.html#autotoc_md35',1,'']]],
+  ['backplane_20client_20js_5',['Backplane client JS',['../index.html#autotoc_md26',1,'']]],
+  ['backplane_20client_20net_6',['Backplane Client .NET',['../dir_24e560c9ee445e554df8750a5f344b77.html#autotoc_md48',1,'']]],
+  ['backplane_20client_20net_7',['Backplane client .NET',['../index.html#autotoc_md27',1,'']]],
+  ['backplane_20client_20net_20v1_200_200_202023_2011_2017_8',['backplane-client-net-v1.0.0 (2023-11-17)',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_c_h_a_n_g_e_l_o_g.html',1,'']]],
+  ['backplane_20client_20net_20v1_200_200_20alpha_201_202023_2001_2007_9',['backplane-client-net-v1.0.0-alpha.1 (2023-01-07)',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_c_h_a_n_g_e_l_o_g.html#autotoc_md46',1,'']]],
+  ['backplane_20client_20net_20v1_200_200_20beta_201_202023_2001_2009_10',['backplane-client-net-v1.0.0-beta.1 (2023-01-09)',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_c_h_a_n_g_e_l_o_g.html#autotoc_md44',1,'']]],
+  ['backplane_20client_20net_20v1_200_200_20beta_202_202023_2011_2017_11',['&lt;a href=&quot;https://github.com/finos/backplane/compare/backplane-client-net-v1.0.0-beta.1...backplane-client-net-v1.0.0-beta.2&quot;&gt;backplane-client-net-v1.0.0-beta.2&lt;/a&gt; (2023-11-17)',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_c_h_a_n_g_e_l_o_g.html#autotoc_md42',1,'']]],
+  ['backplane_20contribution_20and_20governance_20policies_12',['Backplane Contribution and Governance Policies',['../md__c_o_n_t_r_i_b_u_t_i_n_g.html',1,'']]],
+  ['backplane_20dto_13',['Backplane DTO',['../dir_468d63b5fa73974615dca34cb2c6117e.html#autotoc_md54',1,'']]],
+  ['backplane_20integration_14',['Finsemble-Backplane Integration',['../md_docs_2_quick_start.html#autotoc_md17',1,'']]],
+  ['be_20spanned_20across_20multiple_20machines_20provided_20they_20are_20operated_20by_20same_20user_15',['✔️ Workflows can be spanned across multiple machines, provided they are operated by same user.',['../index.html#autotoc_md20',1,'']]],
+  ['be_20spanned_20to_20multiple_20desktop_20agents_20das_20on_20desktop_16',['✔️ Workflows can be spanned to multiple desktop agents (DAs) on desktop.',['../index.html#autotoc_md19',1,'']]],
+  ['beta_201_202023_2001_2009_17',['backplane-client-net-v1.0.0-beta.1 (2023-01-09)',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_c_h_a_n_g_e_l_o_g.html#autotoc_md44',1,'']]],
+  ['beta_202_202023_2011_2017_18',['&lt;a href=&quot;https://github.com/finos/backplane/compare/backplane-client-net-v1.0.0-beta.1...backplane-client-net-v1.0.0-beta.2&quot;&gt;backplane-client-net-v1.0.0-beta.2&lt;/a&gt; (2023-11-17)',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_c_h_a_n_g_e_l_o_g.html#autotoc_md42',1,'']]],
+  ['bridge_19',['Finsemble-Backplane Bridge',['../md_docs_2_hello_world.html#autotoc_md14',1,'']]],
+  ['bridge_20service_20code_20snippet_20',['Finsemble Backplane Bridge Service (Code Snippet)',['../dir_ecd7043b2daba3434278d4d36a066ffc.html#autotoc_md32',1,'']]],
+  ['bug_20fixes_21',['Bug Fixes',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_c_h_a_n_g_e_l_o_g.html#autotoc_md41',1,'Bug Fixes'],['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_c_h_a_n_g_e_l_o_g.html#autotoc_md43',1,'Bug Fixes'],['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_c_h_a_n_g_e_l_o_g.html#autotoc_md45',1,'Bug Fixes'],['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_c_h_a_n_g_e_l_o_g.html#autotoc_md47',1,'Bug Fixes']]],
+  ['by_20same_20user_22',['✔️ Workflows can be spanned across multiple machines, provided they are operated by same user.',['../index.html#autotoc_md20',1,'']]]
 ];

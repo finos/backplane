@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['v1_200_200_20beta_201_20backplane_20client_20net_20v1_200_200_20beta_202_20backplane_20client_20net_20v1_200_200_20beta_202_20a_202023_2011_2017_0',['&lt;a href=&quot;https://github.com/finos/backplane/compare/backplane-client-net-v1.0.0-beta.1...backplane-client-net-v1.0.0-beta.2&quot; &gt;backplane-client-net-v1.0.0-beta.2&lt;/a&gt; (2023-11-17)',['../md_src_2_finos_8_fdc3_8_backplane_8_client_2_c_h_a_n_g_e_l_o_g.html',1,'']]]
+  ['license_0',['License',['../index.html#autotoc_md31',1,'License'],['../dir_ecd7043b2daba3434278d4d36a066ffc.html#autotoc_md34',1,'License'],['../dir_58b40646ed0f1e956714fcb6dc418174.html#autotoc_md39',1,'License'],['../dir_24e560c9ee445e554df8750a5f344b77.html#autotoc_md53',1,'License'],['../dir_468d63b5fa73974615dca34cb2c6117e.html#autotoc_md55',1,'License'],['../dir_80f0df8c1873f91a32b1dafd8e1fc9fa.html#autotoc_md60',1,'License']]]
 ];
