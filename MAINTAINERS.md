@@ -6,11 +6,9 @@ This file lists the maintainers of this repository.
 
 | GitHub Username | Name | Organization | Email (optional) |
 |----------------|------|--------------|------------------|
-| @Aaron-Haines | *please add name* | *please add organization* |  |
-| @Vivek-NatWest | *please add name* | *please add organization* |  |
-| @bingenito | Brian Ingenito | @morganstanley  |  |
+| @Vivek-NatWest | Vivek Kumar Giri | NatWest Group | Vivek.KumarGiri@natwestmarkets.com | 
 | @kriswest | Kris West | NatWest Group | kristopher.west@natwest.com |
-| @manish-nwm | *please add name* | *please add organization* |  |
+| @manish-nwm | Manish Bhutani | NatWest Group | Manish.Bhutani@natwestmarkets.com |  
 
 For information about maintainer responsibilities and resources, see the [FINOS Maintainers Cheatsheet](https://community.finos.org/docs/finos-maintainers-cheatsheet).
 
